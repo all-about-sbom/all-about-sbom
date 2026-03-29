@@ -1,0 +1,316 @@
+/* src/styles/custom.css */
+
+:root {
+  /* ==========================================================
+     GLOBAL THEME COLORS
+     ========================================================== */
+    /* Color 1: Deep Navy (Your primary brand color) */
+    --color-1-main: #003366;
+    --color-1-dark: #000c3f;
+    --color-1-light: #3f72a5;
+
+    /* Color 2: Bright Blue */
+    --color-2-main: #1E88E5;
+    --color-2-dark: #0061be;
+    --color-2-light: #5dc7ff;
+
+    /* Color 3: Vivid Purple */
+    --color-3-main: #8E24AA;
+    --color-3-dark: #670083;
+    --color-3-light: #cd63e9;
+
+    /* Color 4: Vibrant Orange */
+    --color-4-main: #F87B1B;
+    --color-4-dark: #d15400;
+    --color-4-light: #ffba5a;
+
+    /* Color 5: Teal / Green */
+    --color-5-main: #008080;
+    --color-5-dark: #005959;
+    --color-5-light: #3fbfbf;
+
+    /* ==========================================================
+        STARLIGHT THEME MAPPINGS
+        ========================================================== */
+    
+    /* Wire Starlight's theme to your Color 1 (Navy) */
+    --sl-color-accent: var(--color-1-main); 
+    --sl-color-accent-high: var(--color-1-dark);
+    --sl-color-accent-low: var(--color-1-light);
+
+    --sl-color-bg-nav: var(--color-1-main);
+    --sl-color-text-accent: #ffffff;
+}
+
+
+
+/* ==========================================================
+   BUTTON STYLING 
+   ========================================================== */
+
+.sl-link-button.primary {
+  background-color: var(--color-1-main) !important;
+  border-color: var(--color-1-main) !important;
+  color: #ffffff !important;
+}
+
+.sl-link-button.primary:hover {
+  background-color: var(--color-1-dark) !important;
+  border-color: var(--color-1-dark) !important;
+}
+
+/* Color the text and icon of the 'minimal' LinkButton variant */
+.sl-link-button.minimal {
+  color: var(--color-1-main) !important;
+  font-weight: 600; /* Makes it slightly bolder so it feels like a button */
+}
+
+/* Add a hover effect so it feels interactive */
+.sl-link-button.minimal:hover {
+  color: var(--color-1-light) !important;
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   CUSTOM COLORED LINK CARDS
+   ========================================================== */
+
+/* Remove the default Starlight borders/backgrounds so our custom colors show through */
+.use-case-card .sl-link-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 100%;
+}
+
+/* Apply rounded corners and transition effects to our wrapper */
+.use-case-card {
+  border-radius: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.use-case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Force the text inside the colored cards to be readable (White) */
+.use-case-card .title,
+.use-case-card .description,
+.use-case-card .sl-link-card svg {
+  color: #ffffff !important;
+}
+
+/* Map the background colors to the utility classes we made earlier */
+.use-case-card.c1 { background-color: var(--color-1-main); border: 2px solid var(--color-1-dark); }
+.use-case-card.c2 { background-color: var(--color-2-main); border: 2px solid var(--color-2-dark); }
+.use-case-card.c3 { background-color: var(--color-3-main); border: 2px solid var(--color-3-dark); }
+.use-case-card.c4 { background-color: var(--color-4-main); border: 2px solid var(--color-4-dark); }
+.use-case-card.c5 { background-color: var(--color-5-main); border: 2px solid var(--color-5-dark); }
+
+
+/* ==========================================================
+   CUSTOM HEADER & NAVIGATION
+   ========================================================== */
+
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+  background-color: var(--color-1-main); 
+  overflow: visible !important; 
+}
+
+.logo-area .logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: var(--color-1-main);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 1.1;
+}
+
+.custom-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  height: 100%;
+}
+
+.custom-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: opacity 0.2s;
+}
+
+.custom-nav a:hover {
+  opacity: 0.8;
+}
+
+/* ==========================================================
+   DROPDOWN MENU CSS
+   ========================================================== */
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; 
+  left: -10px;
+  background-color: var(--color-1-main);
+  min-width: 240px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4); 
+  z-index: 9999 !important; 
+  border-radius: 0 0 8px 8px;
+  padding: 0.5rem 0;
+}
+
+.dropdown-content a {
+  color: white !important;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--color-1-dark);
+  opacity: 1 !important; 
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* ==========================================================
+   HEADER RIGHT ACTIONS (Search & Theme)
+   ========================================================== */
+.right-actions {
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Make the search icon/button stand out on the dark background */
+.custom-header .sl-search-btn {
+  color: white !important;
+  border-color: rgba(255,255,255,0.3) !important;
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.custom-footer {
+  background-color: var(--color-1-dark); 
+  color: white;
+  padding: 3rem 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 4px solid var(--color-2-main); 
+  
+  /* Forces the footer background to break out of the container and span full width */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.custom-footer .footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.custom-footer .footer-brand {
+  max-width: 300px;
+}
+
+.custom-footer .footer-brand .logo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  color: var(--color-1-main);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.custom-footer .footer-brand p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.custom-footer .footer-links {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.custom-footer .link-group h4 {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.custom-footer .link-group a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.custom-footer .link-group a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.custom-footer .footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.custom-footer .starlight-default-footer {
+  width: 100%;
+}

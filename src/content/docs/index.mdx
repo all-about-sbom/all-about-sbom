@@ -1,40 +1,134 @@
 ---
-title: Welcome to Starlight
+title: All About SBOM
 description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: All About SBOM
+  tagline: Master the fundamentals of Software Bills of Materials (SBOMs). Explore guidelines and content designed to help you secure your software supply chain.
   image:
+    alt: Mascot wearing a hard hat
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Read the Guidelines
+      link: /sboms
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+      variant: primary
+    - text: What is an SBOM?
+      link: /sboms
+      icon: right-arrow
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+import { Image } from 'astro:assets';
+import { Steps, LinkButton, LinkCard, Card, CardGrid  } from '@astrojs/starlight/components';
+import sbomImage from '../../assets/houston.webp';
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+<div style="max-width: 800px; margin: 0 auto; text-align: center;">
+
+## Challenges of Modern Software
+Modern applications are built using third-party components, creating complex software supply chains. 
+While this approach has positive effects, it also raises new challenges, for example in the areas of compliance and cybersecurity.
+Here, the main challenge often lies not in solving the actual problem, but first in identifying which dependencies are used directly or indirectly within a software.
+
+To create the needed transparency, the tech industry stared to adopt software bills of materials (SBOM).
+Just as Bill of Materials (BOM) known from traditional manufacturing, SBOMs aim to list components within a software project in a standardized and machine-readable manner, enabling automated analysis.
+This website provides information, best practices, and guidelines on SBOMs to further increase their adoption.
+
+## Use Cases of SBOMs
+
+<CardGrid>
+  <div class="use-case-card c2">
+    <LinkCard 
+      title="Vulnerability Management" 
+      href="/use-cases/vulnerability" 
+      description="SBOMs make it easy to instantly identify whether vulnerable components (like Log4Shell) are present in a project and exactly which systems are affected."
+    />
+  </div>
+
+  <div class="use-case-card c3">
+    <LinkCard 
+      title="Incident Response" 
+      href="/use-cases/incident" 
+      description="When a new critical threat is disclosed, SBOMs allow security teams to assess their exposure in minutes rather than days, drastically speeding up remediation."
+    />
+  </div>
+
+  <div class="use-case-card c5">
+    <LinkCard 
+      title="License Compliance" 
+      href="/use-cases/license" 
+      description="Easily track open-source dependencies and their associated licenses to ensure you are meeting all legal, regulatory, and internal policy requirements."
+    />
+  </div>
+
+  <div class="use-case-card c4">
+    <LinkCard 
+      title="Supplier Transparency" 
+      href="/use-cases/supplier" 
+      description="Provide customers and partners with verified, machine-readable insight into the composition of your software, building trust and fulfilling vendor requirements."
+    />
+  </div>
 </CardGrid>
+
+## SBOM Basics
+The term "SBOM" refers primarily to a concept brought to life by the two major standards, CycloneDX and SPDX.
+SBOMs in these formats can be generated at various stages of the SDLC.
+The appropriate type of SBOM may vary depending on the use case. It is therefore important to briefly familiarize yourself with the technical basics. 
+
+<LinkButton href="/sbom_basics/sbom_basics" variant="primary" icon="right-arrow">Learn more about the basics</LinkButton>
+
+## The SBOM Lifecycle
+Generating an SBOM is only the first step. Deriving real value from the technology requires enriching and anlyzing the data and responding to the findings properly.
+
+{/* 
+```mermaid
+flowchart LR
+    classDef step1 fill:#003366,stroke:#000c3f,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
+    classDef step2 fill:#1E88E5,stroke:#0061be,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
+    classDef step3 fill:#8E24AA,stroke:#670083,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
+    classDef step4 fill:#F87B1B,stroke:#d15400,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
+
+    A([⚙️ <b>SBOM Production</b>]):::step1
+    B([🔍 <b>Sharing the SBOM</b>]):::step2
+    C([🛡️ <b>Data Enrichment & Analysis</b>]):::step3
+    D([🛡️ <b>Risk Response</b>]):::step4
+
+    A ==> B
+    B ==> C
+    C ==> D
+```
+*/}
+
+<div style="text-align: left;">
+<Steps>
+
+1. **SBOM Production**
+   
+   First, automated tools analyze your project to generate a SBOM.
+
+   <LinkButton href="/lifecycle/sbom_generation/sbom_generation" variant="minimal" icon="right-arrow">Learn more</LinkButton>
+
+2. **Sharing the SBOM**
+   
+   SBOMs can be used internally or they may be shared with others.
+
+   <LinkButton href="/lifecycle/sharing/sharing" variant="minimal" icon="right-arrow">Learn more</LinkButton>
+
+3. **Data Enrichment & Analysis**
+   
+   Once the SBOM is generated, analysis tools can be used to make the information human-readable, visualize them and automatically derive information relevant for the use-case.
+
+   <LinkButton href="/lifecycle/enrichment_analysis/enrichment_analysis" variant="minimal" icon="right-arrow">Learn more</LinkButton>
+
+3. **Response**
+   
+   Once the findings are derived, risk management takes over to derive appropriate actions.
+
+   <LinkButton href="/lifecycle/response/response" variant="minimal" icon="right-arrow">Learn more</LinkButton>
+
+</Steps>
+
+</div>
+
+</div>

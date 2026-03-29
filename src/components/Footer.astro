@@ -1,0 +1,46 @@
+---
+// src/components/Footer.astro
+import type { Props } from '@astrojs/starlight/props';
+import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="custom-footer">
+  <div class="footer-content">
+    
+    <div class="footer-brand">
+      <div class="logo">YOUR<br/>LOGO</div>
+      <p>Publishing informational content and guidelines to help you navigate modern software supply chains.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="link-group">
+        <h4>Resources</h4>
+        <a href="/sbom_basics/sbom_basics">SBOM Basics</a>
+        <a href="/tooling/tooling">Tools</a>
+      </div>
+      <div class="link-group">
+        <h4>Use Cases</h4>
+        <a href="/use-cases/vulnerability">Vulnerability Management</a>
+        <a href="/use-cases/incident">Incident Response</a>
+        <a href="/use-cases/license">License Compliance</a>
+        <a href="/use-cases/supplier">Supplier Transparency</a>
+      </div>
+      <div class="link-group">
+        <h4>SBOM Lifecycle</h4>
+        <a href="/lifecycle/sbom_generation/sbom_generation">SBOM Generation</a>
+        <a href="/lifecycle/sharing/sharing">Sharing an SBOM</a>
+        <a href="/lifecycle/enrichment_analysis/enrichment_analysis">Analyzing an SBOM</a>
+        <a href="/lifecycle/response/response">Respond to Findings</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} All About SBOM. All rights reserved.</p>
+    {/* Optional: Render Starlight's default footer (Edit page link, next/prev arrows) below yours */}
+    <div class="starlight-default-footer">
+      <DefaultFooter {...Astro.props} />
+    </div>
+  </div>
+</footer>
