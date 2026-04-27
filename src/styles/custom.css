@@ -39,7 +39,7 @@
     --sl-color-accent-low: var(--color-1-light);
 
     --sl-color-bg-nav: var(--color-1-main);
-    --sl-color-text-accent: #ffffff;
+    --sl-color-text-accent: var(--color-1-main);
 }
 
 
