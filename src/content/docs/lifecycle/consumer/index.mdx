@@ -1,0 +1,85 @@
+---
+title: "The Consumer's Guide"
+description: "A guide for organizations that receive and use SBOMs to manage their software supply chain, assess risk, and respond to vulnerabilities."
+---
+
+import { Card, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
+
+An SBOM Consumer is an organization or individual that receives SBOMs and uses them to make informed decisions about the software in their environment. As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), consumers are the end users of SBOM data -- they ingest, analyze, and act on the information that producers and distributors provide.
+
+Consuming SBOMs is where the real value of the SBOM ecosystem is realized. While producers create the data and distributors pass it along, **consumers turn SBOM data into actionable intelligence**.
+
+## Key Activities
+
+<CardGrid>
+    <Card title="Vulnerability Management" icon="bug">
+        The primary use case for SBOM consumption. By matching the components listed in an SBOM against live vulnerability databases (NVD, OSV, GitHub Advisories), consumers can identify which of their deployed systems are affected by newly disclosed vulnerabilities. This is where **dynamic vulnerability data** meets the **static SBOM snapshot**.
+    </Card>
+    <Card title="License Compliance" icon="gavel">
+        Consumers can analyze SBOM data to verify that all software components comply with their organization's license policies. This is especially critical for procurement, legal review, and auditing open-source usage.
+    </Card>
+    <Card title="Risk Assessment" icon="warning">
+        SBOMs enable consumers to assess supply chain risk by examining component provenance, the number and depth of dependencies, the age and maintenance status of components, and the diversity of suppliers.
+    </Card>
+    <Card title="Incident Response" icon="rocket">
+        When a critical vulnerability like Log4Shell is disclosed, SBOMs allow security teams to assess their exposure in minutes rather than days. Consumers can immediately search their SBOM inventory to identify every system that contains the affected component.
+    </Card>
+</CardGrid>
+
+## Combining SBOMs with VEX/CSAF
+
+An SBOM tells you **what** is in your software. But to understand your actual risk, you also need to know **whether** a vulnerability in a component actually affects the product in question. This is where VEX and CSAF come in.
+
+<Aside type="note" title="The SBOM + VEX/CSAF Relationship">
+**SBOM** provides an inventory of components -- it answers *"What is in this software?"*
+
+**VEX** (Vulnerability Exploitability eXchange) provides vulnerability status -- it answers *"Is this product actually affected by this vulnerability?"*
+
+**CSAF** (Common Security Advisory Framework) is the standardized format for distributing security advisories, including VEX profiles. It enables machine-readable, automated distribution of vulnerability information.
+
+Together, SBOM and CSAF/VEX create a complete picture: the SBOM identifies the components, and VEX/CSAF communicates which vulnerabilities are relevant and what action to take.
+</Aside>
+
+The four VEX statuses that a producer can communicate for each vulnerability are:
+
+| Status | Meaning |
+| --- | --- |
+| **Not Affected** | The vulnerability does not affect the product. The producer may include a justification (e.g., vulnerable code not present, not in execution path, mitigations already exist). |
+| **Affected** | The vulnerability affects the product. Actions are recommended to remediate or address it. |
+| **Fixed** | The product version contains a fix for the vulnerability. |
+| **Under Investigation** | The producer is still analyzing whether the product is affected. An update will follow. |
+
+This allows consumers to focus on the vulnerabilities that **actually matter**, reducing noise and alert fatigue caused by false positives from automated scanners.
+
+## Getting Started as a Consumer
+
+<Steps>
+    <div>
+    **Build Your Asset Inventory**
+
+    Before you can use SBOMs effectively, you need to know what software you have deployed. Map your hardware, software, and firmware assets across your environment. An SBOM is most valuable when you can associate it with the specific systems where the software is deployed.
+    </div>
+    <div>
+    **Obtain SBOMs from Your Suppliers**
+
+    Request SBOMs from your software vendors and upstream suppliers. Determine where they publish their SBOMs (product downloads, customer portals, APIs) and establish a process to regularly retrieve them. Verify SBOM integrity using signatures or hashes.
+    </div>
+    <div>
+    **Ingest into an Asset Management Tool**
+
+    Use an SBOM-aware asset management or Software Composition Analysis (SCA) tool that can ingest SBOMs in both SPDX and CycloneDX formats. The tool should be able to correlate SBOM components against live vulnerability feeds and support VEX/CSAF ingestion.
+    </div>
+    <div>
+    **Monitor and Respond**
+
+    Continuously monitor your SBOM inventory against new vulnerability disclosures. Consume VEX/CSAF documents from your suppliers to filter out false positives and prioritize remediation based on actual exploitability. Establish processes for patch management and incident response informed by SBOM data.
+    </div>
+</Steps>
+
+<Aside type="tip" title="Tooling for Consumers">
+Several open-source tools can help consumers ingest and analyze SBOMs:
+
+- [Dependency-Track](https://dependencytrack.org/) -- a component analysis platform that supports SBOM ingestion, vulnerability correlation, and policy evaluation.
+- [GUAC](https://guac.sh/) -- a tool for understanding software supply chains by aggregating and synthesizing SBOM and other supply chain metadata.
+- [Grype](https://github.com/anchore/grype) -- a vulnerability scanner that can match SBOM components against known vulnerabilities.
+</Aside>

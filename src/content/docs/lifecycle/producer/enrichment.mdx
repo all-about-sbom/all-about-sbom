@@ -1,45 +1,67 @@
 ---
 title: "SBOM Enrichment: Adding Value to Your SBOM"
-description: "Learn how to enrich your Software Bills of Materials (SBOMs) with additional data to make them more useful."
+description: "Learn how to enrich your Software Bills of Materials (SBOMs) with release metadata to make them more useful for downstream consumers."
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
-An SBOM is more than just a list of components. It can be enriched with a wide range of additional data to provide deeper insights into your software supply chain. This process is known as SBOM enrichment.
+A generated SBOM provides a baseline inventory of software components. However, producers can significantly increase the value of their SBOMs by enriching them with additional release metadata before sharing them with consumers and distributors.
 
 ## Why Enrich Your SBOM?
 
-Enriching your SBOM can help you to:
+Enrichment improves the quality and completeness of the SBOM, making it more actionable for downstream stakeholders. A well-enriched SBOM helps consumers to:
 
-- **Improve security:** By adding vulnerability data to your SBOM, you can quickly identify and remediate security risks.
-- **Ensure compliance:** By adding license data, you can ensure that you are complying with all your legal obligations.
-- **Increase transparency:** By adding dependency relationship data, you can provide a more complete picture of your software supply chain.
+- **Assess provenance:** Understand where each component comes from and how it was built.
+- **Ensure compliance:** Verify that all license obligations are met before deployment.
+- **Build trust:** Demonstrate transparency through complete and accurate release metadata.
+- **Enable automation:** Provide the data fields that asset management and compliance tools need to operate effectively.
 
 ## What Data to Add
 
 <CardGrid>
-    <Card title="Vulnerability Data" icon="bug">
-        One of the most common use cases for SBOMs is to identify and manage vulnerabilities. You can enrich your SBOM with data from vulnerability databases like the [National Vulnerability Database (NVD)](https://nvd.nist.gov/) and the [GitHub Advisory Database](https://github.com/advisories).
+    <Card title="Release Metadata" icon="rocket">
+        Add product version, build identifiers, release timestamps, and supplier contact information. This helps consumers map the SBOM to a specific software release and verify its authenticity.
     </Card>
     <Card title="License Data" icon="gavel">
-        You can enrich your SBOM with information about the licenses of your software components. This can help you to ensure that you are complying with the terms of those licenses.
+        Go beyond auto-detected licenses. Confirm and correct license expressions for each component, resolve ambiguities, and document any license exceptions or dual-licensing arrangements. Accurate license data is essential for procurement and legal compliance.
     </Card>
-    <Card title="Dependency Relationships" icon="share">
-        You can add data about the relationships between your software components. This can help you to understand how your components are connected and identify potential points of failure.
+    <Card title="Component Relationships" icon="share">
+        Ensure the dependency graph is complete. Document direct vs. transitive dependencies, build-time vs. runtime dependencies, and the composition completeness of each section. This allows consumers to understand the full supply chain depth.
     </Card>
-    <Card title="Provenance Information" icon="dna">
-        You can add information about the origin of your software components. This can help you to track the provenance of your software and ensure its integrity.
+    <Card title="Provenance & Pedigree" icon="dna">
+        Add information about where each component's source code originates (download URLs, source repositories), how it was built, and any modifications applied (patches, backports). This supports supply chain integrity verification.
     </Card>
 </CardGrid>
 
-## VEX: Vulnerability Exploitability eXchange
+## SBOM Updates
 
-A key technology for enriching SBOMs with vulnerability information is the Vulnerability Exploitability eXchange (VEX). VEX is a companion to an SBOM that provides information about the exploitability of vulnerabilities in the context of the software product.
+An SBOM is created at a specific point in time and provides a static snapshot of the software's components at that moment. To maintain accuracy, it is crucial to update the SBOM when changes are made to the software or its underlying components.
 
-With VEX, a producer can state that a vulnerability is:
-- **Not affected:** The vulnerability does not affect the product.
-- **Affected:** The vulnerability affects the product and a patch is available.
-- **Fixed:** The vulnerability has been fixed in the product.
-- **Under investigation:** The producer is still investigating the vulnerability.
+Producers should issue a new or revised SBOM when:
+- The software is updated with a **new build or release**.
+- A build integrates an **updated component or dependency**.
+- The producer learns **new details** about the underlying components or wishes to correct an error in the existing SBOM data.
 
-This allows consumers to focus on the vulnerabilities that actually matter, reducing noise and alert fatigue.
+Some producers release an SBOM for every major release, others for every minor release, and some for each code change. The appropriate approach depends on the business model and customer needs.
+
+<Aside type="tip" title="SBOM Versioning">
+Both SPDX and CycloneDX support document versioning. When updating an SBOM, use the serial number and version fields to maintain a clear history of changes. This allows consumers to track how the software composition has evolved across releases.
+</Aside>
+
+## Vulnerability Data is NOT Part of the SBOM
+
+<Aside type="caution" title="A Common Misconception">
+A frequent misunderstanding is that SBOMs should contain vulnerability data. **They should not.**
+
+An SBOM is a **static manifest** -- it describes what is in the software at release time. Vulnerability data is **dynamic** -- new CVEs are published daily, and the exploitability status of a component changes over time as patches, mitigations, and analysis evolve.
+
+Mixing static inventory data with dynamic vulnerability data in a single document creates confusion and leads to stale, misleading information.
+
+Instead, vulnerability communication is handled through **separate, companion documents**:
+- **VEX** (Vulnerability Exploitability eXchange) statements communicate whether a product is affected by a specific vulnerability.
+- **CSAF** (Common Security Advisory Framework) provides the standardized format for distributing security advisories, including VEX profiles.
+
+The SBOM and VEX/CSAF documents are **linked** through shared identifiers (such as CPE or PURL), but they serve different purposes and follow different update cycles. The SBOM changes only when the software changes. VEX documents change whenever the vulnerability landscape changes.
+
+Learn more about how consumers use SBOMs together with VEX data in the [Consumer](/lifecycle/consumer) section.
+</Aside>

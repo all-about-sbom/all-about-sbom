@@ -31,7 +31,7 @@ Modern applications are built using third-party components, creating complex sof
 While this approach has positive effects, it also raises new challenges, for example in the areas of compliance and cybersecurity.
 Here, the main challenge often lies not in solving the actual problem, but first in identifying which dependencies are used directly or indirectly within a software.
 
-To create the needed transparency, the tech industry stared to adopt software bills of materials (SBOM).
+To create the needed transparency, the tech industry started to adopt software bills of materials (SBOM).
 Just as Bill of Materials (BOM) known from traditional manufacturing, SBOMs aim to list components within a software project in a standardized and machine-readable manner, enabling automated analysis.
 This website provides information, best practices, and guidelines on SBOMs to further increase their adoption.
 
@@ -79,30 +79,31 @@ The appropriate type of SBOM may vary depending on the use case. It is therefore
 <LinkButton href="/sbom-basics" variant="primary" icon="right-arrow">Learn the Basics of SBOMs</LinkButton>
 
 ## The SBOM Lifecycle
-Generating an SBOM is only the first step. Deriving real value from the technology requires enriching and anlyzing the data and responding to the findings properly.
+Generating an SBOM is only the first step. The real value of SBOMs emerges through the lifecycle of production, distribution, and consumption. 
+Each stage involves different roles and responsibilities, as defined by [CISA](https://www.cisa.gov/sbom) and the [FIRST SBOM and CSAF/VEX Operational Framework](https://www.first.org/standards/frameworks/psirts/Consolidated-SBOM-VEX-Operational-Framework.pdf).
 
 <CardGrid>
   <div class="use-case-card c2">
     <LinkCard 
       title="Producer" 
       href="/lifecycle/producer" 
-      description="Learn how to generate and provide SBOMs for your software."
+      description="Generate, enrich, and share SBOMs for your software releases."
     />
   </div>
 
   <div class="use-case-card c3">
     <LinkCard 
       title="Distributor" 
-      href="#" 
-      description="Learn how to handle and distribute SBOMs from upstream producers."
+      href="/lifecycle/distributor" 
+      description="Receive, validate, and redistribute SBOMs from upstream producers to downstream consumers."
     />
   </div>
 
   <div class="use-case-card c5">
     <LinkCard 
       title="Consumer" 
-      href="#" 
-      description="Learn how to use SBOMs to assess and manage your software supply chain."
+      href="/lifecycle/consumer" 
+      description="Ingest SBOMs to manage vulnerabilities, ensure license compliance, and assess supply chain risk."
     />
   </div>
 </CardGrid>
