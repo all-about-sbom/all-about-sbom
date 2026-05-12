@@ -1,6 +1,45 @@
 ---
-title: SBOM Enrichment
-description: Learn how to enrich your SBOMs with additional data.
+title: "SBOM Enrichment: Adding Value to Your SBOM"
+description: "Learn how to enrich your Software Bills of Materials (SBOMs) with additional data to make them more useful."
 ---
 
-This page will describe the process of enriching SBOMs.
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+An SBOM is more than just a list of components. It can be enriched with a wide range of additional data to provide deeper insights into your software supply chain. This process is known as SBOM enrichment.
+
+## Why Enrich Your SBOM?
+
+Enriching your SBOM can help you to:
+
+- **Improve security:** By adding vulnerability data to your SBOM, you can quickly identify and remediate security risks.
+- **Ensure compliance:** By adding license data, you can ensure that you are complying with all your legal obligations.
+- **Increase transparency:** By adding dependency relationship data, you can provide a more complete picture of your software supply chain.
+
+## What Data to Add
+
+<CardGrid>
+    <Card title="Vulnerability Data" icon="bug">
+        One of the most common use cases for SBOMs is to identify and manage vulnerabilities. You can enrich your SBOM with data from vulnerability databases like the [National Vulnerability Database (NVD)](https://nvd.nist.gov/) and the [GitHub Advisory Database](https://github.com/advisories).
+    </Card>
+    <Card title="License Data" icon="gavel">
+        You can enrich your SBOM with information about the licenses of your software components. This can help you to ensure that you are complying with the terms of those licenses.
+    </Card>
+    <Card title="Dependency Relationships" icon="share">
+        You can add data about the relationships between your software components. This can help you to understand how your components are connected and identify potential points of failure.
+    </Card>
+    <Card title="Provenance Information" icon="dna">
+        You can add information about the origin of your software components. This can help you to track the provenance of your software and ensure its integrity.
+    </Card>
+</CardGrid>
+
+## VEX: Vulnerability Exploitability eXchange
+
+A key technology for enriching SBOMs with vulnerability information is the Vulnerability Exploitability eXchange (VEX). VEX is a companion to an SBOM that provides information about the exploitability of vulnerabilities in the context of the software product.
+
+With VEX, a producer can state that a vulnerability is:
+- **Not affected:** The vulnerability does not affect the product.
+- **Affected:** The vulnerability affects the product and a patch is available.
+- **Fixed:** The vulnerability has been fixed in the product.
+- **Under investigation:** The producer is still investigating the vulnerability.
+
+This allows consumers to focus on the vulnerabilities that actually matter, reducing noise and alert fatigue.
