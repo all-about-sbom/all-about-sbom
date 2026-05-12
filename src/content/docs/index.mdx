@@ -81,54 +81,30 @@ The appropriate type of SBOM may vary depending on the use case. It is therefore
 ## The SBOM Lifecycle
 Generating an SBOM is only the first step. Deriving real value from the technology requires enriching and anlyzing the data and responding to the findings properly.
 
-{/* 
-```mermaid
-flowchart LR
-    classDef step1 fill:#003366,stroke:#000c3f,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
-    classDef step2 fill:#1E88E5,stroke:#0061be,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
-    classDef step3 fill:#8E24AA,stroke:#670083,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
-    classDef step4 fill:#F87B1B,stroke:#d15400,stroke-width:2px,color:#FFFFFF,rx:10,ry:10
+<CardGrid>
+  <div class="use-case-card c2">
+    <LinkCard 
+      title="Producer" 
+      href="/lifecycle/producer" 
+      description="Learn how to generate and provide SBOMs for your software."
+    />
+  </div>
 
-    A([⚙️ <b>SBOM Production</b>]):::step1
-    B([🔍 <b>Sharing the SBOM</b>]):::step2
-    C([🛡️ <b>Data Enrichment & Analysis</b>]):::step3
-    D([🛡️ <b>Risk Response</b>]):::step4
+  <div class="use-case-card c3">
+    <LinkCard 
+      title="Distributor" 
+      href="#" 
+      description="Learn how to handle and distribute SBOMs from upstream producers."
+    />
+  </div>
 
-    A ==> B
-    B ==> C
-    C ==> D
-```
-*/}
-
-<div style="text-align: left;">
-<Steps>
-
-1. **SBOM Production**
-   
-   First, automated tools analyze your project to generate a SBOM.
-
-   <LinkButton href="/lifecycle/sbom_generation/sbom_generation" variant="minimal" icon="right-arrow">Learn more</LinkButton>
-
-2. **Sharing the SBOM**
-   
-   SBOMs can be used internally or they may be shared with others.
-
-   <LinkButton href="/lifecycle/sharing/sharing" variant="minimal" icon="right-arrow">Learn more</LinkButton>
-
-3. **Data Enrichment & Analysis**
-   
-   Once the SBOM is generated, analysis tools can be used to make the information human-readable, visualize them and automatically derive information relevant for the use-case.
-
-   <LinkButton href="/lifecycle/enrichment_analysis/enrichment_analysis" variant="minimal" icon="right-arrow">Learn more</LinkButton>
-
-4. **Response**
-   
-   Once the findings are derived, risk management takes over to derive appropriate actions.
-
-   <LinkButton href="/lifecycle/response/response" variant="minimal" icon="right-arrow">Learn more</LinkButton>
-
-</Steps>
-
-</div>
+  <div class="use-case-card c5">
+    <LinkCard 
+      title="Consumer" 
+      href="#" 
+      description="Learn how to use SBOMs to assess and manage your software supply chain."
+    />
+  </div>
+</CardGrid>
 
 </div>
