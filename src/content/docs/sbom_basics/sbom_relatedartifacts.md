@@ -1,6 +1,6 @@
 ---
-title: SBOM Companion artifacts: VEX, VDR, attestations, HBOM, SaaSBOM, AI/ML-BOM, CBOM
-description: Article describes the artifacts related to SBOM that enhance the SBOM usability.
+title: "SBOM Companion artifacts: VEX, VDR, attestations, HBOM, SaaSBOM, AI/ML-BOM, CBOM"
+description: "Article describes the artifacts related to SBOM that enhance the SBOM usability."
 template: splash
 ---
 # Companion Artifacts: VEX, VDR, Attestations, HBOM, SaaSBOM, AI/ML-BOM, and CBOM
