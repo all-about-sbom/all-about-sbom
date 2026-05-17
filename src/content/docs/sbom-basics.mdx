@@ -1,0 +1,106 @@
+---
+title: "SBOM Basics: A Beginner's Guide"
+description: "Understand the fundamentals of Software Bills of Materials (SBOMs) in simple, easy-to-understand terms."
+---
+
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+
+## What is an SBOM?
+
+Think of a Software Bill of Materials (SBOM) as a list of ingredients for a piece of software. Just like a recipe lists all the ingredients needed to bake a cake, an SBOM lists all the software components that make up an application.
+
+These components include open-source libraries, commercial off-the-shelf products, and even other pieces of your own software. The goal is to create a complete and accurate inventory of everything that has gone into your software product.
+
+The U.S. National Telecommunications and Information Administration (NTIA) defines an SBOM as:
+
+> *An SBOM is a formal, machine-readable inventory of software components and dependencies, information about those components, and their hierarchical relationships. These inventories should be comprehensive -- or should explicitly state where they could not be.*
+
+An SBOM is a **static file** associated with a particular software release. It represents a **snapshot** of the software's composition at a specific point in time. Each time a new version of the software is released, a new SBOM should be generated to reflect the updated composition.
+
+<Aside type="caution" title="What an SBOM is NOT">
+An SBOM is **not** a vulnerability report. It does not contain live security data.
+
+Vulnerability information is **dynamic** -- it changes constantly as new CVEs are published and existing ones are updated. An SBOM, by contrast, is a **static snapshot** of software ingredients at a specific release point.
+
+To communicate vulnerability status, producers use a separate companion document called **VEX** (Vulnerability Exploitability eXchange), which is typically delivered via the **CSAF** (Common Security Advisory Framework) standard. VEX documents are dynamic and evolve independently of the SBOM as the vulnerability landscape changes.
+
+**SBOM** = static ingredient list (what is in the software)
+**VEX/CSAF** = dynamic vulnerability status (what is affected and how)
+</Aside>
+
+## Why are SBOMs Important?
+
+SBOMs provide crucial transparency into the software supply chain. This transparency has many benefits:
+
+<CardGrid>
+	<Card title="Enhanced Security" icon="approve-check-circle">
+		When a new vulnerability is discovered in a software component (like the Log4Shell vulnerability), you can instantly check your SBOMs to see if you are affected.
+	</Card>
+	<Card title="License Compliance" icon="gavel">
+		SBOMs help you track the licenses of all your software components, ensuring that you are complying with all legal requirements.
+	</Card>
+	<Card title="Customer Trust" icon="users">
+		Providing an SBOM to your customers shows that you are transparent about your software and take security seriously.
+	</Card>
+    <Card title="Due Diligence" icon="magnifying-glass">
+        SBOMs are essential for mergers and acquisitions, allowing companies to assess the quality and risk of a software product.
+    </Card>
+</CardGrid>
+
+## What's Inside an SBOM?
+
+An SBOM is a structured file that contains key information about the software and its components. The NTIA has defined the following minimum elements that every SBOM should include:
+
+| Data Field | Description |
+| --- | --- |
+| **Supplier Name** | The name of the entity that creates, defines, and identifies components. |
+| **Component Name** | The designation assigned to a unit of software by its original supplier. |
+| **Version** | Identifier used by the supplier to specify a change in software from a previously identified version. |
+| **Other Unique Identifiers** | Other identifiers used to identify a component, or that serve as a look-up key for relevant databases (e.g., CPE, PURL). |
+| **Dependency Relationship** | Characterizing the relationship that an upstream component is included in the software. |
+| **Author of SBOM Data** | The name of the entity that creates the SBOM data for this component. |
+| **Timestamp** | Record of the date and time of the SBOM data assembly. |
+
+Beyond these minimum fields, SBOMs can also include license information, cryptographic hashes of components, and information about the lifecycle phase in which the SBOM was generated.
+
+## SBOM Formats
+
+There are two main formats for SBOMs, both of which are designed to be machine-readable:
+
+<CardGrid>
+	<Card title="SPDX" icon="document">
+		**Software Package Data Exchange** is an open standard from the Linux Foundation, standardized as [ISO/IEC 5962:2021](https://www.iso.org/standard/81870.html). Initially focused on license compliance, SPDX has expanded to cover security, provenance, and AI. Version 3.x introduced a modular profile architecture (Software, Security, Licensing, AI, Build, Dataset, and more) and shifted from a document-centric to an element-centric data model.
+	</Card>
+	<Card title="CycloneDX" icon="document">
+		A lightweight BOM standard from the [OWASP](https://owasp.org/) community, standardized as [ECMA-424](https://ecma-international.org/publications-and-standards/standards/ecma-424/). Designed with a strong focus on security and component analysis. Supports JSON, XML, and Protocol Buffers. Covers software components, services, vulnerabilities, formulation, and more through a single unified schema.
+	</Card>
+</CardGrid>
+
+Both formats are actively developed and supported by a wide range of tools. The choice of format often depends on your specific use case, tooling, and regulatory requirements. Importantly, the two communities are working towards interoperability, and SBOM format translation tools exist to convert between them.
+
+## Types of SBOMs
+
+The components that an SBOM describes depend heavily on the phase of the product lifecycle in which it is generated. An SBOM generated from source code can list managed dependencies, but it cannot capture dynamically linked components that are resolved only at runtime.
+
+[CISA](https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf) and the [German BSI](https://www.bsi.bund.de/SharedDocs/Downloads/EN/BSI/Publications/TechGuidelines/TR03183/BSI-TR-03183-2_v2_1_0.pdf) have defined six different types of SBOMs:
+
+| Type | Description |
+| --- | --- |
+| **Design** | SBOM of an intended, planned software project with included components (some of which may not yet exist). |
+| **Source** | Created directly from the development environment, source files, and included dependencies. |
+| **Build** | Generated as part of the build process to create a releasable artifact from source files, dependencies, and build data. |
+| **Analyzed** | Generated through analysis of artifacts (e.g., executables, containers) after the build, often using heuristics. Sometimes called a "3rd party" SBOM. |
+| **Deployed** | Provides an inventory of software present on a system, potentially combining multiple SBOMs with configuration analysis. |
+| **Runtime** | Generated by instrumenting a running system, capturing only components actually present and dynamically loaded. |
+
+Understanding these types is important because the scope shifts across phases. A Source SBOM is identical for every instance of a product, while a Runtime SBOM may differ for the same software running on different systems.
+
+Both SPDX and CycloneDX allow producers to indicate the lifecycle phase in which the SBOM was generated.
+
+## Beyond SBOMs: The xBOM Concept
+
+SPDX and CycloneDX are often called "SBOM formats," but this understates their capabilities. Both standards can document far more than just software components -- they can describe cryptographic algorithms (CBOM), hardware parts (HBOM), AI models (AI-BOM), and more.
+
+The nature of the documented artifact is determined by the component's assigned type attribute in CycloneDX, or through SPDX's modular profile architecture. Whether the resulting document is called an SBOM, CBOM, HBOM, or something else depends solely on what is being documented. The underlying standard is the same.
+
+This broader concept is referred to as **xBOM** (Extended or Everything Bill of Materials) -- a unified approach to mapping an organization's entire hardware and software supply chain in a single, standardized format.

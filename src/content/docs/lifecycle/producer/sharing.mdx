@@ -1,0 +1,44 @@
+---
+title: "SBOM Sharing: Distributing Your SBOM"
+description: "Learn how to share your Software Bills of Materials (SBOMs) with your customers and downstream stakeholders."
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Once you have generated and enriched your SBOM, the next step is to share it with your customers and other stakeholders. This is a critical step in providing transparency and building trust in your software.
+
+## How to Share Your SBOM
+
+There are several ways to share your SBOMs. The best method depends on your specific needs and the needs of your customers.
+
+<CardGrid>
+    <Card title="Inside the Product" icon="box">
+        You can include the SBOM directly inside your software product, for example, as a file in a container image or as part of a software package. This makes it easy for your customers to find and use the SBOM.
+    </Card>
+    <Card title="On a Website" icon="globe">
+        You can publish your SBOMs on a public website, making them available to anyone who is interested. This is a good option for open-source projects and for companies that want to be as transparent as possible.
+    </Card>
+    <Card title="On Request" icon="mail">
+        You can also provide your SBOMs on request, for example, through a customer portal or via email. This allows you to control who has access to your SBOMs and to track who is using them.
+    </Card>
+</CardGrid>
+
+## Access Control
+
+When sharing your SBOMs, it's important to consider access control. You may not want to make your SBOMs public, especially if they contain sensitive information.
+
+Some common access control mechanisms include:
+
+- **Authentication:** Requiring users to log in before they can access your SBOMs.
+- **Authorization:** Granting access to your SBOMs only to specific users or groups of users.
+- **Encryption:** Encrypting your SBOMs to protect them from unauthorized access.
+
+The level of access control you need will depend on the sensitivity of your SBOMs and your company's policies.
+
+## SBOM Repositories
+
+As the use of SBOMs becomes more widespread, we are seeing the emergence of SBOM repositories. These are specialized systems for storing, managing, and distributing SBOMs.
+
+SBOM repositories can provide a centralized location for all your SBOMs, making them easier to find and use. They can also provide advanced features like access control, versioning, and search.
+
+Some examples of SBOM repository and management projects include [Dependency-Track](https://dependencytrack.org/) and [GUAC](https://guac.sh/).
