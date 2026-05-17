@@ -16,6 +16,7 @@ export default defineConfig({
 		starlight({
 			title: 'All About SBOMs',
 			customCss: ['./src/styles/custom.css'],
+			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 			components: {
         		Header: './src/components/Header.astro',
 				Footer: './src/components/Footer.astro',
