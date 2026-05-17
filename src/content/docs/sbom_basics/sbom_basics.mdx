@@ -97,10 +97,13 @@ Understanding these types is important because the scope shifts across phases. A
 
 Both SPDX and CycloneDX allow producers to indicate the lifecycle phase in which the SBOM was generated.
 
-## Beyond SBOMs: The xBOM Concept
+## Beyond SBOMs: Artifacts and the xBOM Concept
 
 SPDX and CycloneDX are often called "SBOM formats," but this understates their capabilities. Both standards can document far more than just software components -- they can describe cryptographic algorithms (CBOM), hardware parts (HBOM), AI models (AI-BOM), and more.
 
 The nature of the documented artifact is determined by the component's assigned type attribute in CycloneDX, or through SPDX's modular profile architecture. Whether the resulting document is called an SBOM, CBOM, HBOM, or something else depends solely on what is being documented. The underlying standard is the same.
 
 This broader concept is referred to as **xBOM** (Extended or Everything Bill of Materials) -- a unified approach to mapping an organization's entire hardware and software supply chain in a single, standardized format.
+
+There are now numerous extensions, such as the Vulnerability Exploitability eXchange (VEX), designed to expand the capabilities of SBOMs. For more information on related Bill of Materials formats and artifacts, see here: [SBOM Companion artifacts](/sbom_basics/sbom_relatedartifacts)
+
