@@ -54,26 +54,21 @@ This allows consumers to focus on the vulnerabilities that **actually matter**, 
 ## Getting Started as a Consumer
 
 <Steps>
-    <div>
-    **Build Your Asset Inventory**
+1. **Build Your Asset Inventory**
 
     Before you can use SBOMs effectively, you need to know what software you have deployed. Map your hardware, software, and firmware assets across your environment. An SBOM is most valuable when you can associate it with the specific systems where the software is deployed.
-    </div>
-    <div>
-    **Obtain SBOMs from Your Suppliers**
+    
+2. **Obtain SBOMs from Your Suppliers**
 
     Request SBOMs from your software vendors and upstream suppliers. Determine where they publish their SBOMs (product downloads, customer portals, APIs) and establish a process to regularly retrieve them. Verify SBOM integrity using signatures or hashes.
-    </div>
-    <div>
-    **Ingest into an Asset Management Tool**
+
+3. **Ingest into an Asset Management Tool**
 
     Use an SBOM-aware asset management or Software Composition Analysis (SCA) tool that can ingest SBOMs in both SPDX and CycloneDX formats. The tool should be able to correlate SBOM components against live vulnerability feeds and support VEX/CSAF ingestion.
-    </div>
-    <div>
-    **Monitor and Respond**
+
+4. **Monitor and Respond**
 
     Continuously monitor your SBOM inventory against new vulnerability disclosures. Consume VEX/CSAF documents from your suppliers to filter out false positives and prioritize remediation based on actual exploitability. Establish processes for patch management and incident response informed by SBOM data.
-    </div>
 </Steps>
 
 <Aside type="tip" title="Tooling for Consumers">

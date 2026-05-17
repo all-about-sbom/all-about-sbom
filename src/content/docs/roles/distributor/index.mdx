@@ -38,26 +38,21 @@ Not every organization needs to act as a distributor. This role is relevant when
 ## The Distribution Process
 
 <Steps>
-    <div>
-    **Receive and Validate**
+1. **Receive and Validate**
 
     Obtain SBOMs from upstream producers alongside the software artifacts they describe. Validate the SBOM's integrity (signatures, hashes) and completeness. Confirm that the SBOM matches the specific version of the software being distributed.
-    </div>
-    <div>
-    **Aggregate and Enrich (if needed)**
+
+2. **Aggregate and Enrich (if needed)**
 
     If your product bundles multiple upstream components, combine their SBOMs into an assembly that represents the complete product. Add your own metadata where appropriate, such as a top-level component describing your product and its relationship to the bundled components.
-    </div>
-    <div>
-    **Store and Version**
+
+3. **Store and Version**
 
     Maintain an archive of all SBOMs you distribute. Use SBOM repositories or version-controlled storage to ensure you can trace which SBOM was distributed with which software release. This is essential for incident response and audit trails.
-    </div>
-    <div>
-    **Redistribute**
+
+4. **Redistribute**
 
     Share SBOMs with downstream consumers using the same mechanisms as producers: embedded in the product, published on a website, available via an API, or provided on request. Include any upstream VEX/CSAF documents alongside the SBOM.
-    </div>
 </Steps>
 
 ## Handling SBOM Updates
