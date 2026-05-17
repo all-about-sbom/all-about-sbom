@@ -1,9 +1,7 @@
 ---
-title: "SBOM Companion artifacts: VEX, VDR, attestations, HBOM, SaaSBOM, AI/ML-BOM, CBOM"
+title: "SBOM Companion artifacts: VEX, VDR, Attestations, HBOM, SaaSBOM, AI/ML-BOM, CBOM"
 description: "Article describes the artifacts related to SBOM that enhance the SBOM usability."
-template: splash
 ---
-# Companion Artifacts: VEX, VDR, Attestations, HBOM, SaaSBOM, AI/ML-BOM, and CBOM
 
 An SBOM by itself rarely answers operational questions. It tells you what components are inside a product at a specific point in time. It does not tell you whether any of those components are currently exploitable, whether the build process that produced them was trustworthy, how the SBOM relates to a particular release, or how hardware, services, and algorithms fit into the picture. A family of companion artifacts has emerged to fill those gaps. Understanding them matters regardless of where you sit in the SBOM ecosystem — whether you are producing SBOMs, consuming them, building tooling, writing policy, or auditing compliance.
 
