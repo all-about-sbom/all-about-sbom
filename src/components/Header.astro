@@ -12,7 +12,7 @@ import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
 
   <nav class="custom-nav sl-hidden md:sl-flex">
     <div class="dropdown">
-      <a href="/use-cases/use-cases" class="dropbtn">Usecases ▾</a>
+      <a href="/use-cases" class="dropbtn">Usecases ▾</a>
       <div class="dropdown-content">
         <a href="/use-cases/security">Security Management</a>
         <a href="/use-cases/technical-debt">Technical Debt</a>
@@ -20,17 +20,23 @@ import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
         <a href="/use-cases/supplier">Supplier Transparency</a>
       </div>
     </div>
-    <a href="/sbom_basics/sbom_basics">SBOM Basics</a>
-    <a href="/tooling/tooling">Tools</a>
     <div class="dropdown">
-      <a href="/lifecycle/lifecycle" class="dropbtn">SBOM Lifecycle ▾</a>
+      <a href="/sbom_basics/sbom_basics" class="dropbtn">SBOM Basics ▾</a>
       <div class="dropdown-content">
-        <a href="/lifecycle/sbom_generation/sbom_generation">SBOM Generation</a>
-        <a href="/lifecycle/sharing/sharing">Sharing an SBOM</a>
-        <a href="/lifecycle/enrichment_analysis/enrichment_analysis">Analyzing an SBOM</a>
-        <a href="/lifecycle/response/response">Respond to Findings</a>
+        <a href="/sbom_basics/sbom_basics">Basics</a>
+        <a href="/sbom_basics/sbom_relatedartifacts">SBOM Formats and Artifacts</a>
       </div>
     </div>
+    <a href="/tooling/tooling">Tools</a>
+    <div class="dropdown">
+      <a href="/roles/producer" class="dropbtn">Roles ▾</a>
+      <div class="dropdown-content">
+        <a href="/roles/producer">Producer</a>
+        <a href="/roles/distributor">Distributor</a>
+        <a href="/roles/consumer">Consumer</a>
+      </div>
+    </div>
+    <a href="/references">Additional References</a>
   </nav>
 
   <div class="right-actions sl-flex">
