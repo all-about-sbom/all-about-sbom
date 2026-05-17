@@ -1,0 +1,42 @@
+---
+title: BOM Use-Cases
+description: Get started building your docs site with Starlight.
+---
+
+import { LinkCard, Card, CardGrid } from '@astrojs/starlight/components';
+
+SBOMs can be used for a variety of use cases. These include:
+
+<CardGrid>
+  <div class="use-case-card c2">
+    <LinkCard 
+      title="Security Management" 
+      href="/use-cases/security" 
+      description="SBOMs make it easy to instantly identify vulnerable components in a project and take corresponding actions."
+    />
+  </div>
+
+  <div class="use-case-card c3">
+    <LinkCard 
+      title="License Compliance" 
+      href="/use-cases/license" 
+      description="Track components and their associated licenses to ensure you are meeting all legal, regulatory, and internal policy requirements."
+    />
+  </div>
+
+  <div class="use-case-card c5">
+    <LinkCard 
+      title="Technical Debt Management" 
+      href="/use-cases/technical-debt" 
+      description="Get an overview of all components used your software, identify outdated elements and guide your update efforts."
+    />
+  </div>
+
+  <div class="use-case-card c4">
+    <LinkCard 
+      title="Supplier Transparency" 
+      href="/use-cases/supplier" 
+      description="Provide customers and partners with data on the composition of your software, building trust and fulfilling vendor requirements."
+    />
+  </div>
+</CardGrid>
