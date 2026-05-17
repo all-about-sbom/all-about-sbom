@@ -1,0 +1,73 @@
+---
+title: "The Distributor's Role"
+description: "A guide for organizations that receive, manage, and redistribute SBOMs from upstream producers to downstream consumers."
+---
+
+import { Card, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
+
+An SBOM Distributor is an organization that receives SBOMs from upstream producers and redistributes them to downstream consumers. Distributors play a critical role in the SBOM supply chain by ensuring that accurate and trustworthy SBOM data flows from producers to the organizations that need it.
+
+As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), distributors are intermediaries who may aggregate, transform, or simply pass through SBOM data as part of a broader software distribution process.
+
+## When Does Distribution Apply?
+
+Not every organization needs to act as a distributor. This role is relevant when you:
+
+- **Bundle or integrate** third-party software into your own product and need to pass along upstream SBOMs together with your own.
+- **Operate a platform or marketplace** that hosts software from multiple producers.
+- **Act as a reseller or system integrator** who delivers software on behalf of upstream vendors.
+- **Manage an internal software catalog** within a large enterprise, aggregating SBOMs from various internal teams and external suppliers.
+
+## Key Responsibilities
+
+<CardGrid>
+    <Card title="Integrity Verification" icon="approve-check-circle">
+        Before redistributing an SBOM, verify its integrity. Check cryptographic signatures or hashes provided by the producer to ensure the SBOM has not been tampered with during transit.
+    </Card>
+    <Card title="Aggregation" icon="list-format">
+        When distributing a product that bundles multiple upstream components, aggregate the individual SBOMs into a coherent view. Ensure that dependency relationships between bundled components are accurately represented.
+    </Card>
+    <Card title="Format Transformation" icon="translate">
+        Downstream consumers may require SBOMs in a different format than what was provided by the producer. Distributors may need to convert between SPDX and CycloneDX, or between different serialization formats (JSON, XML) while preserving data fidelity.
+    </Card>
+    <Card title="Access Control" icon="lock">
+        Some SBOM data may be sensitive. Distributors must implement appropriate access controls, ensuring that SBOMs are shared only with authorized consumers while meeting contractual and regulatory obligations.
+    </Card>
+</CardGrid>
+
+## The Distribution Process
+
+<Steps>
+    <div>
+    **Receive and Validate**
+
+    Obtain SBOMs from upstream producers alongside the software artifacts they describe. Validate the SBOM's integrity (signatures, hashes) and completeness. Confirm that the SBOM matches the specific version of the software being distributed.
+    </div>
+    <div>
+    **Aggregate and Enrich (if needed)**
+
+    If your product bundles multiple upstream components, combine their SBOMs into an assembly that represents the complete product. Add your own metadata where appropriate, such as a top-level component describing your product and its relationship to the bundled components.
+    </div>
+    <div>
+    **Store and Version**
+
+    Maintain an archive of all SBOMs you distribute. Use SBOM repositories or version-controlled storage to ensure you can trace which SBOM was distributed with which software release. This is essential for incident response and audit trails.
+    </div>
+    <div>
+    **Redistribute**
+
+    Share SBOMs with downstream consumers using the same mechanisms as producers: embedded in the product, published on a website, available via an API, or provided on request. Include any upstream VEX/CSAF documents alongside the SBOM.
+    </div>
+</Steps>
+
+## Handling SBOM Updates
+
+When an upstream producer releases an updated SBOM (due to a new software version or corrections to the SBOM data), distributors must propagate these updates to their downstream consumers. Establish a process to:
+
+- Monitor upstream producers for SBOM updates.
+- Validate and re-aggregate updated SBOMs.
+- Notify downstream consumers of the availability of updated SBOM data.
+
+<Aside type="tip" title="VEX Forwarding">
+Distributors should also forward VEX/CSAF documents from upstream producers to downstream consumers. Since VEX documents are dynamic and change more frequently than SBOMs, consider automating the distribution of VEX updates through APIs or notification systems.
+</Aside>

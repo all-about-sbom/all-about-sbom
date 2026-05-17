@@ -1,0 +1,52 @@
+---
+title: "SBOM Generation: Creating Your First SBOM"
+description: "Learn how to generate Software Bills of Materials (SBOMs) for your software projects."
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Generating an SBOM is the first step in the producer's journey. It involves using specialized tools to scan your software and create a structured inventory of all its components.
+
+## When to Generate an SBOM
+
+SBOMs can be generated at different stages of the software development lifecycle. The best time to generate an SBOM depends on your specific needs and the tools you are using.
+
+<Steps>
+    <div>
+    **During Development:**
+    Generating SBOMs during development can help you identify and address security and license compliance issues early in the process.
+    </div>
+    <div>
+    **During the Build:**
+    Integrating SBOM generation into your build process ensures that you always have an up-to-date SBOM for every version of your software. This is the most common and recommended approach.
+    </div>
+    <div>
+    **After Deployment:**
+    You can also generate SBOMs for software that is already deployed. This can be useful for legacy applications or for creating an inventory of your existing software assets.
+    </div>
+</Steps>
+
+## Types of SBOMs
+
+There are different types of SBOMs, each providing a different level of detail and intended for different use cases. Some common types include:
+
+- **Source SBOM:** An SBOM generated from the source code of your application.
+- **Build SBOM:** An SBOM generated from the build artifacts of your application.
+- **Deployed SBOM:** An SBOM generated from a running application.
+- **Analyzed SBOM:** An SBOM that has been enriched with additional information, such as vulnerability data.
+
+## Choosing an SBOM Tool
+
+There are many open-source and commercial tools available for generating SBOMs. When choosing a tool, consider the following factors:
+
+- **Supported Languages and Ecosystems:** Make sure the tool supports the programming languages and package managers you are using.
+- **Output Formats:** The tool should be able to generate SBOMs in the formats you need (e.g., SPDX, CycloneDX).
+- **Integration with CI/CD:** The tool should be easy to integrate into your existing CI/CD pipeline.
+- **Quality of Results:** The tool should be able to generate accurate and complete SBOMs.
+
+Some popular open-source SBOM generation tools include:
+
+- [Syft](https://github.com/anchore/syft)
+- [Trivy](https://github.com/aquasecurity/trivy)
+- [SPDX SBOM Generator](https://github.com/spdx/spdx-sbom-generator)
+- [CycloneDX CLI](https://github.com/CycloneDX/cyclonedx-cli)
