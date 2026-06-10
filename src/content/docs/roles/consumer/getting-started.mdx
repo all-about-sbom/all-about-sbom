@@ -1,0 +1,296 @@
+---
+title: "What To Do"
+description: "Practical guidance for organizations receiving SBOMs — from first action steps through building a mature receiving program."
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+
+## Getting Started
+
+<Tabs>
+  <TabItem label="No Dedicated IT / SaaS-Only">
+
+If your organization runs no internal servers and relies on SaaS vendors for its software stack, direct SBOM ingestion is not your starting point. What matters is whether the vendors you depend on maintain their software responsibly — and whether you have the visibility and contracts to act when they don't.
+
+<Steps>
+1. **Know what you're running**
+
+   Maintain a list of every SaaS platform, every commercial application, and every connected device your organization uses. This does not have to be an SBOM. It has to be a list. It is the prerequisite to every other step. A spreadsheet updated when something is added or removed is entirely sufficient.
+
+2. **Ask vendors the right questions**
+
+   When onboarding a new vendor or renewing a critical contract, ask:
+   - Do you have a published security advisory or vulnerability disclosure process?
+   - Do you publish CVSSv3 or CVSSv4 scores for vulnerabilities in your product?
+   - Is a software bill of materials available upon request?
+   - Do you hold a SOC 2 Type II report covering security, availability, and confidentiality?
+   - What is your patch turnaround for critical vulnerabilities?
+
+   You do not need to process an SBOM to benefit from a vendor that has good SBOM practices. The presence of a mature SBOM program signals that the vendor knows what is in their software — which means they patch faster and communicate more clearly.
+
+3. **Include security language in contracts**
+
+   Even a single sentence added to a vendor services agreement provides meaningful protection: *"Vendor will notify Customer within 72 hours of becoming aware of a security incident or disclosed vulnerability materially affecting the services."* This creates a contractual basis for conversations that would otherwise depend entirely on the vendor's goodwill.
+
+4. **Know where to go when something breaks**
+
+   When a major vulnerability is announced, you need a way to quickly determine whether any of your vendors are affected. The vendor's security advisory page, their status page, and their support channel are your first line of inquiry. If a vendor cannot tell you within a reasonable time whether they are affected by a named, public vulnerability, that is a risk signal that should affect your next renewal decision.
+
+5. **Review your cyber insurance application honestly**
+
+   Insurance questionnaires are increasingly granular about vendor risk management. Answering them accurately, identifying gaps, and closing those gaps over the policy year is the most practical risk-reduction pathway available to organizations without a dedicated security function.
+</Steps>
+
+  </TabItem>
+  <TabItem label="Technical / Development Org">
+
+Organizations with a dedicated security team, DevSecOps capability, or internal engineering function can engage directly with SBOM artifacts. The four steps below cover the receiving side. For the tooling landscape across open-source and commercial options, see [SBOM Tooling](../tooling).
+
+<Steps>
+1. **Build your asset inventory**
+
+   Before you can use SBOMs effectively, you need to know what software you have deployed. Map your hardware, software, and firmware assets across your environment. An SBOM is most valuable when you can associate it with the specific systems where the software is actually deployed.
+
+2. **Obtain SBOMs from your suppliers**
+
+   Request SBOMs from your software vendors and upstream suppliers. Determine where they publish their SBOMs — product downloads, customer portals, APIs — and establish a process to regularly retrieve them. Verify SBOM integrity using signatures or hashes where available.
+
+3. **Ingest into an asset management or analysis tool**
+
+   Use an SBOM-aware tool that can ingest both SPDX and CycloneDX formats. The tool should be able to correlate SBOM components against live vulnerability feeds and support VEX/CSAF ingestion to reduce false-positive noise. See [SBOM Tooling](../tooling) for the current open-source and commercial landscape.
+
+4. **Monitor and respond**
+
+   Continuously monitor your SBOM inventory against new vulnerability disclosures. Consume VEX and CSAF documents from your suppliers to filter out false positives and prioritize remediation based on actual exploitability.<sup><a href="./references#ref-1">[1]</a></sup> Establish patch management and incident response processes informed by SBOM data.
+</Steps>
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Escalation Paths
+
+What to do when a supplier doesn't deliver, or when something goes wrong.
+
+<details>
+<summary><strong>Organization with an internal security function</strong></summary>
+
+Most SBOM receiving problems come from misunderstanding rather than refusal — a producer's tool doesn't generate the field you expected, or their distribution channel isn't what their sales team described. A clear four-step path resolves most situations without escalation.
+
+1. **Direct technical conversation.** Contact the producer's product security team. Most issues are resolved here.
+2. **Documented commitment.** Ask for an agreement to deliver the artifact within a defined timeframe. Capture it in email as the basis for either resolution or escalation.
+3. **Account-level escalation.** If the producer doesn't deliver, escalate to the account team and the producer's executive sponsor. Make clear the issue is operational, not theoretical.
+4. **Procurement consequences.** As a last resort, the SBOM gap becomes a contract matter: a non-renewal threat, a clause invocation, or a tier downgrade.
+
+On the receiving organization's side, good faith means not weaponizing minor SBOM imperfections, not demanding artifacts the producer cannot reasonably provide, and not treating routine consumer-side processing issues as producer failures.
+
+</details>
+
+<details>
+<summary><strong>Organization with an MSP as security operator</strong></summary>
+
+When something goes wrong — a major vulnerability is announced, a vendor breach is disclosed, a vendor cannot answer a basic question about their software — the escalation path runs through the MSP, not an internal team.
+
+The customer's responsibility is to have established in advance what the MSP's obligations are in these scenarios. If the managed services agreement does not describe what the MSP will do when a critical vulnerability affecting your vendor environment is disclosed, that gap needs to close at the next contract review. You should expect:
+
+- Notification within a defined timeframe when a vulnerability potentially affecting your environment is publicly disclosed
+- A determination of actual impact within a defined follow-up window
+- A documented recommendation for remediation or mitigation
+
+If the MSP cannot deliver on any of these, that is a service quality conversation. If they will not, it is a procurement decision.
+
+</details>
+
+<details>
+<summary><strong>Small organization with no IT function</strong></summary>
+
+The escalation path here is simpler and often runs through the cyber insurance carrier's incident response resources. Most commercial cyber insurance policies include access to a breach response hotline and may include pre-approved IR vendors. Knowing that number and having it accessible before an incident is one of the highest-value, lowest-cost preparations available.
+
+Beyond the insurance carrier:
+- The vendor's support channel is the first contact for a suspected vulnerability affecting their software
+- [CISA regional advisors](https://www.cisa.gov/about/regions) offer free assistance to small businesses and critical infrastructure operators<sup><a href="./references#ref-13">[13]</a></sup>
+- [Sector-specific ISACs](https://www.nationalisacs.org/member-isacs-3) (Information Sharing and Analysis Centers) provide threat intelligence and incident guidance for their covered sectors, often including small members<sup><a href="./references#ref-14">[14]</a></sup>
+
+</details>
+
+---
+
+<details>
+<summary><strong>Note: AI-generated code and individual developers</strong></summary>
+
+One receiving context that cuts across organization types deserves specific mention. AI coding assistants like GitHub Copilot and Cursor increasingly suggest package imports and dependency additions as part of code generation. The developer accepts a suggestion, the package is added to the project, and there is no procurement workflow, vendor questionnaire, or contract. The SBOM for the resulting software may include packages the developer did not consciously choose.
+
+This is not a hypothetical risk. The XZ Utils backdoor, disclosed in March 2024, exploited a package adopted through exactly the kind of casual, frictionless channel that AI assistants accelerate.<sup><a href="./references#ref-15">[15]</a></sup>
+
+Practical steps for individual developers and small teams:
+- Use lockfiles and pin dependencies. Know what version of what package is in the project.
+- Run a software composition analysis tool — `pip audit`, `npm audit`, `trivy fs`, or `osv-scanner` — as part of a pre-commit hook or CI step. These are free and take minutes to set up.
+- Review AI-suggested package additions before accepting them. Check that the suggested package name matches the package you actually need — package name confusion attacks are well-documented.
+- When a project's SBOM matters (open-source projects; projects delivered to enterprise or government customers), generate it with Syft or CycloneDX CLI at build time. See [SBOM Tooling](../tooling) for details.
+
+</details>
+
+---
+
+## Maturing Your Approach
+
+The sections below are for organizations ready to formalize their SBOM receiving program — whether that means documenting responsibilities across a small team or building out a structured enterprise capability.
+
+### Roles and Responsibilities
+
+<details>
+<summary><strong>Single IT/security owner — small organization</strong></summary>
+
+In organizations up to roughly 50 people without a dedicated security team, the activities that a large enterprise distributes across departments are carried by one or two people — often the office manager, the owner, the most technical employee, or an outsourced resource like a fractional CISO. The table below identifies the minimum non-deferrable responsibilities and assigns them a home.
+
+| Activity | Who owns it | Minimum action |
+|---|---|---|
+| Know what software is in use | IT/security owner | Maintain a spreadsheet. Update it when a tool is added or removed. |
+| Vendor security evaluation at onboarding | IT/security owner + whoever signs contracts | SOC 2? Security advisory page? Breach notification clause? |
+| Contract security language | Attorney or contract reviewer | At minimum: breach notification, right to audit, data handling obligations. |
+| Monitoring vendor security advisories | IT/security owner | Subscribe to vendor security advisories by email. Bookmark status pages. |
+| Responding to a disclosed vulnerability | IT/security owner | Contact vendor support. Ask directly: "Are we affected? What is the patch timeline?" Document the response. |
+| Cyber insurance application | Owner + IT/security owner | Review the questionnaire together annually. Identify the gaps. Close the ones that matter most before renewal. |
+| Evidence for audits or exams | Owner + IT/security owner | Keep a folder with vendor security documentation, SOC 2 reports, and any security-related correspondence. |
+
+</details>
+
+<details>
+<summary><strong>Small internal team with MSP — 5–20 employees</strong></summary>
+
+| Activity | Who owns it | Minimum action |
+|---|---|---|
+| Know what software is in use | MSP (maintains asset inventory) | Confirm with MSP that their inventory is current and that you can access it. |
+| Vendor security evaluation at onboarding | Business owner + fractional CISO or MSP security lead | Use a vendor questionnaire template (CAIQ or equivalent). File the response. |
+| Contract security language | Attorney | Ensure MSP agreement includes security obligations; ensure key vendor contracts have breach notification clauses. |
+| Monitoring vendor security advisories | MSP | Ask MSP explicitly: "What is your process when a vulnerability like Log4Shell is announced?" Get the answer in writing. |
+| Responding to a disclosed vulnerability | MSP + business owner | MSP should be first line; business owner should have an escalation path when MSP response is insufficient. |
+| Cyber insurance | Business owner + fractional CISO | Complete questionnaire accurately. Share with MSP for input on technical questions. |
+| Regulatory compliance documentation | Compliance officer or fractional CISO | Maintain evidence file; include vendor security documentation as part of risk analysis. |
+
+</details>
+
+<details>
+<summary><strong>Development organization</strong></summary>
+
+For organizations with engineering teams and a formal security function, cross-functional reach is the defining challenge. Procurement, ITAM, security, legal, engineering, and privacy all have legitimate stakes in SBOM receiving, and the most common failure is assigning the program to a single team that cannot deliver it alone.
+
+**Two structural patterns deserve specific attention.**
+
+The SBOM ingestion infrastructure should sit with the team that runs the rest of the security tooling — the AppSec or DevSecOps platform team — not with procurement. Procurement runs the request side and feeds metadata into the system, but the operating infrastructure belongs in security.
+
+Policy ownership should be senior enough to mediate between competing department interests. Putting policy ownership in security alone tends to under-weight legal concerns; putting it in legal tends to under-weight operational realities. A cross-functional steering group meeting quarterly with clear authority is a common solution.
+
+| Activity | Primary owner | Contributing roles |
+|---|---|---|
+| Define SBOM receiving policy and standards | Security / AppSec leadership | Legal, OSPO, Procurement, Privacy |
+| Vendor onboarding and SBOM clauses in contracts | Procurement / Vendor management | Security, Legal, ITAM |
+| Day-to-day SBOM ingestion and validation | Security tools / DevSecOps platform team | ITAM, Engineering |
+| Vulnerability triage from SBOM data | Vulnerability management / SecOps | Engineering, Product Security |
+| VEX and CSAF intake and analysis | Vulnerability management / Product Security | Engineering |
+| License and OSS compliance | Open Source Program Office or Legal | Engineering, Procurement |
+| ITAM record linkage | ITAM / SAM team | Security tools team |
+| Audit and regulator-facing evidence | Risk / GRC / Compliance | All of the above |
+
+</details>
+
+---
+
+### Phased Program Model
+
+Most organizations cannot stand up a full SBOM receiving program at once. The progression below is calibrated by organization type. Choose the track that fits your situation.
+
+<Tabs>
+  <TabItem label="Small Organization">
+
+#### Phase 1 — Foundation
+- Build the software inventory: every SaaS platform, every application, every connected device. One spreadsheet or asset management tool. Update it when something changes.
+- Identify the five to ten vendors most critical to operations or that handle the most sensitive data. These are your equivalent of Tier 1.
+- Pull or request current security documentation from each: SOC 2 Type II, ISO 27001, or equivalent attestation. File it.
+- Review vendor contracts for breach notification language. Note which contracts are silent on security.
+
+#### Phase 2 — Operationalize
+- Establish a monitoring routine for your Tier 1 vendors: subscribe to security advisory emails, bookmark status pages.
+- Develop a short vendor questionnaire to run at next renewal. Include questions about vulnerability disclosure process, patch timelines, and SBOM availability.
+- Add a security clause to your vendor contract template. Template language is available from SANS, NCSC, and CISA's resources pages.
+- Set a calendar reminder to revisit the software inventory quarterly.
+
+#### Phase 3 — Scale
+- Extend the questionnaire process to all vendors handling sensitive data, not just your top five.
+- Add SBOM availability as a question in vendor onboarding. You do not need to process the SBOM — asking signals maturity expectations and is a useful vendor-quality indicator.
+- If you have an MSP, schedule an annual security review that specifically asks how they handle vendor software vulnerabilities across your environment.
+- Consider a fractional CISO engagement if your regulatory exposure is significant.
+
+#### Phase 4 — Mature
+- Establish a vendor security scorecard — even a simple one: current SOC 2 on file, breach notification clause in contract, responsive to security inquiries, advisory channel exists. A vendor who fails all four warrants a conversation at next renewal.
+- Align cyber insurance coverage to actual risk exposure based on your software inventory and vendor landscape.
+- If you operate in a regulated sector, confirm with your compliance advisor that your vendor security documentation satisfies current examination expectations.
+
+  </TabItem>
+  <TabItem label="Enterprise / Development Org">
+
+#### Phase 1 — Foundation
+- Establish policy: accepted formats, minimum required fields aligned to the [CISA 2025 Minimum Elements](https://www.cisa.gov/resources-tools/resources/sbom-minimum-elements),<sup><a href="./references#ref-11">[11]</a></sup> vendor tier definitions, and retention rules.
+- Stand up a receiving stack. Ingest first-party SBOMs first to validate the pipeline before onboarding vendor SBOMs. See [SBOM Tooling](../tooling) for current open-source and commercial options.
+- Identify the top 10–20 critical (Tier 1) vendors and begin outreach. Do not bring in the long tail yet.
+- Build asset-record linkage minimally: SKU-level for now, instance-level for Tier 1.
+
+#### Phase 2 — Operationalize
+- Onboard Tier 1 and Tier 2 vendors. Capture SBOMs across at least one full release cycle.
+- Wire SBOM inventory into vulnerability management. KEV-first triage. Begin VEX/CSAF intake from vendors who provide it.
+- Engage the OSPO and legal team. Surface license-compliance issues and build the working relationship for ongoing review.
+- Connect ITAM/SAM records. Ensure SBOM linkages match procurement records.
+
+#### Phase 3 — Scale
+- Onboard Tier 3 vendors. Use questionnaires and tier-appropriate clauses; do not over-specify for low-criticality suppliers.
+- For vendors that cannot or will not produce SBOMs, generate analyzed SBOMs internally using tools like Syft or Trivy against their binaries or containers. Tag these clearly as consumer-generated — including generation method and date — to distinguish them from producer-issued build SBOMs.
+- Add VEX-based suppression to triage. Begin tracking SBOM quality scores per vendor.
+- Evaluate commercial platforms against what your open-source stack provides.
+
+#### Phase 4 — Mature
+- Adopt the [Transparency Exchange API (TEA)](https://www.ecma-international.org/publications-and-standards/standards/ecma-424/)<sup><a href="./references#ref-12">[12]</a></sup> for vendors who publish through it. Automate SBOM discovery and retrieval.
+- Treat SBOM quality as a vendor scorecard input that affects renewal and tier decisions.
+- Integrate signing and provenance verification into ingestion. Preserve cryptographic evidence.
+- Evaluate whether your scope should extend to non-software BOMs relevant to your environment — hardware, AI/ML models, or cryptographic inventories. See [Connected SBOM Artifacts](../companion-artifacts) for the landscape.
+
+  </TabItem>
+</Tabs>
+
+<Aside type="note" title="Realistic timelines">
+For an enterprise development organization, the full progression typically takes two to three years. Programs that compress it tend to over-buy tooling and under-build process. For a small organization, Phase 1 through Phase 2 is achievable in a quarter if someone owns it. The critical factor in both cases is actually assigning an owner.
+</Aside>
+
+---
+
+### Metrics
+
+Track only what you can act on. Pick three or four that align with where your program currently is and report them with enough trend data to support decisions.
+
+<Tabs>
+  <TabItem label="Enterprise Metrics">
+
+| Metric | What it measures |
+|---|---|
+| **Coverage** | Percentage of in-scope third-party software with at least one current SBOM in the repository |
+| **Freshness** | Median age of the latest SBOM per deployed product version |
+| **Quality score** | Aggregate quality score across received SBOMs |
+| **VEX coverage** | Percentage of vendor SBOMs accompanied by at least one VEX statement |
+| **Vulnerable-component lead time** | Time from public CVE disclosure to internal identification of all affected products |
+| **KEV coverage** | Time from KEV listing to verified mitigation across affected products |
+| **Vendor responsiveness** | Median time from SBOM request to receipt of updated artifact |
+| **Audit readiness** | Time to produce an inventory snapshot for a given date and product set |
+
+  </TabItem>
+  <TabItem label="Small Organization Metrics">
+
+| Metric | What it measures |
+|---|---|
+| **Vendor security documentation coverage** | Percentage of critical vendors with a current SOC 2, ISO 27001, or equivalent on file |
+| **Contract coverage** | Percentage of critical vendor contracts with a breach notification clause |
+| **Advisory channel coverage** | Percentage of critical vendors for which you have subscribed to security advisories |
+| **Response time to disclosed vulnerabilities** | How quickly can you determine whether a named public vulnerability affects any vendor in your environment? Track this after each major disclosure. |
+| **Insurance questionnaire gap count** | Number of gaps identified in last cyber insurance application; reduction over time is the target |
+
+  </TabItem>
+</Tabs>

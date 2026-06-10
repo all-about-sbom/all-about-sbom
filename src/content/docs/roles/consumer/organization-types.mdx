@@ -1,0 +1,127 @@
+---
+title: "Organization Types, Roles & Responsibilities"
+description: "How SBOM consumption maps to your organization's structure, operational model, and regulatory context — with a compliance and insurance framework crosswalk."
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+SBOM consumption looks very different depending on how your organization operates, what staff it has, and what regulations it must satisfy. Before reviewing action steps or program models, it helps to understand which of the five types below fits your situation.
+
+The differences that matter are not headcount alone — they are operational model, regulatory exposure, and whether anyone in your organization has a dedicated IT or security function.
+
+---
+
+## Organization Types
+
+<details>
+<summary><strong>🧑‍💼 Solo Operator — freelancers, independent consultants, solo practitioners</strong></summary>
+
+A freelance designer, consultant, accountant, or therapist in solo practice. They use a small stack of SaaS tools — project management, invoicing, scheduling, cloud file storage, possibly a third-party-hosted website. There is no IT staff. The term "SBOM" has almost certainly never appeared in their day-to-day work.
+
+**What receiving means for this type**
+
+Practically nothing in the direct sense. A solo operator will not request a raw SBOM. What matters is whether their SaaS vendors maintain their software responsibly — and the instruments available to evaluate that are vendor security questionnaires, SOC 2 Type II reports, and the public security disclosures those vendors make. SBOM practice at the vendor tier benefits this type by improving the quality of the software they depend on, but the solo operator sits at the far end of an indirect chain.
+
+**If regulated:** A solo practitioner handling health information is a HIPAA covered entity.<sup><a href="./references#ref-7">[7]</a></sup> A solo attorney may be subject to state bar data security rules. In those cases the question is not "do we have SBOMs from our vendors?" but "can we demonstrate that the vendors handling our sensitive data maintain their software responsibly?" That demonstration runs through vendor security documentation, not directly through SBOM artifacts.
+
+</details>
+
+---
+
+<details id="small-business">
+<summary><strong>🏪 Small Business — 2–20 employees, no dedicated IT function</strong></summary>
+
+A restaurant, specialty retailer, small law firm, dental practice, or nonprofit. They use a mix of commercial packaged software — point-of-sale, practice management, HR platforms — and SaaS tools. They may work with a managed service provider (MSP). Internally, no one owns cybersecurity as a dedicated role; it belongs to whoever is willing to deal with it.
+
+**What receiving means for this type**
+
+Almost certainly no direct SBOM engagement. Their exposure to SBOM-related risk shows up in two ways. First, when a vendor they use patches — or fails to patch — a vulnerability in software their business depends on. Second, when a cyber insurance application asks about vendor security practices. The questionnaire language rarely uses the word "SBOM," but questions about software inventory, patch currency, and vendor risk programs are rooted in the same discipline.
+
+**The cyber insurance gateway:** For many small businesses, the practical forcing function for thinking about vendor software quality is not regulation — it is cyber insurance. Insurers have steadily expanded their application questionnaires to cover third-party software risk management. Answering those questions accurately, identifying gaps, and closing them over the policy year is the most actionable path forward. See the [Compliance and Insurance Crosswalk](#compliance-and-insurance-crosswalk) below.
+
+</details>
+
+---
+
+<details id="saas-mid-market">
+<summary><strong>☁️ SaaS-Only Mid-Market — 50–500 staff, cloud-only, small or fractional IT team</strong></summary>
+
+A management consulting firm, staffing company, marketing agency, or regional healthcare system that runs no internal servers and buys all of its software as SaaS. IT is either a small internal team or an MSP. There may be a security officer, often part-time or fractional.
+
+**What receiving means for this type**
+
+This is the type where SBOM concepts are most likely to become operationally visible without the organization ever directly receiving an SBOM file. Several scenarios drive this.
+
+**Incident response.** When a high-profile vulnerability surfaces in a widely used component — Log4Shell and XZ Utils are the landmark examples — this organization needs to answer: "Are any of our SaaS vendors affected?" Vendors with mature SBOM programs answer faster and more precisely; vendors without them produce vague, delayed disclosures. The receiving organization starts to care about SBOM quality indirectly, through the quality of incident communications it receives.
+
+**FedRAMP customers.** Organizations that buy cloud services from FedRAMP-authorized vendors can, under [OMB M-26-05](https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05.pdf),<sup><a href="./references#ref-2">[2]</a></sup> request SBOM data for the runtime production environment. Most organizations in this tier are unaware of that right. It exists and can be exercised when a specific security question requires it.
+
+**Vendor due diligence.** Organizations in this tier frequently run vendor security questionnaires — through platforms like OneTrust, Whistic, or SecurityScorecard — when onboarding critical SaaS vendors. A forward-looking questionnaire will begin asking about SBOM availability. The organization does not necessarily process the SBOM itself; SBOM availability is a signal of supply chain maturity.
+
+</details>
+
+---
+
+<details id="regulated-entity">
+<summary><strong>🏛️ Regulated Entity — healthcare, financial services, utilities, defense</strong></summary>
+
+A medical practice, community bank, credit union, small broker-dealer, or regional utility. These organizations operate under regulatory regimes — HIPAA, Gramm-Leach-Bliley, SEC cybersecurity rules, NERC CIP, state-level privacy laws — that impose specific software security obligations. They typically have a compliance officer but may not have a dedicated security role.
+
+**What receiving means for this type**
+
+Regulation is the entry point. A medical practice covered by HIPAA is required to have a risk analysis that accounts for the security of systems handling protected health information.<sup><a href="./references#ref-7">[7]</a></sup> A bank subject to the [FTC Safeguards Rule](https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know) must maintain an information security program with controls over service provider arrangements.<sup><a href="./references#ref-3">[3]</a></sup> Neither regulation uses the word "SBOM," but both require the organization to understand and manage the security posture of software vendors. Demonstrating that understanding — in an exam, an audit, or a breach investigation — is where SBOM-adjacent documentation becomes valuable.
+
+Medical device manufacturers selling into the U.S. market face a direct SBOM mandate under [FDA Section 524B](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions), which applies to any "cyber device" submitted for premarket approval after March 29, 2023.<sup><a href="./references#ref-4">[4]</a></sup> Small device manufacturers are not exempt. They must both supply SBOMs for their own devices and engage with the SBOM practices of the component suppliers in their supply chain.
+
+</details>
+
+---
+
+<details id="development-org">
+<summary><strong>🏗️ Development Organization — internal engineering, DevSecOps, dedicated security staff</strong></summary>
+
+A software company, technology-forward enterprise, financial institution with an in-house engineering team, or startup. This organization both produces and receives SBOMs. It has — or can build — dedicated roles for security, engineering, and compliance.
+
+**What receiving means for this type**
+
+This is the type most SBOM literature addresses. Direct SBOM ingestion, tooling selection, RACI design, and phased program models are all relevant here. The [What To Do](./getting-started) page covers the operational detail for this type, including the technical receiving workflow and the program maturity model.
+
+Receiving SBOMs is only one part of this type's SBOM program. This section covers only the receiving end; production and distribution responsibilities are addressed in their respective sections of this guide.
+
+</details>
+
+---
+
+<Aside type="tip" title="Using an MSP or MSSP?">
+The majority of small and mid-market organizations outsource IT management to a managed service provider (MSP) or, for security specifically, a managed security service provider (MSSP). When those organizations receive vendor-issued SBOMs — or should be requesting them — the actual intake function sits in the MSP's environment, not the customer's.
+
+This creates a gap that is almost entirely unaddressed in current SBOM guidance: **who owns SBOM practice in a managed-services arrangement?**
+
+A customer who requests an SBOM from their EHR vendor and receives one has accomplished nothing useful unless someone is actually reading it. If the MSP is handling vulnerability management, the SBOM needs to land in the MSP's tooling. If the MSP is not doing SBOM-aware vulnerability management, the artifact is orphaned.
+
+**Questions to ask your MSP or MSSP:**
+- Do you ingest SBOMs from the software vendors in my environment?
+- When a vulnerability like Log4Shell is announced, how do you determine whether any software in my environment is affected, and how quickly?
+- Do you use software composition analysis tooling that checks vendor software against known vulnerability feeds?
+- Will you flag it to me if a vendor in my environment cannot answer basic questions about their software components?
+
+MSPs serving healthcare customers support HIPAA compliance obligations that include software risk management.<sup><a href="./references#ref-7">[7]</a></sup> MSPs serving financial services customers may be touching FTC Safeguards or GLBA obligations.<sup><a href="./references#ref-3">[3]</a></sup> The expectation that an MSP tracks vendor software vulnerabilities at the component level — not just at the patch level — is becoming a differentiator in MSP procurement and, in regulated sectors, a requirement. [CISA's guidance on SBOM management for operational use](https://www.cisa.gov/resources-tools/resources/framing-software-component-transparency-establishing-common-software-bill-materials)<sup><a href="./references#ref-5">[5]</a></sup> is the reference framework for MSPs developing this capability.
+</Aside>
+
+---
+
+## Compliance and Insurance Crosswalk
+
+For organizations without a dedicated security program, the most actionable entry point into SBOM-adjacent practice is usually a regulatory or insurance obligation. The table below maps the most common frameworks to what they actually require and how SBOM practice supports compliance.
+
+| Framework | Who it covers | What it requires relevant to SBOM | How SBOM practice helps |
+|---|---|---|---|
+| **[FTC Safeguards Rule (GLBA)](https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know)**<sup><a href="./references#ref-3">[3]</a></sup> | Financial institutions including auto dealers, tax preparers, mortgage brokers | Written information security program; service provider oversight requiring contracts with appropriate safeguards | Vendor security contracts; knowing what software vendors are running; faster breach scoping |
+| **[HIPAA Security Rule](https://www.hhs.gov/hipaa/for-professionals/security/index.html)**<sup><a href="./references#ref-7">[7]</a></sup> | Covered entities and business associates handling PHI | Risk analysis; technical safeguards; business associate agreements | Software inventory underpins risk analysis; BAAs should require vendor security transparency |
+| **[FDA Section 524B](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions)**<sup><a href="./references#ref-4">[4]</a></sup> | Manufacturers of "cyber devices" submitted for premarket clearance/approval | SBOM in premarket submission; post-market vulnerability monitoring | Direct SBOM mandate; receiving obligation for component suppliers |
+| **[PCI DSS v4.0](https://www.pcisecuritystandards.org/document_library/)**<sup><a href="./references#ref-8">[8]</a></sup> | Any entity storing, processing, or transmitting cardholder data | Req. 6.3: security of externally developed software; Req. 12.8: third-party service provider management | Software composition analysis; vendor risk management documentation |
+| **[NIST CSF 2.0](https://www.nist.gov/cyberframework)**<sup><a href="./references#ref-6">[6]</a></sup> | Voluntary, but referenced by many regulations and insurers | "Identify" function: asset management, risk assessment; "Respond": incident response | SBOM operationalizes software asset management and improves incident response speed |
+| **[CIS Controls v8 IG1](https://www.cisecurity.org/controls/v8)**<sup><a href="./references#ref-9">[9]</a></sup> | Baseline controls appropriate for small organizations | Control 2: Inventory and control of software assets; Control 16: Application security practices | A software inventory at any level of rigor; vendor communication about vulnerabilities |
+| **[SEC Cybersecurity Rules](https://www.sec.gov/rules/final/2023/33-11216.pdf)**<sup><a href="./references#ref-10">[10]</a></sup> | Public companies | Annual disclosure of cybersecurity risk management; material incident disclosure | Vendor software risk management is part of documented risk management; SBOM practice improves disclosure quality |
+| **EU Cyber Resilience Act** | Manufacturers placing products with digital elements on the EU market | SBOM obligation for products in scope; vulnerability reporting; 10-year retention | Direct mandate for in-scope manufacturers |
+| **Cyber insurance** | Any insured organization | Questionnaires increasingly cover software inventory, patch management, vendor risk management, and incident response | SBOM practice improves answers to all four categories; vendors with SBOM programs are easier to vet; incident response is faster |
