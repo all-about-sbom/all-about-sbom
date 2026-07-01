@@ -1,80 +1,162 @@
 ---
-title: "The Consumer's Guide"
-description: "A guide for organizations that receive and use SBOMs to manage their software supply chain, assess risk, and respond to vulnerabilities."
+title: "Receiving and Using SBOMs"
+description: "A practical guide for organizations that receive SBOMs and use them to manage software supply chain risk, assess vulnerabilities, and meet compliance requirements."
 ---
 
-import { Card, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-An SBOM Consumer is an organization or individual that receives SBOMs and uses them to make informed decisions about the software in their environment. As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), consumers are the end users of SBOM data -- they ingest, analyze, and act on the information that producers and distributors provide.
+An SBOM Consumer is any organization or individual that receives Software Bills of Materials and uses them to make informed decisions about the software they depend on. As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), consumers are the endpoint of the SBOM ecosystem — the ones who turn static component inventory data into actionable intelligence.
 
-Consuming SBOMs is where the real value of the SBOM ecosystem is realized. While producers create the data and distributors pass it along, **consumers turn SBOM data into actionable intelligence**.
-
-## Key Activities
+## What You Can Do With SBOMs
 
 <CardGrid>
-    <Card title="Vulnerability Management" icon="bug">
-        The primary use case for SBOM consumption. By matching the components listed in an SBOM against live vulnerability databases (NVD, OSV, GitHub Advisories), consumers can identify which of their deployed systems are affected by newly disclosed vulnerabilities. This is where **dynamic vulnerability data** meets the **static SBOM snapshot**.
-    </Card>
-    <Card title="License Compliance" icon="gavel">
-        Consumers can analyze SBOM data to verify that all software components comply with their organization's license policies. This is especially critical for procurement, legal review, and auditing open-source usage.
-    </Card>
-    <Card title="Risk Assessment" icon="warning">
-        SBOMs enable consumers to assess supply chain risk by examining component provenance, the number and depth of dependencies, the age and maintenance status of components, and the diversity of suppliers.
-    </Card>
-    <Card title="Incident Response" icon="rocket">
-        When a critical vulnerability like Log4Shell is disclosed, SBOMs allow security teams to assess their exposure in minutes rather than days. Consumers can immediately search their SBOM inventory to identify every system that contains the affected component.
-    </Card>
+  <Card title="Vulnerability Management" icon="bug">
+    Match components in received SBOMs against live vulnerability databases to identify which deployed systems are exposed when a new CVE is disclosed. This is where dynamic vulnerability data meets the static SBOM snapshot.
+  </Card>
+  <Card title="License Compliance" icon="open-book">
+    Verify that all software components in your supply chain comply with your organization's license policies — essential for procurement decisions, legal review, and open-source usage audits.
+  </Card>
+  <Card title="Risk Assessment" icon="warning">
+    Examine component provenance, dependency depth, supplier diversity, and component maintenance status to build a clear picture of your software supply chain risk.
+  </Card>
+  <Card title="Incident Response" icon="rocket">
+    When a critical vulnerability like Log4Shell is disclosed, search your SBOM inventory to identify every affected system in minutes rather than days of manual investigation.
+  </Card>
 </CardGrid>
 
-## Combining SBOMs with VEX/CSAF
+## Find Your Starting Point
 
-An SBOM tells you **what** is in your software. But to understand your actual risk, you also need to know **whether** a vulnerability in a component actually affects the product in question. This is where VEX and CSAF come in.
+Not all SBOM consumers operate the same way. The right starting point depends on your organization's size, operational model, and regulatory context. Select the type that fits your situation:
 
-<Aside type="note" title="The SBOM + VEX/CSAF Relationship">
-**SBOM** provides an inventory of components -- it answers *"What is in this software?"*
+<style>{`
+  .sbom-org-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
 
-**VEX** (Vulnerability Exploitability eXchange) provides vulnerability status -- it answers *"Is this product actually affected by this vulnerability?"*
+  .sbom-org-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 1.1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--sl-color-hairline);
+    background: var(--sl-color-bg-sidebar);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+  }
 
-**CSAF** (Common Security Advisory Framework) is the standardized format for distributing security advisories, including VEX profiles. It enables machine-readable, automated distribution of vulnerability information.
+  .sbom-org-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    border-color: var(--sl-color-accent);
+    text-decoration: none;
+  }
 
-Together, SBOM and CSAF/VEX create a complete picture: the SBOM identifies the components, and VEX/CSAF communicates which vulnerabilities are relevant and what action to take.
-</Aside>
+  .sbom-org-accent {
+    height: 4px;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
 
-The four VEX statuses that a producer can communicate for each vulnerability are:
+  .sbom-org-body {
+    padding: 0 1.1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.35rem;
+  }
 
-| Status | Meaning |
-| --- | --- |
-| **Not Affected** | The vulnerability does not affect the product. The producer may include a justification (e.g., vulnerable code not present, not in execution path, mitigations already exist). |
-| **Affected** | The vulnerability affects the product. Actions are recommended to remediate or address it. |
-| **Fixed** | The product version contains a fix for the vulnerability. |
-| **Under Investigation** | The producer is still analyzing whether the product is affected. An update will follow. |
+  .sbom-org-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--sl-color-white);
+    margin: 0;
+    line-height: 1.3;
+  }
 
-This allows consumers to focus on the vulnerabilities that **actually matter**, reducing noise and alert fatigue caused by false positives from automated scanners.
+  .sbom-org-desc {
+    font-size: 0.78rem;
+    color: var(--sl-color-gray-3);
+    margin: 0;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
 
-## Getting Started as a Consumer
+  .sbom-org-cta {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--sl-color-accent);
+    margin-top: 0.65rem;
+    letter-spacing: 0.01em;
+  }
+`}</style>
 
-<Steps>
-1. **Build Your Asset Inventory**
+<div class="sbom-org-grid">
+  <a href="./organization-types#solo-operator" class="sbom-org-card">
+    <div class="sbom-org-accent" style="background: #5B8DD9;"></div>
+    <div class="sbom-org-body">
+      <p class="sbom-org-title">Solo Operator</p>
+      <p class="sbom-org-desc">Freelancer, independent consultant, solo practitioner</p>
+      <span class="sbom-org-cta">See your path →</span>
+    </div>
+  </a>
+  <a href="./organization-types#small-business" class="sbom-org-card">
+    <div class="sbom-org-accent" style="background: #52A872;"></div>
+    <div class="sbom-org-body">
+      <p class="sbom-org-title">Small Business</p>
+      <p class="sbom-org-desc">2–20 employees, no dedicated IT or security function</p>
+      <span class="sbom-org-cta">See your path →</span>
+    </div>
+  </a>
+  <a href="./organization-types#saas-mid-market" class="sbom-org-card">
+    <div class="sbom-org-accent" style="background: #8B6FBD;"></div>
+    <div class="sbom-org-body">
+      <p class="sbom-org-title">SaaS-Only Mid-Market</p>
+      <p class="sbom-org-desc">50–500 staff, cloud-only, small or fractional IT team</p>
+      <span class="sbom-org-cta">See your path →</span>
+    </div>
+  </a>
+  <a href="./organization-types#regulated-entity" class="sbom-org-card">
+    <div class="sbom-org-accent" style="background: #C47B3E;"></div>
+    <div class="sbom-org-body">
+      <p class="sbom-org-title">Regulated Entity</p>
+      <p class="sbom-org-desc">Healthcare, financial services, utilities — compliance obligations drive security requirements</p>
+      <span class="sbom-org-cta">See your path →</span>
+    </div>
+  </a>
+  <a href="./organization-types#development-org" class="sbom-org-card">
+    <div class="sbom-org-accent" style="background: #3D9E9E;"></div>
+    <div class="sbom-org-body">
+      <p class="sbom-org-title">Development Organization</p>
+      <p class="sbom-org-desc">Internal engineering team, DevSecOps capability, dedicated security staff</p>
+      <span class="sbom-org-cta">See your path →</span>
+    </div>
+  </a>
+</div>
 
-    Before you can use SBOMs effectively, you need to know what software you have deployed. Map your hardware, software, and firmware assets across your environment. An SBOM is most valuable when you can associate it with the specific systems where the software is deployed.
-    
-2. **Obtain SBOMs from Your Suppliers**
+SBOMs work alongside other documents like VEX and CSAF to communicate vulnerability status and exploitability. See [Connected SBOM Artifacts](../companion-artifacts) for how these fit together.
 
-    Request SBOMs from your software vendors and upstream suppliers. Determine where they publish their SBOMs (product downloads, customer portals, APIs) and establish a process to regularly retrieve them. Verify SBOM integrity using signatures or hashes.
+## In This Section
 
-3. **Ingest into an Asset Management Tool**
-
-    Use an SBOM-aware asset management or Software Composition Analysis (SCA) tool that can ingest SBOMs in both SPDX and CycloneDX formats. The tool should be able to correlate SBOM components against live vulnerability feeds and support VEX/CSAF ingestion.
-
-4. **Monitor and Respond**
-
-    Continuously monitor your SBOM inventory against new vulnerability disclosures. Consume VEX/CSAF documents from your suppliers to filter out false positives and prioritize remediation based on actual exploitability. Establish processes for patch management and incident response informed by SBOM data.
-</Steps>
-
-<Aside type="tip" title="Tooling for Consumers">
-Several open-source tools can help consumers ingest and analyze SBOMs:
-
-- [Dependency-Track](https://dependencytrack.org/) -- a component analysis platform that supports SBOM ingestion, vulnerability correlation, and policy evaluation.
-- [GUAC](https://guac.sh/) -- a tool for understanding software supply chains by aggregating and synthesizing SBOM and other supply chain metadata.
-- [Grype](https://github.com/anchore/grype) -- a vulnerability scanner that can match SBOM components against known vulnerabilities.
-</Aside>
+<CardGrid>
+  <LinkCard
+    title="Organization Types, Roles & Responsibilities"
+    description="What SBOM consumption means for your specific organization type, including the compliance and insurance framework crosswalk."
+    href="./organization-types"
+  />
+  <LinkCard
+    title="What To Do"
+    description="Practical action steps for both non-technical organizations and technical teams — from first steps through program maturity."
+    href="./getting-started"
+  />
+  <LinkCard
+    title="References"
+    description="All cited sources and further reading."
+    href="./references"
+  />
+</CardGrid>
