@@ -40,8 +40,9 @@
 
     --sl-color-bg-nav: var(--color-1-main);
     --sl-color-text-accent: var(--color-1-main);
-}
 
+    --sl-content-width: 60rem;
+}
 
 
 /* ==========================================================
@@ -71,46 +72,124 @@
   text-decoration: underline;
 }
 
-/* ==========================================================
-   CUSTOM COLORED LINK CARDS
-   ========================================================== */
-
-/* Remove the default Starlight borders/backgrounds so our custom colors show through */
-.use-case-card .sl-link-card {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  height: 100%;
-}
-
-/* Apply rounded corners and transition effects to our wrapper */
+/* Wrapper only for color variants */
 .use-case-card {
-  border-radius: 0.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
-.use-case-card:hover {
+/* Style the actual Starlight card */
+.use-case-card .sl-link-card {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  background: var(--sl-color-black);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.use-case-card .sl-link-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
 }
 
-/* Force the text inside the colored cards to be readable (White) */
+/* Better text hierarchy */
+.use-case-card .title {
+  color: var(--sl-color-white);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.use-case-card .description {
+  color: var(--sl-color-gray-3);
+  line-height: 1.6;
+  font-size: 0.98rem;
+  max-width: 34ch;
+}
+
+/* Arrow/icon styling */
+.use-case-card .sl-link-card svg,
+.use-case-card .sl-link-card .icon {
+  opacity: 0.9;
+  transition: transform 180ms ease, color 180ms ease;
+}
+
+.use-case-card .sl-link-card:hover svg,
+.use-case-card .sl-link-card:hover .icon {
+  transform: translateX(3px);
+}
+
+/* Accent variants: tinted background + colored border */
+.use-case-card.c2 .sl-link-card {
+  background: color-mix(in srgb, var(--color-2-main) 16%, var(--sl-color-black));
+  border-color: color-mix(in srgb, var(--color-2-main) 45%, transparent);
+}
+
+.use-case-card.c3 .sl-link-card {
+  background: color-mix(in srgb, var(--color-3-main) 16%, var(--sl-color-black));
+  border-color: color-mix(in srgb, var(--color-3-main) 45%, transparent);
+}
+
+.use-case-card.c4 .sl-link-card {
+  background: color-mix(in srgb, var(--color-4-main) 16%, var(--sl-color-black));
+  border-color: color-mix(in srgb, var(--color-4-main) 45%, transparent);
+}
+
+.use-case-card.c5 .sl-link-card {
+  background: color-mix(in srgb, var(--color-5-main) 16%, var(--sl-color-black));
+  border-color: color-mix(in srgb, var(--color-5-main) 45%, transparent);
+}
+
+/* Stronger title/accent color per card */
+.use-case-card.c2 .title,
+.use-case-card.c2 .icon {
+  color: var(--color-2-light) !important;
+}
+
+.use-case-card.c3 .title,
+.use-case-card.c3 .icon {
+  color: var(--color-3-light) !important;
+}
+
+.use-case-card.c4 .title,
+.use-case-card.c4 .icon {
+  color: var(--color-4-light) !important;
+}
+
+.use-case-card.c5 .title,
+.use-case-card.c5 .icon {
+  color: var(--color-5-light) !important;
+}
+
+.use-case-card .sl-link-card {
+  justify-items: center;
+  text-align: center;
+}
+
 .use-case-card .title,
-.use-case-card .description,
-.use-case-card .sl-link-card svg {
-  color: #ffffff !important;
+.use-case-card .description {
+  text-align: center;
 }
 
-/* Map the background colors to the utility classes we made earlier */
-.use-case-card.c1 { background-color: var(--color-1-main); border: 2px solid var(--color-1-dark); }
-.use-case-card.c2 { background-color: var(--color-2-main); border: 2px solid var(--color-2-dark); }
-.use-case-card.c3 { background-color: var(--color-3-main); border: 2px solid var(--color-3-dark); }
-.use-case-card.c4 { background-color: var(--color-4-main); border: 2px solid var(--color-4-dark); }
-.use-case-card.c5 { background-color: var(--color-5-main); border: 2px solid var(--color-5-dark); }
+.stakeholder-grid .card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
 
+@media (min-width: 72rem) {
+  .stakeholder-grid .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 
 /* ==========================================================
    CUSTOM HEADER & NAVIGATION
@@ -313,4 +392,149 @@
 
 .custom-footer .starlight-default-footer {
   width: 100%;
+}
+
+
+/* ==========================================================
+   Homepage Design
+   ========================================================== */
+
+.homepage-lead,
+.homepage-intro {
+  max-width: 52rem;
+  margin: 0 auto 3rem;
+}
+
+.homepage-use-cases,
+.stakeholder-grid {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.homepage-lead {
+  text-align: left;
+}
+
+.homepage-intro {
+  text-align: center;
+}
+
+@media (min-width: 50rem) {
+  .homepage-lead,
+  .homepage-intro,
+  .homepage-use-cases,
+  .stakeholder-grid {
+    margin-bottom: 5rem;
+  }
+}
+
+.homepage-lead h2 {
+  text-align: left;
+  margin-bottom: 1.25rem;
+}
+
+.homepage-lead p {
+  text-align: left;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.homepage-use-cases h2,
+.stakeholder-grid h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.homepage-use-cases p,
+.stakeholder-grid p {
+  max-width: 64rem;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.stakeholder-grid .card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 72rem) {
+  .stakeholder-grid .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+.info-card .card {
+  height: 100%;
+  background: var(--sl-color-black);
+  border: 2px solid var(--sl-color-gray-5);
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 1.4rem 1.5rem;
+  text-align: center;
+  transition: none;
+  cursor: default;
+}
+
+.info-card .card .title {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.25;
+}
+
+.info-card .card .body {
+  text-align: center;
+  color: var(--sl-color-gray-3);
+  line-height: 1.6;
+  font-size: 0.98rem;
+  margin-top: 0.75rem;
+}
+
+.info-card .card .icon {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin-inline: auto;
+}
+
+.info-card.c2 .card {
+  border-color: color-mix(in srgb, var(--color-2-main) 65%, white);
+}
+
+.info-card.c2 .card .title,
+.info-card.c2 .card .icon {
+  color: var(--color-2-main);
+}
+
+.info-card.c3 .card {
+  border-color: color-mix(in srgb, var(--color-3-main) 65%, white);
+}
+
+.info-card.c3 .card .title,
+.info-card.c3 .card .icon {
+  color: var(--color-3-main);
+}
+
+.info-card.c4 .card {
+  border-color: color-mix(in srgb, var(--color-4-main) 65%, white);
+}
+
+.info-card.c4 .card .title,
+.info-card.c4 .card .icon {
+  color: var(--color-4-main);
+}
+
+.info-card.c5 .card {
+  border-color: color-mix(in srgb, var(--color-5-main) 65%, white);
+}
+
+.info-card.c5 .card .title,
+.info-card.c5 .card .icon {
+  color: var(--color-5-main);
 }
