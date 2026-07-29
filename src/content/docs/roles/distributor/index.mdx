@@ -3,7 +3,7 @@ title: "The Distributor's Role"
 description: "A guide for organizations that receive, manage, and redistribute SBOMs from upstream producers to downstream consumers."
 ---
 
-import { Card, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
+import { LinkCard, Card, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
 
 An SBOM Distributor is an organization that receives SBOMs from upstream producers and redistributes them to downstream consumers. Distributors play a critical role in the SBOM supply chain by ensuring that accurate and trustworthy SBOM data flows from producers to the organizations that need it.
 
@@ -21,19 +21,21 @@ Not every organization needs to act as a distributor. This role is relevant when
 ## Key Responsibilities
 
 <CardGrid>
-    <Card title="Integrity Verification" icon="approve-check-circle">
+    <Card title="Integrity Verification">
         Before redistributing an SBOM, verify its integrity. Check cryptographic signatures or hashes provided by the producer to ensure the SBOM has not been tampered with during transit.
     </Card>
-    <Card title="Aggregation" icon="list-format">
+    <Card title="Aggregation">
         When distributing a product that bundles multiple upstream components, aggregate the individual SBOMs into a coherent view. Ensure that dependency relationships between bundled components are accurately represented.
     </Card>
-    <Card title="Format Transformation" icon="translate">
+    <Card title="Format Transformation">
         Downstream consumers may require SBOMs in a different format than what was provided by the producer. Distributors may need to convert between SPDX and CycloneDX, or between different serialization formats (JSON, XML) while preserving data fidelity.
     </Card>
-    <Card title="Access Control" icon="lock">
+    <Card title="Access Control">
         Some SBOM data may be sensitive. Distributors must implement appropriate access controls, ensuring that SBOMs are shared only with authorized consumers while meeting contractual and regulatory obligations.
     </Card>
 </CardGrid>
+
+
 
 ## The Distribution Process
 
