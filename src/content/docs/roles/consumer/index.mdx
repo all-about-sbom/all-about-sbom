@@ -10,18 +10,37 @@ An SBOM Consumer is any organization or individual that receives Software Bills 
 ## What You Can Do With SBOMs
 
 <CardGrid>
-  <Card title="Vulnerability Management">
-    Match components in received SBOMs against live vulnerability databases to identify which deployed systems are exposed when a new CVE is disclosed. This is where dynamic vulnerability data meets the static SBOM snapshot.
-  </Card>
-  <Card title="License Compliance">
-    Verify that all software components in your supply chain comply with your organization's license policies — essential for procurement decisions, legal review, and open-source usage audits.
-  </Card>
-  <Card title="Risk Assessment">
-    Examine component provenance, dependency depth, supplier diversity, and component maintenance status to build a clear picture of your software supply chain risk.
-  </Card>
-  <Card title="Incident Response">
-    When a critical vulnerability like Log4Shell is disclosed, search your SBOM inventory to identify every affected system in minutes rather than days of manual investigation.
-  </Card>
+  <div class="use-case-card c2">
+    <LinkCard 
+      title="Security Management" 
+      href="/use-cases/security" 
+      description="SBOMs make it easy to instantly identify vulnerable components in a project and take corresponding actions."
+    />
+  </div>
+
+  <div class="use-case-card c3">
+    <LinkCard 
+      title="License Compliance" 
+      href="/use-cases/license" 
+      description="Track components and their associated licenses to ensure you are meeting all legal, regulatory, and internal policy requirements."
+    />
+  </div>
+
+  <div class="use-case-card c5">
+    <LinkCard 
+      title="Technical Debt Management" 
+      href="/use-cases/technical-debt" 
+      description="Get an overview of all components used your software, identify outdated elements and guide your update efforts."
+    />
+  </div>
+
+  <div class="use-case-card c4">
+    <LinkCard 
+      title="Supplier Transparency" 
+      href="/use-cases/supplier" 
+      description="Provide customers and partners with data on the composition of your software, building trust and fulfilling vendor requirements."
+    />
+  </div>
 </CardGrid>
 
 ## Find Your Starting Point
