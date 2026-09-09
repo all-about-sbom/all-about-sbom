@@ -10,91 +10,44 @@ An SBOM Consumer is any organization or individual that receives Software Bills 
 ## What You Can Do With SBOMs
 
 <CardGrid>
-  <Card title="Vulnerability Management" icon="bug">
-    Match components in received SBOMs against live vulnerability databases to identify which deployed systems are exposed when a new CVE is disclosed. This is where dynamic vulnerability data meets the static SBOM snapshot.
-  </Card>
-  <Card title="License Compliance" icon="open-book">
-    Verify that all software components in your supply chain comply with your organization's license policies — essential for procurement decisions, legal review, and open-source usage audits.
-  </Card>
-  <Card title="Risk Assessment" icon="warning">
-    Examine component provenance, dependency depth, supplier diversity, and component maintenance status to build a clear picture of your software supply chain risk.
-  </Card>
-  <Card title="Incident Response" icon="rocket">
-    When a critical vulnerability like Log4Shell is disclosed, search your SBOM inventory to identify every affected system in minutes rather than days of manual investigation.
-  </Card>
+  <div class="use-case-card c2">
+    <LinkCard 
+      title="Security Management" 
+      href="/use-cases/security" 
+      description="SBOMs make it easy to instantly identify vulnerable components in a project and take corresponding actions."
+    />
+  </div>
+
+  <div class="use-case-card c3">
+    <LinkCard 
+      title="License Compliance" 
+      href="/use-cases/license" 
+      description="Track components and their associated licenses to ensure you are meeting all legal, regulatory, and internal policy requirements."
+    />
+  </div>
+
+  <div class="use-case-card c5">
+    <LinkCard 
+      title="Technical Debt Management" 
+      href="/use-cases/technical-debt" 
+      description="Get an overview of all components used your software, identify outdated elements and guide your update efforts."
+    />
+  </div>
+
+  <div class="use-case-card c4">
+    <LinkCard 
+      title="Supplier Transparency" 
+      href="/use-cases/supplier" 
+      description="Provide customers and partners with data on the composition of your software, building trust and fulfilling vendor requirements."
+    />
+  </div>
 </CardGrid>
 
 ## Find Your Starting Point
 
 Not all SBOM consumers operate the same way. The right starting point depends on your organization's size, operational model, and regulatory context. Select the type that fits your situation:
 
-<style>{`
-  .sbom-org-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0 2rem;
-  }
 
-  .sbom-org-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 1.1rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--sl-color-hairline);
-    background: var(--sl-color-bg-sidebar);
-    text-decoration: none;
-    color: inherit;
-    overflow: hidden;
-    transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-  }
-
-  .sbom-org-card:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-    border-color: var(--sl-color-accent);
-    text-decoration: none;
-  }
-
-  .sbom-org-accent {
-    height: 4px;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .sbom-org-body {
-    padding: 0 1.1rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: 0.35rem;
-  }
-
-  .sbom-org-title {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--sl-color-white);
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  .sbom-org-desc {
-    font-size: 0.78rem;
-    color: var(--sl-color-gray-3);
-    margin: 0;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-
-  .sbom-org-cta {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--sl-color-accent);
-    margin-top: 0.65rem;
-    letter-spacing: 0.01em;
-  }
-`}</style>
 
 <div class="sbom-org-grid">
   <a href="/roles/consumer/organization-types#solo-operator" class="sbom-org-card">
@@ -143,20 +96,30 @@ SBOMs work alongside other documents like VEX and CSAF to communicate vulnerabil
 
 ## In This Section
 
-<CardGrid>
-  <LinkCard
-    title="Organization Types, Roles & Responsibilities"
-    description="What SBOM consumption means for your specific organization type, including the compliance and insurance framework crosswalk."
-    href="/roles/consumer/organization-types"
-  />
-  <LinkCard
-    title="What To Do"
-    description="Practical action steps for both non-technical organizations and technical teams — from first steps through program maturity."
-    href="/roles/consumer/getting-started"
-  />
-  <LinkCard
-    title="References"
-    description="All cited sources and further reading."
-    href="/roles/consumer/references"
-  />
-</CardGrid>
+<div class="stakeholder-grid">
+  <CardGrid>
+    <div class="use-case-card c2">
+      <LinkCard
+        title="Organization Types, Roles & Responsibilities"
+        description="What SBOM consumption means for your specific organization type, including the compliance and insurance framework crosswalk."
+        href="/roles/consumer/organization-types"
+      />
+    </div>
+
+    <div class="use-case-card c3">
+      <LinkCard
+        title="What To Do"
+        description="Practical action steps for both non-technical organizations and technical teams — from first steps through program maturity."
+        href="/roles/consumer/getting-started"
+      />
+    </div>
+
+    <div class="use-case-card c5">
+      <LinkCard
+        title="References"
+        description="All cited sources and further reading."
+        href="/roles/consumer/references"
+      />
+    </div>
+  </CardGrid>
+</div>

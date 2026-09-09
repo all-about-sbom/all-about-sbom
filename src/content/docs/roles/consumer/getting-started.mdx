@@ -184,53 +184,78 @@ Policy ownership should be senior enough to mediate between competing department
 <Tabs>
   <TabItem label="Small Organization">
 
-#### Phase 1 — Foundation
-- Build and maintain a software asset inventory covering all vendors, products, and versions in your environment.
-- Identify the five to ten vendors most critical to operations or handling the most sensitive data. These are your Tier 1.
-- Request SBOM availability information from each Tier 1 vendor. Determine what formats they support and how SBOMs are delivered.
-- Establish a storage location for received SBOMs with version, format, and receipt date recorded for each artifact.
+<h4>Phase 1 — Foundation</h4>
 
-#### Phase 2 — Operationalize
-- Add SBOM delivery requirements to Tier 1 vendor contracts at next renewal. Specify accepted formats (SPDX 2.3 or later, CycloneDX 1.4 or later) and the delivery channel.
-- Subscribe to SBOM-related and security advisory communications from each Tier 1 vendor. Establish a process for reviewing VEX statements when issued.
-- Develop a vendor questionnaire covering SBOM availability, supported formats, delivery process, and VEX practices. Use it at onboarding and renewal for all critical vendors.
+<ul>
+  <li>Build and maintain a software asset inventory covering all vendors, products, and versions in your environment.</li>
+  <li>Identify the five to ten vendors most critical to operations or handling the most sensitive data. These are your Tier 1.</li>
+  <li>Request SBOM availability information from each Tier 1 vendor. Determine what formats they support and how SBOMs are delivered.</li>
+  <li>Establish a storage location for received SBOMs with version, format, and receipt date recorded for each artifact.</li>
+</ul>
 
-#### Phase 3 — Scale
-- Extend SBOM delivery requirements to all vendors handling sensitive data, not only Tier 1.
-- Add SBOM availability and format support as standard criteria in all vendor onboarding.
-- If using an MSP, confirm that SBOM ingestion and VEX monitoring are included in the managed services agreement and that findings are reported on a defined schedule.
+<h4>Phase 2 — Operationalize</h4>
 
-#### Phase 4 — Mature
-- Establish a vendor SBOM quality baseline: SBOM delivered with each release, in a supported format, with VEX statements issued for disclosed vulnerabilities. Factor compliance against this baseline into renewal decisions.
-- Evaluate whether your asset inventory and SBOM storage approach should advance to a structured ITAM platform or dedicated SBOM management tool appropriate to your current scale. See [SBOM Tooling](../tooling).
-- If operating in a regulated sector, confirm that your SBOM records and vendor SBOM documentation satisfy current examination or audit requirements.
+<ul>
+  <li>Add SBOM delivery requirements to Tier 1 vendor contracts at next renewal. Specify accepted formats (SPDX 2.3 or later, CycloneDX 1.4 or later) and the delivery channel.</li>
+  <li>Subscribe to SBOM-related and security advisory communications from each Tier 1 vendor. Establish a process for reviewing VEX statements when issued.</li>
+  <li>Develop a vendor questionnaire covering SBOM availability, supported formats, delivery process, and VEX practices. Use it at onboarding and renewal for all critical vendors.</li>
+</ul>
+
+<h4>Phase 3 — Scale</h4>
+
+<ul>
+  <li>Extend SBOM delivery requirements to all vendors handling sensitive data, not only Tier 1.</li>
+  <li>Add SBOM availability and format support as standard criteria in all vendor onboarding.</li>
+  <li>If using an MSP, confirm that SBOM ingestion and VEX monitoring are included in the managed services agreement and that findings are reported on a defined schedule.</li>
+</ul>
+
+<h4>Phase 4 — Mature</h4>
+
+<ul>
+  <li>Establish a vendor SBOM quality baseline: SBOM delivered with each release, in a supported format, with VEX statements issued for disclosed vulnerabilities.</li>
+  <li>Evaluate whether your asset inventory and SBOM storage approach should advance to a structured ITAM platform or dedicated SBOM management tool. See <a href="../tooling">SBOM Tooling</a>.</li>
+  <li>If operating in a regulated sector, confirm that your SBOM records and vendor documentation satisfy current audit requirements.</li>
+</ul>
 
   </TabItem>
+
   <TabItem label="Enterprise / Development Org">
 
-#### Phase 1 — Foundation
-- Establish policy: accepted formats, minimum required fields aligned to the [CISA 2025 Minimum Elements](https://www.cisa.gov/resources-tools/resources/sbom-minimum-elements),<sup><a href="./references#ref-11">[11]</a></sup> vendor tier definitions, and retention rules.
-- Stand up a receiving stack. Ingest first-party SBOMs first to validate the pipeline before onboarding vendor SBOMs. See [SBOM Tooling](../tooling) for current options.
-- Identify the top 10–20 critical (Tier 1) vendors and begin outreach. Do not onboard the long tail until the Tier 1 pipeline is stable.
-- Build asset-record linkage: SKU-level for now, instance-level for Tier 1.
+<h4>Phase 1 — Foundation</h4>
 
-#### Phase 2 — Operationalize
-- Onboard Tier 1 and Tier 2 vendors. Capture SBOMs across at least one full release cycle before drawing conclusions about coverage.
-- Correlate SBOM inventory against vulnerability management. KEV-first triage. Begin VEX/CSAF intake from vendors who provide it.
-- Engage the OSPO and legal team on license compliance. Build the working relationship for ongoing review.
-- Connect ITAM/SAM records. Ensure SBOM linkages align with procurement records.
+<ul>
+  <li>Establish policy: accepted formats, minimum required fields, vendor tier definitions, and retention rules.</li>
+  <li>Stand up a receiving stack and ingest first-party SBOMs first to validate the pipeline.</li>
+  <li>Identify the top 10–20 critical Tier 1 vendors and begin outreach.</li>
+  <li>Build asset-record linkage: SKU-level for now, instance-level for Tier 1.</li>
+</ul>
 
-#### Phase 3 — Scale
-- Onboard Tier 3 vendors. Apply tier-appropriate contract clauses; do not over-specify for low-criticality suppliers.
-- For vendors that cannot or will not produce SBOMs, generate analyzed SBOMs internally using tooling such as Syft or Trivy against their binaries or containers. Tag consumer-generated SBOMs clearly — including generation method and date — to distinguish them from producer-issued build SBOMs.
-- Add VEX-based suppression to triage. Begin tracking SBOM quality scores per vendor.
-- Evaluate commercial platforms against what your open-source stack provides.
+<h4>Phase 2 — Operationalize</h4>
 
-#### Phase 4 — Mature
-- Adopt the [Transparency Exchange API (TEA)](https://www.ecma-international.org/publications-and-standards/standards/ecma-424/)<sup><a href="./references#ref-12">[12]</a></sup> for vendors who publish through it. Automate SBOM discovery and retrieval.
-- Treat SBOM quality as a vendor scorecard input affecting renewal and tier decisions.
-- Integrate signing and provenance verification into ingestion. Preserve cryptographic evidence.
-- Evaluate whether your scope should extend to non-software BOMs relevant to your environment. See [Connected SBOM Artifacts](../companion-artifacts) for the landscape.
+<ul>
+  <li>Onboard Tier 1 and Tier 2 vendors across at least one full release cycle.</li>
+  <li>Correlate SBOM inventory against vulnerability management and begin VEX/CSAF intake.</li>
+  <li>Engage the OSPO and legal team on license compliance.</li>
+  <li>Connect ITAM/SAM records and align SBOM linkages with procurement records.</li>
+</ul>
+
+<h4>Phase 3 — Scale</h4>
+
+<ul>
+  <li>Onboard Tier 3 vendors using tier-appropriate contract clauses.</li>
+  <li>Generate analyzed SBOMs internally for vendors that cannot or will not produce them. Record the generation method and date.</li>
+  <li>Add VEX-based suppression to triage and track SBOM quality scores per vendor.</li>
+  <li>Evaluate commercial platforms against the existing open-source stack.</li>
+</ul>
+
+<h4>Phase 4 — Mature</h4>
+
+<ul>
+  <li>Adopt the <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-424/">Transparency Exchange API</a> where supported.</li>
+  <li>Use SBOM quality as a vendor scorecard input affecting renewal and tier decisions.</li>
+  <li>Integrate signing and provenance verification into ingestion.</li>
+  <li>Evaluate whether the scope should extend to non-software BOMs.</li>
+</ul>
 
   </TabItem>
 </Tabs>
