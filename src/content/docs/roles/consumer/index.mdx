@@ -1,125 +1,147 @@
 ---
-title: "Receiving and Using SBOMs"
+title: "The Consumer: Receiving and Using SBOMs"
 description: "A practical guide for organizations that receive SBOMs and use them to manage software supply chain risk, assess vulnerabilities, and meet compliance requirements."
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkCard, Steps, Tabs, TabItem, Aside} from '@astrojs/starlight/components';
 
-An SBOM Consumer is any organization or individual that receives Software Bills of Materials and uses them to make informed decisions about the software they depend on. As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), consumers are the endpoint of the SBOM ecosystem — the ones who turn static component inventory data into actionable intelligence.
+An SBOM Consumer is any organization or individual that receives SBOMs and uses them to make decisions about the software they depend on.
 
-## What You Can Do With SBOMs
+Typically, SBOMs are not consumed directly but are first processed in a system and enriched with additional information.
+For example, if a consumer wants to use SBOMs to identify vulnerabilities in a software’s supply chain, the SBOM—without extensions such as VEX—initially contains only a neutral list of components.
+It is only through the (automated) querying of known vulnerabilities for the components used that added value is created, from which action can be derived.
 
-<CardGrid>
-  <div class="use-case-card c2">
-    <LinkCard 
-      title="Security Management" 
-      href="/use-cases/security" 
-      description="SBOMs make it easy to instantly identify vulnerable components in a project and take corresponding actions."
-    />
-  </div>
-
-  <div class="use-case-card c3">
-    <LinkCard 
-      title="License Compliance" 
-      href="/use-cases/license" 
-      description="Track components and their associated licenses to ensure you are meeting all legal, regulatory, and internal policy requirements."
-    />
-  </div>
-
-  <div class="use-case-card c5">
-    <LinkCard 
-      title="Technical Debt Management" 
-      href="/use-cases/technical-debt" 
-      description="Get an overview of all components used your software, identify outdated elements and guide your update efforts."
-    />
-  </div>
-
-  <div class="use-case-card c4">
-    <LinkCard 
-      title="Supplier Transparency" 
-      href="/use-cases/supplier" 
-      description="Provide customers and partners with data on the composition of your software, building trust and fulfilling vendor requirements."
-    />
-  </div>
-</CardGrid>
-
-## Find Your Starting Point
-
-Not all SBOM consumers operate the same way. The right starting point depends on your organization's size, operational model, and regulatory context. Select the type that fits your situation:
+In addition to their use in [vulnerability management](/use-cases/security), SBOMs can also help consumers address other use cases, such as [license compliance](/use-cases/license), [technical debt management](/use-cases/technical-debt), or [supplier transparency](/use-cases/supplier).
+Details on the use cases can be found [here](/use-cases).
 
 
+## How to Get Started
 
-<div class="sbom-org-grid">
-  <a href="/roles/consumer/organization-types#solo-operator" class="sbom-org-card">
-    <div class="sbom-org-accent" style="background: #5B8DD9;"></div>
-    <div class="sbom-org-body">
-      <p class="sbom-org-title">Solo Operator</p>
-      <p class="sbom-org-desc">Freelancer, independent consultant, solo practitioner</p>
-      <span class="sbom-org-cta">See your path →</span>
-    </div>
-  </a>
-  <a href="/roles/consumer/organization-types#small-business" class="sbom-org-card">
-    <div class="sbom-org-accent" style="background: #52A872;"></div>
-    <div class="sbom-org-body">
-      <p class="sbom-org-title">Small Business</p>
-      <p class="sbom-org-desc">2–20 employees, no dedicated IT or security function</p>
-      <span class="sbom-org-cta">See your path →</span>
-    </div>
-  </a>
-  <a href="/roles/consumer/organization-types#saas-mid-market" class="sbom-org-card">
-    <div class="sbom-org-accent" style="background: #8B6FBD;"></div>
-    <div class="sbom-org-body">
-      <p class="sbom-org-title">SaaS-Only Mid-Market</p>
-      <p class="sbom-org-desc">50–500 staff, cloud-only, small or fractional IT team</p>
-      <span class="sbom-org-cta">See your path →</span>
-    </div>
-  </a>
-  <a href="/roles/consumer/organization-types#regulated-entity" class="sbom-org-card">
-    <div class="sbom-org-accent" style="background: #C47B3E;"></div>
-    <div class="sbom-org-body">
-      <p class="sbom-org-title">Regulated Entity</p>
-      <p class="sbom-org-desc">Healthcare, financial services, utilities — compliance obligations drive security requirements</p>
-      <span class="sbom-org-cta">See your path →</span>
-    </div>
-  </a>
-  <a href="/roles/consumer/organization-types#development-org" class="sbom-org-card">
-    <div class="sbom-org-accent" style="background: #3D9E9E;"></div>
-    <div class="sbom-org-body">
-      <p class="sbom-org-title">Development Organization</p>
-      <p class="sbom-org-desc">Internal engineering team, DevSecOps capability, dedicated security staff</p>
-      <span class="sbom-org-cta">See your path →</span>
-    </div>
-  </a>
-</div>
+<Tabs>
+  <TabItem label="Solo Operators and Small Businesses">
+    Approximately 1–50 employees and no dedicated IT or IT‑Security functions. Includes freelancers.
+    <Steps>
+      1. **Identify the software being used.**  
+      This can include purchased software, software developed in‑house, or software to be sold as a product.  
+      Small businesses usually maintain this overview as lists or simple spreadsheets, optionally enriched with basic metadata (vendor, version, purpose, and owner).
 
-SBOMs work alongside other documents like VEX and CSAF to communicate vulnerability status and exploitability. See [Connected SBOM Artifacts](../companion-artifacts) for how these fit together.
+      2. **Set up an analysis system.**  
+      SBOM files are difficult for humans to read. Use lightweight analysis tools to ingest SBOMs and enrich them with vulnerability and license data. Suitable tools can be found [here](/tooling/tooling).  
+      For very small setups, a single desktop tool or a small self‑hosted service is often sufficient.
 
-## In This Section
+      3. **Define a handoff‑point.**  
+      Define how SBOMs should be received (e.g., email, shared folder, or download portal).  
+      At this level, manual import into the analysis system is acceptable, but document who is responsible and where files are stored.
 
-<div class="stakeholder-grid">
-  <CardGrid>
-    <div class="use-case-card c2">
-      <LinkCard
-        title="Organization Types, Roles & Responsibilities"
-        description="What SBOM consumption means for your specific organization type, including the compliance and insurance framework crosswalk."
-        href="/roles/consumer/organization-types"
-      />
-    </div>
+      4. **Perform basic risk triage.**  
+      For each new or updated SBOM, check for critical and high vulnerabilities/licenses in components you actually use.  
+      Prioritize actions (update, replace, isolate) based on severity and exposure, not just the number of findings.
 
-    <div class="use-case-card c3">
-      <LinkCard
-        title="What To Do"
-        description="Practical action steps for both non-technical organizations and technical teams — from first steps through program maturity."
-        href="/roles/consumer/getting-started"
-      />
-    </div>
+      5. **Document decisions and actions.**  
+      Keep a simple log of what was done for each SBOM (e.g., “updated component X”, “accepted risk with mitigation Y”).  
+      This supports audits, insurance questionnaires, and future incident response.
+    </Steps>
+  </TabItem>
 
-    <div class="use-case-card c5">
-      <LinkCard
-        title="References"
-        description="All cited sources and further reading."
-        href="/roles/consumer/references"
-      />
-    </div>
-  </CardGrid>
-</div>
+  <TabItem label="Mid‑Sized Companies">
+    Approximately 50–500 employees and only a small or fractional IT team.
+    <Steps>
+      1. **Identify the software being used.**  
+      This can include purchased software, software developed in‑house, or software to be sold as a product.  
+      Mid‑sized companies usually maintain this information in a structured database or entry‑level IT Asset Management (ITAM) tool to enable cross‑referencing with contracts, owners, and environments.
+
+      2. **Set up an analysis system.**  
+      SBOM files are difficult for humans to read. Use analysis systems to process SBOMs and enrich them with vulnerability, license, and end‑of‑life data. Suitable tools can be found [here](/tooling/tooling).  
+      Integrate the tool with your asset inventory so each SBOM is linked to a specific product, environment, and responsible team.
+
+      3. **Define a handoff‑point.**  
+      Define standard channels and formats for receiving SBOMs (e.g., CycloneDX or SPDX via email, ticket attachment, or a dedicated intake form).  
+      Assign ownership (e.g., product security or platform team) for validating and ingesting incoming SBOMs.
+
+      4. **Specify which information should be delivered.**  
+      Define minimum SBOM requirements for suppliers: format (CycloneDX/SPDX), coverage (including transitive dependencies), key fields (component name, version, supplier, identifiers like PURL/CPE, hashes, licenses, timestamp), and update triggers (new releases, patches, or at least every 90–180 days).  
+      Optionally require vulnerability status information (e.g., VEX/CSAF) where available.
+
+      5. **Require SBOM delivery in vendor contracts.**  
+      Include SBOM obligations in procurement documents, RFPs, and contracts: format, frequency, quality expectations, and consequences for non‑delivery.  
+      Add clauses for updated SBOMs after releases and for notification of newly discovered critical vulnerabilities affecting delivered components.
+
+      6. **Establish processes to process SBOMs.**  
+      Define a repeatable workflow: ingest → validate → enrich → triage → assign → remediate/accept → document.  
+      Integrate this workflow with your ticketing system so findings become actionable tasks with owners and due dates.
+
+      7. **Monitor and review.**  
+      Periodically review SBOM coverage, data quality, and time‑to‑remediate for high‑severity issues.  
+      Use these metrics to refine contract language, supplier expectations, and internal processes.
+    </Steps>
+  </TabItem>
+
+  <TabItem label="Enterprises or Regulated Entities">
+    More than 500 employees or regulated entities including healthcare, financial services, or defence. Dedicated and well‑staffed IT and IT‑Security teams.
+    <Steps>
+      1. **Identify the software being used.**  
+      This can include purchased software, software developed in‑house, or software to be sold as a product.  
+      Enterprises and regulated entities usually maintain this information in full‑scale ITAM/CMDB platforms, enabling integration with ticketing, change management, and risk registers.
+
+      2. **Set up an analysis system.**  
+      SBOM files are difficult for humans to read. Use enterprise‑grade analysis platforms to process SBOMs and enrich them with vulnerability, license, EOL, and policy data. Suitable tools can be found [here](/tooling/tooling).  
+      Integrate these tools with existing processes and systems such as ticketing, SIEM, GRC, and change management to support automated workflows and reporting.
+
+      3. **Define a handoff‑point.**  
+      Standardize secure, automated SBOM intake (e.g., API, artifact repository, or dedicated portal) with clear authentication, access control, and logging.  
+      Define roles (e.g., product security, supply‑chain security, procurement) responsible for validation, exception handling, and escalation.
+
+      4. **Specify which information should be delivered.**  
+      Define detailed SBOM requirements aligned with frameworks such as CISA’s Minimum Elements: mandatory fields, transitive dependency coverage, component hashes, unique identifiers, license data, and update cadence.  
+      Require machine‑readable vulnerability status (VEX/CSAF) where applicable and define expectations for corrections and “known unknowns”.
+
+      5. **Require SBOM delivery in vendor contracts.**  
+      Embed SBOM obligations into enterprise procurement policies, RFPs, and master service agreements: formats, data quality, delivery triggers, update intervals, vulnerability notification duties, audit rights, and subcontractor flow‑down.  
+      Include acceptance criteria and the right to reject deliveries that do not meet SBOM requirements.
+
+      6. **Establish processes to process SBOMs.**  
+      Implement an end‑to‑end, automated pipeline: standardized ingestion, schema and policy validation, enrichment, risk scoring, assignment, remediation tracking, and evidence retention.  
+      Align processes with regulatory requirements (e.g., sector‑specific rules, critical infrastructure mandates) and internal governance frameworks.
+
+      7. **Integrate with vulnerability and incident management.**  
+      Connect SBOM data to vulnerability management and incident response workflows so that newly disclosed CVEs can be rapidly mapped to affected products, environments, and customers.  
+      Define SLAs for triage, mitigation, and communication based on severity and regulatory obligations.
+
+      8. **Measure, audit, and improve.**  
+      Define and track KPIs such as SBOM coverage, data quality scores, time‑to‑triage, time‑to‑remediate, and supplier compliance rates.  
+      Use internal and external audits to verify that SBOM practices meet contractual, regulatory, and risk‑management objectives, and continuously refine requirements and tooling.
+    </Steps>
+  </TabItem>
+</Tabs>
+
+
+## How to Measure Success
+Metrics can help measure the maturity of the SBOM program. Here are some example metrics.
+
+<Tabs>
+  <TabItem label="Enterprise Metrics">
+
+| Metric | What it measures |
+|---|---|
+| **Coverage** | Percentage of in-scope third-party software with at least one current SBOM in the repository |
+| **Freshness** | Median age of the latest SBOM per deployed product version |
+| **Quality score** | Aggregate quality score across received SBOMs |
+| **VEX coverage** | Percentage of vendor SBOMs accompanied by at least one VEX statement |
+| **Vulnerable-component lead time** | Time from public CVE disclosure to internal identification of all affected products |
+| **KEV coverage** | Time from KEV listing to verified mitigation across affected products |
+| **Vendor responsiveness** | Median time from SBOM request to receipt of updated artifact |
+| **Audit readiness** | Time to produce an inventory snapshot for a given date and product set |
+
+  </TabItem>
+  <TabItem label="Small Organization Metrics">
+
+| Metric | What it measures |
+|---|---|
+| **SBOM availability coverage** | Percentage of Tier 1 vendors from whom a current SBOM has been received |
+| **SBOM format compliance** | Percentage of received SBOMs in a supported format (SPDX 2.3+ or CycloneDX 1.4+) |
+| **Contract SBOM clause coverage** | Percentage of critical vendor contracts specifying SBOM delivery requirements |
+| **VEX coverage** | Percentage of Tier 1 vendors that issue VEX statements when vulnerabilities affecting their software are disclosed |
+| **Vulnerability response time** | Time from public disclosure of a vulnerability to confirmed impact status across Tier 1 vendors |
+
+  </TabItem>
+</Tabs>

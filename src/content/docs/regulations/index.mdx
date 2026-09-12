@@ -1,0 +1,22 @@
+---
+title: "Regulations and Frameworks"
+description: "Overview of Regulatory Requirements and Frameworks."
+---
+
+
+The table below maps common regulatory and insurance frameworks to their requirements relevant to SBOM practice and describes how SBOM receiving supports compliance. Organizations subject to these frameworks should treat SBOM program development as a direct compliance activity, not merely a security enhancement.
+
+| Framework | Who it covers | What it requires relevant to SBOM | How SBOM receiving supports compliance |
+|---|---|---|---|
+| **[FTC Safeguards Rule (GLBA)](https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know)**<sup><a href="./references#ref-3">[3]</a></sup> | Financial institutions including auto dealers, tax preparers, mortgage brokers | Written information security program; service provider oversight requiring contracts with appropriate safeguards | Received SBOMs document the component composition of vendor software; SBOM-informed contracts establish enforceable transparency requirements |
+| **[HIPAA Security Rule](https://www.hhs.gov/hipaa/for-professionals/security/index.html)**<sup><a href="./references#ref-7">[7]</a></sup> | Covered entities and business associates handling PHI | Risk analysis; technical safeguards; business associate agreements | Received SBOMs support risk analysis for software handling PHI; BAAs can specify SBOM delivery as a vendor obligation |
+| **[FDA Section 524B](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions)**<sup><a href="./references#ref-4">[4]</a></sup> | Manufacturers of "cyber devices" submitted for premarket clearance/approval | SBOM in premarket submission; post-market vulnerability monitoring | Direct SBOM mandate; component supplier SBOMs are required inputs to a compliant premarket submission |
+| **[PCI DSS v4.0](https://www.pcisecuritystandards.org/document_library/)**<sup><a href="./references#ref-8">[8]</a></sup> | Any entity storing, processing, or transmitting cardholder data | Req. 6.3: security of externally developed software; Req. 12.8: third-party service provider management | Received SBOMs provide the component-level visibility required for externally developed software security assessment |
+| **[NIST CSF 2.0](https://www.nist.gov/cyberframework)**<sup><a href="./references#ref-6">[6]</a></sup> | Voluntary, but referenced by many regulations and insurers | "Identify" function: asset management, risk assessment; "Respond": incident response | Received SBOMs operationalize software asset management within the Identify function and accelerate incident response |
+| **[CIS Controls v8 IG1](https://www.cisecurity.org/controls/v8)**<sup><a href="./references#ref-9">[9]</a></sup> | Baseline controls appropriate for small organizations | Control 2: Inventory and control of software assets; Control 16: Application security practices | Received SBOMs provide component-level detail supporting software asset inventory requirements |
+| **[SEC Cybersecurity Rules](https://www.sec.gov/rules/final/2023/33-11216.pdf)**<sup><a href="./references#ref-10">[10]</a></sup> | Public companies | Annual disclosure of cybersecurity risk management; material incident disclosure | Received SBOMs support documented vendor software risk management and improve the accuracy and speed of material incident scoping |
+| **EU Cyber Resilience Act** | Manufacturers placing products with digital elements on the EU market | SBOM obligation for products in scope; vulnerability reporting; 10-year retention | Component supplier SBOMs are required inputs to a compliant product SBOM; receiving capability is a prerequisite |
+| **Cyber insurance** | Any insured organization | Questionnaires increasingly cover software inventory practices, vendor risk management, and incident response | SBOM records from vendors document software component transparency; SBOM-aware vendor contracts and VEX monitoring directly address common questionnaire categories |
+
+
+As of: September 12, 2026
