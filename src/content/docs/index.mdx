@@ -3,18 +3,18 @@ title: All About SBOM
 description: Learn the fundamentals, formats, lifecycle roles, and use cases of Software Bills of Materials.
 template: splash
 hero:
-  title: SBOM Guide
-  tagline: Learn the fundamentals, standards, lifecycle roles, and practical use cases of Software Bills of Materials.
+  title: All About SBOM
+  tagline: A beginner’s guide to SBOMs - what they are, why they matter, and how to use them.
   image:
     alt: SBOM site mascot
     file: ../../assets/houston.webp
   actions:
-    - text: Start with SBOM Basics
-      link: /sbom_basics/sbom_basics
+    - text: Learn about SBOMs
+      link: /sbom_basics/
       icon: right-arrow
       variant: primary
     - text: Explore Use Cases
-      link: /use-cases/security
+      link: /use-cases/
       icon: right-arrow
       variant: minimal
 ---
@@ -24,107 +24,102 @@ import { Image } from 'astro:assets';
 import { Steps, LinkButton, LinkCard, Card, CardGrid  } from '@astrojs/starlight/components';
 import sbomImage from '../../assets/houston.webp';
 
+
 <div class="homepage-lead">
+## What is an SBOM?
+
+A Software Bill of Materials (SBOM) is a structured, machine‑readable inventory of the components, libraries, and dependencies inside a software product.  
+Think of it like a food label: it tells you what went into the software, which versions are used, and where each component comes from.
+
+At minimum, an SBOM typically includes:
+
+- Product name and version
+- List of components and their versions
+- Supplier or source of each component
+- Unique identifiers (e.g., PURL, CPE) and dependency relationships
+- Timestamp and author of the SBOM data
+
+Common formats such as **CycloneDX** and **SPDX** make SBOMs easy to process automatically in tooling and pipelines.
+
+</div>
+
+
+<div class="homepage-lead">
+
 
 ## Why SBOMs matter
-Modern applications are built using third-party components, creating complex software supply chains. 
-While this approach has positive effects, it also raises new challenges, for example in the areas of compliance and cybersecurity.
-Here, the main challenge often lies not in solving the actual problem, but first in identifying which dependencies are used directly or indirectly within a software.
 
-To create the needed transparency, the tech industry started to adopt software bills of materials (SBOM).
-Just as Bill of Materials (BOM) known from traditional manufacturing, SBOMs aim to list components within a software project in a standardized and machine-readable manner, enabling automated analysis.
-This website provides information, best practices, and guidelines on SBOMs to further increase their adoption.
+Modern applications are assembled from many third‑party components, creating complex software supply chains.  
+When a new vulnerability is disclosed, teams often struggle to answer a simple question: *“Are we affected, and where?”*.
 
+SBOMs create the transparency needed to:
+- **Find vulnerable components quickly** and prioritize remediation.
+- **Support compliance** with customer, sector, and regulatory expectations.
+- **Manage technical debt** by detecting outdated or unsupported components.
+- **Increase supplier transparency** by sharing software composition details with customers and partners.
 
-</div>
-
-<div class="homepage-lead">
-
-## SBOM basics
-
-The term “SBOM” refers to a concept implemented primarily through the CycloneDX and SPDX standards.  
-SBOMs can be generated at different stages of the software development lifecycle, and the most useful form depends on the intended use case.
-
-<LinkButton href="/sbom_basics/sbom_basics" variant="primary" icon="right-arrow">
-  Learn the Basics of SBOMs
-</LinkButton>
+This website helps you understand SBOMs and start using them in your own projects or organization.
 
 </div>
 
 <div class="homepage-lead">
 
-## Use cases
+## How to get started with SBOMs
 
-SBOMs support several important activities, but their value depends on the quality and limitations of the generation and analysis tooling in use.
+The term “SBOM” refers to a concept implemented primarily through the **CycloneDX** and **SPDX** standards.  
+SBOMs can be generated at different stages of the software development lifecycle, and the most useful form depends on your role and use case.
+
+If you’re just starting out, a simple approach is:
+
+<Steps>
+  1. **Assess your environment**  
+  and identify business‑critical applications.
+  2. **Pick a tools**  
+  that matches your stack (e.g., containers, packages, language ecosystems).
+  3. **Generate or Request your first SBOM**  
+  by building it yourself or requiring it from your vendors.
+  4. **Validate and store**  
+  the SBOM securely and make it available to the right stakeholders.
+  5. **Keep it updated**  
+  with each release and use it in vulnerability and license reviews.
+</Steps>
+
+## Get More Information
 
 <CardGrid>
   <div class="use-case-card c2">
-    <LinkCard
-      title="Security Management"
-      href="/use-cases/security"
-      description="Identify vulnerable components and support remediation decisions."
-    />
-  </div>
-
-  <div class="use-case-card c3">
-    <LinkCard
-      title="License Compliance"
-      href="/use-cases/license"
-      description="Track dependencies and associated licenses for legal and policy alignment."
-    />
-  </div>
-
-  <div class="use-case-card c5">
-    <LinkCard
-      title="Technical Debt Management"
-      href="/use-cases/technical-debt"
-      description="Detect outdated components and guide software maintenance efforts."
-    />
-  </div>
-
-  <div class="use-case-card c4">
-    <LinkCard
-      title="Supplier Transparency"
-      href="/use-cases/supplier"
-      description="Share software composition details with customers and partners."
-    />
-  </div>
-</CardGrid>
-
-</div>
-
-<div class="homepage-intro">
-
-## Stakeholder roles
-
-Generating an SBOM is only the first step. Its value emerges through the lifecycle of production, distribution, and consumption, where different actors create, transfer, validate, and use SBOM data.
-
-</div>
-
-<div class="stakeholder-grid">
-  <CardGrid>
-    <div class="use-case-card c2">
       <LinkCard
-        title="Producer"
-        href="/roles/producer"
-        description="Generate, enrich, and share SBOMs for software releases."
+        title="SBOM Basics"
+        href="/sbom_basics"
+        description="Learn the technical basics of SBOMs."
       />
     </div>
 
     <div class="use-case-card c3">
       <LinkCard
-        title="Distributor"
-        href="/roles/distributor"
-        description="Validate and redistribute SBOMs from producers to downstream users."
+        title="Use Cases"
+        href="/use-cases"
+        description="Learn what SBOMs can be used for."
       />
     </div>
 
     <div class="use-case-card c5">
       <LinkCard
-        title="Consumer"
-        href="/roles/consumer"
-        description="Use SBOMs for vulnerability, license, and supply chain risk management."
+        title="Roles & Implementation"
+        href="/roles"
+        description="Learn how to implement SBOMs."
       />
     </div>
-  </CardGrid>
+
+  <div class="use-case-card c4">
+    <LinkCard
+      title="Regulations & Frameworks"
+      href="/regulations"
+      description="Learn about Regulations and Frameworks"
+    />
+  </div>
+</CardGrid>
+
+
+
 </div>
