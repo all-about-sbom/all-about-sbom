@@ -119,6 +119,19 @@ Details on the use cases can be found [here](/use-cases).
 Metrics can help measure the maturity of the SBOM program. Here are some example metrics.
 
 <Tabs>
+
+  <TabItem label="Small Organization Metrics">
+
+| Metric | What it measures |
+|---|---|
+| **SBOM availability coverage** | Percentage of Tier 1 vendors from whom a current SBOM has been received |
+| **SBOM format compliance** | Percentage of received SBOMs in a supported format (SPDX 2.3+ or CycloneDX 1.4+) |
+| **Contract SBOM clause coverage** | Percentage of critical vendor contracts specifying SBOM delivery requirements |
+| **VEX coverage** | Percentage of Tier 1 vendors that issue VEX statements when vulnerabilities affecting their software are disclosed |
+| **Vulnerability response time** | Time from public disclosure of a vulnerability to confirmed impact status across Tier 1 vendors |
+
+  </TabItem>
+
   <TabItem label="Enterprise Metrics">
 
 | Metric | What it measures |
@@ -131,17 +144,6 @@ Metrics can help measure the maturity of the SBOM program. Here are some example
 | **KEV coverage** | Time from KEV listing to verified mitigation across affected products |
 | **Vendor responsiveness** | Median time from SBOM request to receipt of updated artifact |
 | **Audit readiness** | Time to produce an inventory snapshot for a given date and product set |
-
-  </TabItem>
-  <TabItem label="Small Organization Metrics">
-
-| Metric | What it measures |
-|---|---|
-| **SBOM availability coverage** | Percentage of Tier 1 vendors from whom a current SBOM has been received |
-| **SBOM format compliance** | Percentage of received SBOMs in a supported format (SPDX 2.3+ or CycloneDX 1.4+) |
-| **Contract SBOM clause coverage** | Percentage of critical vendor contracts specifying SBOM delivery requirements |
-| **VEX coverage** | Percentage of Tier 1 vendors that issue VEX statements when vulnerabilities affecting their software are disclosed |
-| **Vulnerability response time** | Time from public disclosure of a vulnerability to confirmed impact status across Tier 1 vendors |
 
   </TabItem>
 </Tabs>
