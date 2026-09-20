@@ -7,12 +7,15 @@ import { Card, CardGrid, LinkCard, Steps, Tabs, TabItem, Aside} from '@astrojs/s
 
 An SBOM Consumer is any organization or individual that receives SBOMs and uses them to make decisions about the software they depend on.
 
+For example, a vulnerability scanner can cross-reference the components listed in an SBOM against a database like the National Vulnerability Database (NVD) to flag known issues.
+
 Typically, SBOMs are not consumed directly but are first processed in a system and enriched with additional information.
 For example, if a consumer wants to use SBOMs to identify vulnerabilities in a software’s supply chain, the SBOM—without extensions such as VEX—initially contains only a neutral list of components.
 It is only through the (automated) querying of known vulnerabilities for the components used that added value is created, from which action can be derived.
 
 In addition to their use in [vulnerability management](/use-cases/security), SBOMs can also help consumers address other use cases, such as [license compliance](/use-cases/license), [technical debt management](/use-cases/technical-debt), or [supplier transparency](/use-cases/supplier).
 Details on the use cases can be found [here](/use-cases).
+In addition to their use in vulnerability management, SBOMs can also help consumers address other use cases, such as license compliance, technical debt management, or supplier transparency. Details on the use cases can be found here. For more on how SBOMs are created and shared, see [Producer](/roles/producer) and [Distributor](/roles/distributor).
 
 
 ## How to Get Started
