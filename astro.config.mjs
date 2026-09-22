@@ -15,7 +15,10 @@ export default defineConfig({
 		mermaid(),
 		starlight({
 			title: 'All About SBOMs',
-			customCss: ['./src/styles/custom.css'],
+			customCss: [
+				'./src/styles/base.css',
+				'./src/styles/theme-b-dependency.css',
+			],
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 			components: {
         		Header: './src/components/Header.astro',
