@@ -3,6 +3,20 @@
 import type { Props } from '@astrojs/starlight/props';
 import Search from '@astrojs/starlight/components/Search.astro';
 import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+
+// Self-hosted fonts (see src/styles/custom.css for the font-family
+// declarations). Imported here, not in custom.css, so Vite bundles
+// the font files as local assets instead of leaving a render-blocking
+// request to Google's servers. Header renders on every page, so this
+// guarantees the fonts load site-wide from a single place.
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/500.css';
+import '@fontsource/public-sans/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
 ---
 
 <header class="custom-header">
@@ -46,5 +60,89 @@ import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
       <Search {...Astro.props} />
     </div>
     <ThemeSelect {...Astro.props} />
+
+    <mobile-nav-button>
+      <button
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+        aria-controls="mobile-nav-drawer"
+        class="mobile-nav-toggle sl-flex md:sl-hidden"
+      >
+        <svg class="open-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="close-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </mobile-nav-button>
   </div>
 </header>
+
+<div class="mobile-nav-backdrop md:sl-hidden"></div>
+
+<nav class="mobile-nav-drawer md:sl-hidden" id="mobile-nav-drawer" aria-label="Mobile navigation">
+  <details>
+    <summary>Usecases</summary>
+    <a href="/use-cases/security">Security Management</a>
+    <a href="/use-cases/technical-debt">Technical Debt</a>
+    <a href="/use-cases/license">License Compliance</a>
+    <a href="/use-cases/supplier">Supplier Transparency</a>
+  </details>
+  <details>
+    <summary>SBOM Basics</summary>
+    <a href="/sbom_basics">Basics</a>
+    <a href="/sbom_basics/sbom_extensions">SBOM Extensions</a>
+    <a href="/sbom_basics/related_boms">Related SBOMs</a>
+  </details>
+  <details>
+    <summary>Roles & Implementation</summary>
+    <a href="/roles/producer">Producer</a>
+    <a href="/roles/distributor">Distributor</a>
+    <a href="/roles/consumer">Consumer</a>
+  </details>
+  <a href="/references">Additional References</a>
+  <a href="/tooling">Tools</a>
+  <a href="/regulations">Regulations & Frameworks</a>
+</nav>
+
+<script>
+  class MobileNavButton extends HTMLElement {
+    btn = this.querySelector('button')!;
+
+    constructor() {
+      super();
+      this.btn.addEventListener('click', () => this.toggleExpanded());
+      document.addEventListener('keyup', (e) => this.closeOnEscape(e));
+
+      const backdrop = document.querySelector('.mobile-nav-backdrop');
+      backdrop?.addEventListener('click', () => this.setExpanded(false));
+
+      const drawer = document.getElementById('mobile-nav-drawer');
+      drawer?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => this.setExpanded(false));
+      });
+    }
+
+    setExpanded(expanded: boolean) {
+      this.btn.setAttribute('aria-expanded', String(expanded));
+      document.body.toggleAttribute('data-mobile-nav-expanded', expanded);
+    }
+
+    toggleExpanded() {
+      this.setExpanded(this.btn.getAttribute('aria-expanded') !== 'true');
+    }
+
+    closeOnEscape(e: KeyboardEvent) {
+      if (e.code === 'Escape') {
+        this.setExpanded(false);
+        this.btn.focus();
+      }
+    }
+  }
+
+  customElements.define('mobile-nav-button', MobileNavButton);
+</script>

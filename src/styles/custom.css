@@ -8,9 +8,10 @@
    referenced throughout, purely to keep the many repeated values
    (header/footer/dropdown/card colors, etc.) consistent and easy to
    retune in one place — this is a single fixed theme, not a
-   swappable system. */
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+   swappable system.
+   Fonts (Space Grotesk, Public Sans, IBM Plex Mono) are self-hosted
+   via @fontsource, imported in Header.astro so Vite bundles the font
+   files locally instead of fetching them from Google at render time. */
 
 :root {
   --font-display: 'Space Grotesk', system-ui, sans-serif;
@@ -66,7 +67,6 @@
   --card-border-width: 1px;
   --card-top-rule: 3px;
   --card-hover-transform: translateY(-4px);
-  --card-hover-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   --card-1-bg: #16202c; --card-1-rule: var(--node-1);
   --card-2-bg: #16202c; --card-2-rule: var(--node-2);
   --card-3-bg: #16202c; --card-3-rule: var(--node-3);
@@ -179,7 +179,6 @@
 
 .use-case-card:hover {
   transform: var(--card-hover-transform);
-  box-shadow: var(--card-hover-shadow);
 }
 
 .use-case-card .title,
@@ -193,6 +192,16 @@
 .use-case-card.c3 { background-color: var(--card-3-bg); border-color: var(--card-3-rule); }
 .use-case-card.c4 { background-color: var(--card-4-bg); border-color: var(--card-4-rule); }
 .use-case-card.c5 { background-color: var(--card-5-bg); border-color: var(--card-5-rule); }
+
+/* Hover shadow is tinted per card — a darker tone of that card's own
+   accent color — instead of one generic rgba(0,0,0,...) shared across
+   all five. A plain black shadow reads as a flat grey on the light
+   background and is essentially invisible against the dark one. */
+.use-case-card.c1:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-1-rule) 55%, black); }
+.use-case-card.c2:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-2-rule) 55%, black); }
+.use-case-card.c3:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-3-rule) 55%, black); }
+.use-case-card.c4:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-4-rule) 55%, black); }
+.use-case-card.c5:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-5-rule) 55%, black); }
 
 .stakeholder-grid .card-grid {
   display: grid;
@@ -241,7 +250,11 @@
 }
 
 .custom-nav {
-  display: flex;
+  /* display is intentionally left to the sl-hidden/md:sl-flex utility
+     classes on the element (Starlight's @layer starlight.utils) —
+     setting display here unlayered would always win the cascade over
+     that layer regardless of media query, permanently defeating the
+     responsive hide/show. */
   gap: 2rem;
   align-items: center;
   height: 100%;
@@ -374,6 +387,142 @@
 }
 
 /* ==========================================================
+   MOBILE NAVIGATION
+   Below the md breakpoint the desktop nav (.custom-nav) is
+   hidden and this drawer is the only way to navigate the site.
+   State lives on <body data-mobile-nav-expanded>, toggled by the
+   <mobile-nav-button> custom element in Header.astro — CSS below
+   just reacts to that attribute.
+   ========================================================== */
+
+.mobile-nav-toggle {
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--header-fg);
+  border-radius: var(--control-radius);
+  cursor: pointer;
+}
+
+.mobile-nav-toggle .close-menu {
+  display: none;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-toggle .open-menu {
+  display: none;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-toggle .close-menu {
+  display: block;
+}
+
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  overflow-y: auto;
+  background: var(--dropdown-bg);
+  color: var(--header-fg);
+  box-shadow: var(--dropdown-shadow);
+  padding: calc(var(--sl-nav-height, 4rem) + 1rem) 1.25rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 9999;
+  font-family: var(--sl-font);
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-drawer {
+  transform: translateX(0);
+}
+
+body[data-mobile-nav-expanded] {
+  overflow: hidden;
+}
+
+.mobile-nav-drawer > a,
+.mobile-nav-drawer details summary {
+  display: block;
+  padding: 0.875rem 0.25rem;
+  color: var(--header-fg);
+  text-decoration: none;
+  font-weight: var(--nav-weight);
+  font-size: 1rem;
+  font-family: var(--font-nav);
+  border-bottom: 1px solid var(--dep-rail);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-nav-drawer details summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-nav-drawer details summary::after {
+  content: '+';
+  float: right;
+  color: var(--dep-rail);
+}
+
+.mobile-nav-drawer details[open] summary::after {
+  content: '\2212';
+}
+
+.mobile-nav-drawer details[open] summary {
+  border-bottom-color: transparent;
+}
+
+.mobile-nav-drawer details a {
+  display: block;
+  padding: 0.75rem 0.25rem 0.75rem 1.25rem;
+  margin-left: 0.5rem;
+  color: var(--header-fg);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-family: var(--sl-font);
+  border-left: 1px solid var(--dep-rail);
+  opacity: 0.85;
+}
+
+.mobile-nav-drawer details a:last-child {
+  border-bottom: 1px solid var(--dep-rail);
+}
+
+.mobile-nav-drawer > a:hover,
+.mobile-nav-drawer details summary:hover,
+.mobile-nav-drawer details a:hover {
+  opacity: 1;
+  background: var(--dropdown-hover-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav-drawer,
+  .mobile-nav-backdrop {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
    FOOTER
    ========================================================== */
 
@@ -391,6 +540,16 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+
+  /* Starlight's "On this Page" TOC column is position:fixed with
+     height:100vh (it scrolls independently, pinned to the viewport,
+     by design — see TwoColumnContent.astro). It normally never
+     collides with anything because the default footer stays within
+     the content column width. Ours breaks out to full 100vw, which
+     puts it underneath that fixed column once you scroll far enough
+     for the footer to enter view. This z-index guarantees the
+     (opaque) footer always paints over it instead of the reverse. */
+  z-index: 10;
 }
 
 .custom-footer .footer-content {
