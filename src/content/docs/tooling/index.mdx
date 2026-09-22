@@ -1,0 +1,133 @@
+---
+title: "SBOM Tooling"
+description: "An orientation to the SBOM tooling landscape — how tools are categorized by function, what to consider when evaluating them, and where to find current tool catalogs."
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+The market for SBOM-related tooling has expanded significantly since the first wave of SBOM adoption following the 2021 NTIA Minimum Elements publication. SBOM tooling has matured far beyond the capabilities and functionalities of tools available in 2021, and organizations implementing SBOM programs now face a dense and growing landscape of options across generation, consumption, management, and analysis functions.
+
+Selecting the right SBOM tooling is not a single decision. Most organizations require tools that address more than one function, and a tool's stated capabilities require evaluation against an organization's specific operational requirements, formats, integration needs, and deployment constraints. This section provides an orientation to how tools are categorized, where to find current tool catalogs, and how to structure an evaluation using the attribute framework developed by the CISA SBOM Tooling and Implementation Working Group.
+
+---
+
+## How SBOM Tools Are Categorized
+
+SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in CISA guidance<sup><a href="/references#ref-cisa-tooling-taxonomy">[TODO]</a></sup> defines three primary categories. Many tools operate across more than one of them.
+
+<details>
+<summary><strong>Produce — SBOM generation and authoring</strong></summary>
+
+Produce tools generate SBOMs by analyzing software artifacts. The methods they use — and the accuracy and completeness of the output — vary considerably by approach.
+
+**What these tools do:**
+- Scan source code, compiled binaries, containers, operating system environments, or package manager manifests to identify components and their metadata
+- Identify component name, version, license, dependency relationships, and standard identifiers (CPE, PURL, SWID)
+- Generate SBOMs in one or both of the current standard formats: SPDX and CycloneDX
+- Sign and hash generated SBOMs to support downstream integrity verification
+
+**What varies between tools in this category:**
+- Which SBOM types they support — source, build, binary-analyzed, runtime, and design SBOMs each require different instrumentation<sup><a href="/references#ref-cisa-sbom-types">[1]</a></sup>
+- Which ecosystems, languages, and package managers they recognize
+- Whether they integrate into CI/CD pipelines, developer IDEs, or operate as standalone utilities
+- The accuracy of component identification, particularly for transitive dependencies and components not delivered via package managers
+
+<Aside type="note">
+A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The 2025 CISA Minimum Elements draft<sup><a href="/references#ref-cisa-minimum-elements-2025">[TODO]</a></sup> notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.
+</Aside>
+
+</details>
+
+<details>
+<summary><strong>Consume — SBOM ingestion, viewing, and analysis</strong></summary>
+
+Consume tools ingest SBOMs and make their data available for review, correlation, and downstream operations. This is the category most directly relevant to organizations receiving SBOMs from vendors — see [Receiving and Using SBOMs](/roles/consumer) for the operational context.
+
+**What these tools do:**
+- Import SBOMs in SPDX, CycloneDX, or both formats
+- Validate the format and completeness of ingested SBOMs against specification requirements
+- Display SBOM data in human-readable form, including dependency graphs and component filtering
+- Correlate SBOM components against vulnerability databases (NVD, OSV, GitHub Advisories, EPSS)
+- Ingest VEX statements to filter and prioritize vulnerability findings
+- Compare SBOMs across versions to identify component changes
+- Preserve SBOM provenance and integrity signatures through external linking
+
+**What varies between tools in this category:**
+- Which import formats and SBOM format versions are supported
+- The depth and currency of vulnerability correlation, including KEV and EPSS scoring integration
+- VEX/CSAF ingestion support and how findings are filtered and surfaced
+- Whether the tool supports linking of received SBOMs to asset records
+
+</details>
+
+<details>
+<summary><strong>Transform — SBOM conversion, aggregation, and export</strong></summary>
+
+Transform tools operate on existing SBOM data to convert, merge, enrich, or distribute it. This category includes a range of capabilities that support both internal workflows and external SBOM distribution.
+
+**What these tools do:**
+- Convert SBOMs between formats — SPDX to CycloneDX and vice versa
+- Merge SBOM data from multiple sources into a single artifact, including product-line SBOMs (PLSBOMs)
+- Export SBOMs in standard formats for use in other systems or for external distribution
+- Generate VEX reports for export alongside SBOMs
+- Provide security advisory information on active exploits associated with identified components
+- Integrate with external systems for SBOM import, export, cataloging, vulnerability intelligence, asset management, and workflow
+
+**What varies between tools in this category:**
+- Which format conversions are supported and whether conversion is lossless
+- Whether aggregation preserves provenance and signing from source SBOMs
+- Integration depth with external systems (ingestion only vs. bidirectional)
+
+<Aside type="caution">
+Format interoperability between tools is not guaranteed. Interoperability between different tools handling SBOMs is not currently guaranteed, due to varying interpretations of the SBOM specifications. When selecting tools across categories, verify that the output of a Produce or Transform tool can be correctly ingested by the Consume tools in the same workflow.
+</Aside>
+
+</details>
+
+---
+
+## General Tool Attributes
+
+Regardless of functional category, all SBOM tools have attributes that affect deployment and operational fit. These include how and where the tool is deployed (hosted public cloud, SaaS, on-premises, or API), the licensing and cost model, authentication and access control support, available interfaces (CLI, GUI, or both), and the type of vendor support provided. Tools that are part of a larger software security or asset management suite carry additional considerations around how the SBOM-related functionality integrates with the suite's primary features.
+
+Primary use designation — whether a tool's primary function is SBOM consumption, scanning/generation, vulnerability management, or something else — affects how the tool is maintained, what its roadmap prioritizes, and where SBOM-related gaps are most likely to appear.
+
+---
+
+## Existing Tool Catalogs
+
+Several organizations maintain catalogs of SBOM-related tools. Two long-standing catalogs are maintained by the format standards bodies:
+
+- **[SPDX Tools](https://spdx.dev/use/spdx-tools/)** — The SPDX project's catalog of tools that support SPDX. Organized by functional category using the Produce/Consume/Transform taxonomy.
+- **[CycloneDX Tool Center](https://cyclonedx.org/tool-center/)** — CycloneDX's catalog of tools supporting the CycloneDX format.
+
+Both catalogs are valuable but limited by their format specificity. Tools that support both SPDX and CycloneDX may appear in both catalogs, but tools are not represented in a catalog for a format they do not support — which can obscure otherwise capable tools from view during evaluation.
+
+The **[OpenSSF SBOM Everywhere project](https://sbom-catalog.openssf.org)** maintains a format-agnostic SBOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the OpenSSF catalog effort to bring richer attributes to tool listings.<sup><a href="/references#ref-cisa-tooling-taxonomy">[TODO]</a></sup>
+
+---
+
+## Evaluating Tools for Your Organization
+
+An organization's requirements for SBOM tooling are shaped by both internal and external factors: existing tooling and integration points, developer and engineering preferences, SBOM types required, formats mandated by customers or regulators, and the maturity of the organization's current SBOM program. No single tool meets every requirement, and most organizations will need to evaluate a set of tools against their specific criteria.
+
+The person or team responsible for identifying and selecting SBOM tools — referred to as the **Chooser** in NTIA and CISA guidance — benefits from a structured set of tool attributes to use during evaluation or in formal RFI/RFP processes. The CISA SBOM Tooling and Implementation Working Group produced two resources specifically for this purpose:
+
+<CardGrid>
+  <Card title="SBOM Tool Attributes — White Paper" icon="document">
+    Explains the complete SBOM tool attribute framework organized by function (Produce, Consume, Transform) and General categories. Describes each attribute, its purpose, and how to apply the framework during tool evaluation or procurement. Suitable for use in RFI and RFP processes.
+
+    [Download White Paper](/resources/sbom-tool-attributes-whitepaper.docx)
+  </Card>
+  <Card title="SBOM Tool Attributes — Spreadsheet" icon="list-format">
+    The companion evaluation tool. Each row is a discrete tool attribute with its category, subcategory, unique ID, description, expected response format, and references to relevant publications. Use to survey and compare tools against your organization's requirements.
+
+    [Download Spreadsheet](/resources/sbom-tool-attributes-spreadsheet.xlsx)
+  </Card>
+</CardGrid>
+
+<Aside type="tip" title="How to use these resources">
+The attributes in the white paper and spreadsheet are not prescriptive requirements — they are evaluation criteria that each organization weights according to its own needs and priorities. An organization focused solely on consuming vendor-supplied SBOMs will treat Produce category attributes differently than an organization with active SBOM generation requirements. The Chooser should identify required, optional, and not-needed attributes before beginning the evaluation, in consultation with relevant internal stakeholders across security, legal, finance, engineering, and asset management.
+</Aside>
+
+The attribute framework is designed to be format-agnostic: it applies equally to tools that support SPDX, CycloneDX, or both, addressing a limitation of the format-specific catalogs described above.
