@@ -250,7 +250,7 @@
 }
 
 .custom-nav {
-  /* display is intentionally left to the sl-hidden/md:sl-flex utility
+  /* display is intentionally left to the sl-hidden/lg:sl-flex utility
      classes on the element (Starlight's @layer starlight.utils) —
      setting display here unlayered would always win the cascade over
      that layer regardless of media query, permanently defeating the
@@ -388,8 +388,13 @@
 
 /* ==========================================================
    MOBILE NAVIGATION
-   Below the md breakpoint the desktop nav (.custom-nav) is
-   hidden and this drawer is the only way to navigate the site.
+   Below the lg breakpoint (72rem/1152px) the desktop nav
+   (.custom-nav) is hidden and this drawer is the only way to
+   navigate the site. The cutover is lg, not Starlight's usual md,
+   because six top-level items — two with long labels — don't fit
+   comfortably in the header until well past md (verified: wraps to
+   two rows around 900px, fits cleanly by 950px+; lg gives headroom
+   above that without shrinking nav text/spacing to cram more in).
    State lives on <body data-mobile-nav-expanded>, toggled by the
    <mobile-nav-button> custom element in Header.astro — CSS below
    just reacts to that attribute.

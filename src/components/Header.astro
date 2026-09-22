@@ -24,7 +24,7 @@ import '@fontsource/ibm-plex-mono/500.css';
     <a href="/" class="logo">YOUR<br/>LOGO</a>
   </div>
 
-  <nav class="custom-nav sl-hidden md:sl-flex">
+  <nav class="custom-nav sl-hidden lg:sl-flex">
     <div class="dropdown">
       <a href="/use-cases" class="dropbtn">Usecases ▾</a>
       <div class="dropdown-content">
@@ -56,17 +56,16 @@ import '@fontsource/ibm-plex-mono/500.css';
   </nav>
 
   <div class="right-actions sl-flex">
-    <div class="search-wrapper sl-hidden md:sl-flex">
+    <div class="search-wrapper sl-hidden lg:sl-flex">
       <Search {...Astro.props} />
     </div>
-    <ThemeSelect {...Astro.props} />
 
     <mobile-nav-button>
       <button
         aria-expanded="false"
         aria-label="Open navigation menu"
         aria-controls="mobile-nav-drawer"
-        class="mobile-nav-toggle sl-flex md:sl-hidden"
+        class="mobile-nav-toggle sl-flex lg:sl-hidden"
       >
         <svg class="open-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -79,12 +78,14 @@ import '@fontsource/ibm-plex-mono/500.css';
         </svg>
       </button>
     </mobile-nav-button>
+
+    <ThemeSelect {...Astro.props} />
   </div>
 </header>
 
-<div class="mobile-nav-backdrop md:sl-hidden"></div>
+<div class="mobile-nav-backdrop lg:sl-hidden"></div>
 
-<nav class="mobile-nav-drawer md:sl-hidden" id="mobile-nav-drawer" aria-label="Mobile navigation">
+<nav class="mobile-nav-drawer lg:sl-hidden" id="mobile-nav-drawer" aria-label="Mobile navigation">
   <details>
     <summary>Usecases</summary>
     <a href="/use-cases/security">Security Management</a>
