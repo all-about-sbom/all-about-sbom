@@ -3,7 +3,7 @@ title: "References & Resources"
 description: "A collection of useful links and resources for learning more about SBOMs and software supply chain security."
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
 
 This page contains a curated list of external resources to help you on your SBOM journey.
 
@@ -45,6 +45,7 @@ This page contains a curated list of external resources to help you on your SBOM
         <a href="https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf" target="_blank">Download PDF</a>
     </Card>
     <Card title="CISA: Types of SBOMs" icon="document">
+        <span id="ref-cisa-sbom-types" />
         Defines the six types of SBOMs (Design, Source, Build, Analyzed, Deployed, Runtime) and their appropriate use across the software lifecycle.
         <a href="https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf" target="_blank">Download PDF</a>
     </Card>
@@ -70,3 +71,42 @@ This page contains a curated list of external resources to help you on your SBOM
         <a href="https://www.openchainproject.org/" target="_blank">Visit website</a>
     </Card>
 </CardGrid>
+
+## Works Cited
+
+Numbered citations referenced by superscript links from individual pages across the site.
+
+<Aside type="caution" title="Two sources need a real citation">
+`ref-cisa-tooling-taxonomy` and `ref-cisa-minimum-elements-2025` below are placeholders — the page that cites them (`/tooling`) named these sources in passing without a confirmed title/URL. Replace the TODO text and href once the actual CISA/NTIA publications are identified.
+</Aside>
+
+<ol>
+  <li id="ref-cisa-tooling-taxonomy">TODO — source for "the functional taxonomy established by the NTIA and carried forward in CISA guidance" and the CISA Tooling and Implementation Working Group's collaboration with the OpenSSF SBOM Everywhere catalog, cited from <a href="/tooling">the Tooling page</a>.</li>
+  <li id="ref-cisa-minimum-elements-2025">TODO — "2025 CISA Minimum Elements draft," cited from <a href="/tooling">the Tooling page</a>.</li>
+  <li id="ref-csaf"><a href="https://oasis-open.github.io/csaf-documentation/" target="_blank" rel="noopener noreferrer">OASIS CSAF Technical Committee, "Common Security Advisory Framework (CSAF) Version 2.0," OASIS Open</a></li>
+  <li id="ref-cdx-vex"><a href="https://cyclonedx.org/capabilities/vex/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Exploitability eXchange (VEX)," OWASP CycloneDX</a></li>
+  <li id="ref-openvex"><a href="https://github.com/openvex/spec" target="_blank" rel="noopener noreferrer">OpenVEX Project, "OpenVEX Specification," OpenSSF / OpenVEX</a></li>
+  <li id="ref-cisa-vex"><a href="https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex" target="_blank" rel="noopener noreferrer">CISA, "Minimum Requirements for Vulnerability Exploitability eXchange (VEX)," Cybersecurity and Infrastructure Security Agency (2023)</a></li>
+  <li id="ref-fda-cyber"><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions" target="_blank" rel="noopener noreferrer">FDA, "Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions," U.S. Food and Drug Administration</a></li>
+  <li id="ref-cra"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R2847" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/2847 — Cyber Resilience Act, Official Journal of the European Union (December 2024)</a></li>
+  <li id="ref-cdx-vdr"><a href="https://cyclonedx.org/capabilities/vdr/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Disclosure Report (VDR)," OWASP CycloneDX</a></li>
+  <li id="ref-nist-800-161"><a href="https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-161r1, "Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations," National Institute of Standards and Technology (2022)</a></li>
+  <li id="ref-sigstore"><a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore Project, "Sigstore: A New Standard for Signing, Verifying, and Protecting Software," OpenSSF</a></li>
+  <li id="ref-in-toto"><a href="https://in-toto.io/" target="_blank" rel="noopener noreferrer">in-toto Project, "in-toto: A Framework to Secure the Integrity of Software Supply Chains," Cloud Native Computing Foundation</a></li>
+  <li id="ref-slsa"><a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">SLSA Project, "Supply-chain Levels for Software Artifacts (SLSA)," OpenSSF</a></li>
+  <li id="ref-cdxa"><a href="https://cyclonedx.org/capabilities/attestations/" target="_blank" rel="noopener noreferrer">CycloneDX, "CycloneDX Attestations (CDXA)," OWASP CycloneDX</a></li>
+  <li id="ref-ssdf"><a href="https://csrc.nist.gov/Projects/ssdf" target="_blank" rel="noopener noreferrer">NIST SP 800-218, "Secure Software Development Framework (SSDF) Version 1.1," National Institute of Standards and Technology (2022)</a></li>
+  <li id="ref-hbom"><a href="https://www.cisa.gov/resources-tools/resources/hardware-bill-materials-hbom-framework-supply-chain-risk-management" target="_blank" rel="noopener noreferrer">CISA, "Hardware Bill of Materials (HBOM) Framework for Supply Chain Risk Management" (November 2023)</a></li>
+  <li id="ref-omb-m2605"><a href="https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05.pdf" target="_blank" rel="noopener noreferrer">OMB M-26-05, "Strengthening and Streamlining Federal Cybersecurity Procurement Requirements," Office of Management and Budget (January 2026)</a></li>
+  <li id="ref-cdx-saas"><a href="https://cyclonedx.org/capabilities/saasbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "SaaSBOM: Software as a Service Bill of Materials," OWASP CycloneDX</a></li>
+  <li id="ref-cdx-aiml"><a href="https://cyclonedx.org/capabilities/mlbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "ML-BOM: Machine Learning Bill of Materials," OWASP CycloneDX</a></li>
+  <li id="ref-nist-ai-rmf"><a href="https://airc.nist.gov/Docs/1" target="_blank" rel="noopener noreferrer">NIST, "Artificial Intelligence Risk Management Framework (AI RMF 1.0)," National Institute of Standards and Technology (2023)</a></li>
+  <li id="ref-eu-ai-act"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/1689 — Artificial Intelligence Act, Official Journal of the European Union (July 2024)</a></li>
+  <li id="ref-nist-pqc"><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener noreferrer">NIST, "Post-Quantum Cryptography Standardization," National Institute of Standards and Technology</a></li>
+  <li id="ref-cdx-cbom"><a href="https://cyclonedx.org/capabilities/cbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "CBOM: Cryptography Bill of Materials," OWASP CycloneDX</a></li>
+  <li id="ref-nsa-pqc"><a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/" target="_blank" rel="noopener noreferrer">NSA, "Post-Quantum Cybersecurity Resources," National Security Agency</a></li>
+  <li id="ref-cdx-1-7"><a href="https://cyclonedx.org/specification/overview/" target="_blank" rel="noopener noreferrer">CycloneDX 1.7 Specification Overview, OWASP CycloneDX (October 2025)</a></li>
+  <li id="ref-spdx-3"><a href="https://spdx.github.io/spdx-spec/v3.0/" target="_blank" rel="noopener noreferrer">SPDX 3.0 Specification, The Linux Foundation (2024)</a></li>
+  <li id="ref-dep-track"><a href="https://dependencytrack.org/" target="_blank" rel="noopener noreferrer">OWASP Dependency-Track, "Intelligent Component Analysis Platform," OWASP Foundation</a></li>
+  <li id="ref-tea"><a href="https://ecma-international.org/technical-committees/tc54/" target="_blank" rel="noopener noreferrer">ECMA TC54, "Transparency Exchange API (TEA)," ECMA International</a></li>
+</ol>

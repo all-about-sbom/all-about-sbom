@@ -11,7 +11,7 @@ SBOMs are only one part of a broader family of structured inventory artifacts. C
 
 A hardware bill of materials (HBOM) lists the physical and logical components of a hardware product — integrated circuits, printed circuit boards, firmware, embedded software — and the relationships between them. The motivation is identical to software SBOMs: supply chain visibility, vulnerability tracking, and counterfeit detection.
 
-CISA published an HBOM framework in November 2023 covering data format and use cases for hardware component transparency. <sup>[<a href="#ref-hbom" target="_blank" rel="noopener noreferrer">14</a>]</sup> OMB M-26-05 explicitly elevated hardware supply chain risk as a priority alongside software, reflecting the recognition that software SBOMs alone do not capture the full attack surface of modern systems. <sup>[<a href="#ref-omb-m2605" target="_blank" rel="noopener noreferrer">15</a>]</sup> CycloneDX 1.4 and later support hardware component types natively, allowing HBOM and SBOM data to coexist in a single document or be linked across documents.
+CISA published an HBOM framework in November 2023 covering data format and use cases for hardware component transparency. <sup>[<a href="/references#ref-hbom" target="_blank" rel="noopener noreferrer">14</a>]</sup> OMB M-26-05 explicitly elevated hardware supply chain risk as a priority alongside software, reflecting the recognition that software SBOMs alone do not capture the full attack surface of modern systems. <sup>[<a href="/references#ref-omb-m2605" target="_blank" rel="noopener noreferrer">15</a>]</sup> CycloneDX 1.4 and later support hardware component types natively, allowing HBOM and SBOM data to coexist in a single document or be linked across documents.
 
 ### HBOM across roles
 
@@ -27,7 +27,7 @@ CISA published an HBOM framework in November 2023 covering data format and use c
 
 A SaaSBOM describes the components and services that make up a SaaS platform — not the source code of the platform itself (that is a software SBOM), but the external services, APIs, and third-party components the platform depends on at runtime. A SaaS product that depends on AWS Lambda for compute, Twilio for communications, Stripe for payments, and Elasticsearch for search has a SaaSBOM that captures those dependencies.
 
-CycloneDX 1.4 introduced the `service` component type to support SaaSBOM use cases. <sup>[<a href="#ref-cdx-saas" target="_blank" rel="noopener noreferrer">16</a>]</sup> SPDX 3.0's service profile covers similar ground. The concept is directly relevant to OMB M-26-05's provision that cloud service providers should be able to produce SBOM data describing the runtime production environment on request from federal customers.
+CycloneDX 1.4 introduced the `service` component type to support SaaSBOM use cases. <sup>[<a href="/references#ref-cdx-saas" target="_blank" rel="noopener noreferrer">16</a>]</sup> SPDX 3.0's service profile covers similar ground. The concept is directly relevant to OMB M-26-05's provision that cloud service providers should be able to produce SBOM data describing the runtime production environment on request from federal customers.
 
 ### SaaSBOM across roles
 
@@ -43,7 +43,7 @@ CycloneDX 1.4 introduced the `service` component type to support SaaSBOM use cas
 
 An AI/ML-BOM captures the components that make up a machine learning system: the base model or models, training data references, fine-tuning datasets, preprocessing pipelines, inference-time dependencies, and runtime serving infrastructure. As AI-enabled products proliferate across every industry, the supply chain risks associated with models — data poisoning, model tampering, adversarial manipulation of fine-tuning datasets — require the same kind of component transparency that software supply chain attacks drove for code.
 
-CycloneDX 1.5 and later support AI/ML component types, including `machineLearningModel` and related metadata fields. <sup>[<a href="#ref-cdx-aiml" target="_blank" rel="noopener noreferrer">17</a>]</sup> NIST's AI Risk Management Framework (AI RMF) and the companion NIST AI 600-1 (for generative AI) identify supply chain transparency as a risk management practice. <sup>[<a href="#ref-nist-ai-rmf" target="_blank" rel="noopener noreferrer">18</a>]</sup> The EU AI Act's transparency and conformity assessment obligations for high-risk AI systems will increasingly require documentation that resembles an AI/ML-BOM. <sup>[<a href="#ref-eu-ai-act" target="_blank" rel="noopener noreferrer">19</a>]</sup>
+CycloneDX 1.5 and later support AI/ML component types, including `machineLearningModel` and related metadata fields. <sup>[<a href="/references#ref-cdx-aiml" target="_blank" rel="noopener noreferrer">17</a>]</sup> NIST's AI Risk Management Framework (AI RMF) and the companion NIST AI 600-1 (for generative AI) identify supply chain transparency as a risk management practice. <sup>[<a href="/references#ref-nist-ai-rmf" target="_blank" rel="noopener noreferrer">18</a>]</sup> The EU AI Act's transparency and conformity assessment obligations for high-risk AI systems will increasingly require documentation that resembles an AI/ML-BOM. <sup>[<a href="/references#ref-eu-ai-act" target="_blank" rel="noopener noreferrer">19</a>]</sup>
 
 ### AI/ML-BOM across roles
 
@@ -59,9 +59,9 @@ CycloneDX 1.5 and later support AI/ML component types, including `machineLearnin
 
 A CBOM catalogs the cryptographic algorithms, protocols, and key lengths used throughout a software or hardware system. It is distinct from an SBOM (which captures software components) in that it focuses specifically on the cryptographic layer — which cipher suites are in use for TLS, which algorithms are used for signing and hashing, which key management approaches are deployed.
 
-The primary driver for CBOM today is the post-quantum migration. NIST finalized its first post-quantum cryptography standards in 2024, and organizations across every sector now face the task of identifying everywhere classical public-key cryptography is in use before it can be replaced. <sup>[<a href="#ref-nist-pqc" target="_blank" rel="noopener noreferrer">20</a>]</sup> Without a CBOM, that inventory is a manual, error-prone process. With one, the exposure surface is enumerable.
+The primary driver for CBOM today is the post-quantum migration. NIST finalized its first post-quantum cryptography standards in 2024, and organizations across every sector now face the task of identifying everywhere classical public-key cryptography is in use before it can be replaced. <sup>[<a href="/references#ref-nist-pqc" target="_blank" rel="noopener noreferrer">20</a>]</sup> Without a CBOM, that inventory is a manual, error-prone process. With one, the exposure surface is enumerable.
 
-CycloneDX 1.6 added the `cryptoProperties` field to support CBOM natively. <sup>[<a href="#ref-cdx-cbom" target="_blank" rel="noopener noreferrer">21</a>]</sup> IBM has been a notable contributor to the CBOM specification and has tooling to generate CBOMs from codebases and containers.
+CycloneDX 1.6 added the `cryptoProperties` field to support CBOM natively. <sup>[<a href="/references#ref-cdx-cbom" target="_blank" rel="noopener noreferrer">21</a>]</sup> IBM has been a notable contributor to the CBOM specification and has tooling to generate CBOMs from codebases and containers.
 
 ### CBOM across roles
 
@@ -69,7 +69,7 @@ CycloneDX 1.6 added the `cryptoProperties` field to support CBOM natively. <sup>
 
 **Consumers** purchasing products with long deployment lifetimes — critical infrastructure, healthcare devices, financial systems — should ask for CBOMs alongside SBOMs to understand the cryptographic exposure of what they are buying and plan remediation timelines for the post-quantum transition.
 
-**Risk and compliance teams** will increasingly encounter CBOM requirements in federal procurement (CISA and NSA guidance on post-quantum migration references component-level cryptographic inventory) and in standards like FIPS 140-3 compliance assessments. <sup>[<a href="#ref-nsa-pqc" target="_blank" rel="noopener noreferrer">22</a>]</sup>
+**Risk and compliance teams** will increasingly encounter CBOM requirements in federal procurement (CISA and NSA guidance on post-quantum migration references component-level cryptographic inventory) and in standards like FIPS 140-3 compliance assessments. <sup>[<a href="/references#ref-nsa-pqc" target="_blank" rel="noopener noreferrer">22</a>]</sup>
 
 ---
 
@@ -77,9 +77,9 @@ CycloneDX 1.6 added the `cryptoProperties` field to support CBOM natively. <sup>
 
 The software industry spent years building SBOM tooling that handles only software. Adding hardware, service, AI, and cryptographic components as afterthoughts has proved painful everywhere it has been attempted. The practical guidance for anyone designing or procuring an SBOM management system today is direct: **design the data model and the tooling stack to hold any BOM type alongside the others from the start.**
 
-CycloneDX 1.7 supports all of the BOM types described here — SBOM, HBOM, SaaSBOM, AI/ML-BOM, CBOM — within a single document model and with a unified component taxonomy. <sup>[<a href="#ref-cdx-1-7" target="_blank" rel="noopener noreferrer">23</a>]</sup> SPDX 3.0 introduces profile-based extensions for several similar use cases. <sup>[<a href="#ref-spdx-3" target="_blank" rel="noopener noreferrer">24</a>]</sup> Dependency-Track, the leading open source SBOM management platform, has active work toward multi-BOM-type support. <sup>[<a href="#ref-dep-track" target="_blank" rel="noopener noreferrer">25</a>]</sup>
+CycloneDX 1.7 supports all of the BOM types described here — SBOM, HBOM, SaaSBOM, AI/ML-BOM, CBOM — within a single document model and with a unified component taxonomy. <sup>[<a href="/references#ref-cdx-1-7" target="_blank" rel="noopener noreferrer">23</a>]</sup> SPDX 3.0 introduces profile-based extensions for several similar use cases. <sup>[<a href="/references#ref-spdx-3" target="_blank" rel="noopener noreferrer">24</a>]</sup> Dependency-Track, the leading open source SBOM management platform, has active work toward multi-BOM-type support. <sup>[<a href="/references#ref-dep-track" target="_blank" rel="noopener noreferrer">25</a>]</sup>
 
-The Transparency Exchange API (TEA), currently in beta under ECMA TC54, is designed to handle the full family of BOM artifacts — not just software SBOMs — and to support automated discovery and retrieval from producers. <sup>[<a href="#ref-tea" target="_blank" rel="noopener noreferrer">26</a>]</sup> Organizations building SBOM receiving infrastructure should watch TEA closely, as it is likely to become the standard exchange mechanism for the entire BOM family.
+The Transparency Exchange API (TEA), currently in beta under ECMA TC54, is designed to handle the full family of BOM artifacts — not just software SBOMs — and to support automated discovery and retrieval from producers. <sup>[<a href="/references#ref-tea" target="_blank" rel="noopener noreferrer">26</a>]</sup> Organizations building SBOM receiving infrastructure should watch TEA closely, as it is likely to become the standard exchange mechanism for the entire BOM family.
 
 A compound product — one that includes hardware, runs software, exposes a SaaS interface, uses AI features, and encrypts data in transit — has all five BOM types applicable simultaneously. That is not a hypothetical: it describes a modern medical device, a smart industrial controller, or an enterprise network appliance. The organizations that have invested in a unified BOM data model will have a significant advantage when regulators, customers, and incident responders begin asking for the full picture.
 
@@ -87,31 +87,4 @@ A compound product — one that includes hardware, runs software, exposes a SaaS
 
 ## References
 
-<ol>
-  <li id="ref-csaf"><a href="https://oasis-open.github.io/csaf-documentation/" target="_blank" rel="noopener noreferrer">OASIS CSAF Technical Committee, "Common Security Advisory Framework (CSAF) Version 2.0," OASIS Open</a></li>
-  <li id="ref-cdx-vex"><a href="https://cyclonedx.org/capabilities/vex/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Exploitability eXchange (VEX)," OWASP CycloneDX</a></li>
-  <li id="ref-openvex"><a href="https://github.com/openvex/spec" target="_blank" rel="noopener noreferrer">OpenVEX Project, "OpenVEX Specification," OpenSSF / OpenVEX</a></li>
-  <li id="ref-cisa-vex"><a href="https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex" target="_blank" rel="noopener noreferrer">CISA, "Minimum Requirements for Vulnerability Exploitability eXchange (VEX)," Cybersecurity and Infrastructure Security Agency (2023)</a></li>
-  <li id="ref-fda-cyber"><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions" target="_blank" rel="noopener noreferrer">FDA, "Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions," U.S. Food and Drug Administration</a></li>
-  <li id="ref-cra"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R2847" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/2847 — Cyber Resilience Act, Official Journal of the European Union (December 2024)</a></li>
-  <li id="ref-cdx-vdr"><a href="https://cyclonedx.org/capabilities/vdr/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Disclosure Report (VDR)," OWASP CycloneDX</a></li>
-  <li id="ref-nist-800-161"><a href="https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-161r1, "Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations," National Institute of Standards and Technology (2022)</a></li>
-  <li id="ref-sigstore"><a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore Project, "Sigstore: A New Standard for Signing, Verifying, and Protecting Software," OpenSSF</a></li>
-  <li id="ref-in-toto"><a href="https://in-toto.io/" target="_blank" rel="noopener noreferrer">in-toto Project, "in-toto: A Framework to Secure the Integrity of Software Supply Chains," Cloud Native Computing Foundation</a></li>
-  <li id="ref-slsa"><a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">SLSA Project, "Supply-chain Levels for Software Artifacts (SLSA)," OpenSSF</a></li>
-  <li id="ref-cdxa"><a href="https://cyclonedx.org/capabilities/attestations/" target="_blank" rel="noopener noreferrer">CycloneDX, "CycloneDX Attestations (CDXA)," OWASP CycloneDX</a></li>
-  <li id="ref-ssdf"><a href="https://csrc.nist.gov/Projects/ssdf" target="_blank" rel="noopener noreferrer">NIST SP 800-218, "Secure Software Development Framework (SSDF) Version 1.1," National Institute of Standards and Technology (2022)</a></li>
-  <li id="ref-hbom"><a href="https://www.cisa.gov/resources-tools/resources/hardware-bill-materials-hbom-framework-supply-chain-risk-management" target="_blank" rel="noopener noreferrer">CISA, "Hardware Bill of Materials (HBOM) Framework for Supply Chain Risk Management" (November 2023)</a></li>
-  <li id="ref-omb-m2605"><a href="https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05.pdf" target="_blank" rel="noopener noreferrer">OMB M-26-05, "Strengthening and Streamlining Federal Cybersecurity Procurement Requirements," Office of Management and Budget (January 2026)</a></li>
-  <li id="ref-cdx-saas"><a href="https://cyclonedx.org/capabilities/saasbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "SaaSBOM: Software as a Service Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-cdx-aiml"><a href="https://cyclonedx.org/capabilities/mlbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "ML-BOM: Machine Learning Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-nist-ai-rmf"><a href="https://airc.nist.gov/Docs/1" target="_blank" rel="noopener noreferrer">NIST, "Artificial Intelligence Risk Management Framework (AI RMF 1.0)," National Institute of Standards and Technology (2023)</a></li>
-  <li id="ref-eu-ai-act"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/1689 — Artificial Intelligence Act, Official Journal of the European Union (July 2024)</a></li>
-  <li id="ref-nist-pqc"><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener noreferrer">NIST, "Post-Quantum Cryptography Standardization," National Institute of Standards and Technology</a></li>
-  <li id="ref-cdx-cbom"><a href="https://cyclonedx.org/capabilities/cbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "CBOM: Cryptography Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-nsa-pqc"><a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/" target="_blank" rel="noopener noreferrer">NSA, "Post-Quantum Cybersecurity Resources," National Security Agency</a></li>
-  <li id="ref-cdx-1-7"><a href="https://cyclonedx.org/specification/overview/" target="_blank" rel="noopener noreferrer">CycloneDX 1.7 Specification Overview, OWASP CycloneDX (October 2025)</a></li>
-  <li id="ref-spdx-3"><a href="https://spdx.github.io/spdx-spec/v3.0/" target="_blank" rel="noopener noreferrer">SPDX 3.0 Specification, The Linux Foundation (2024)</a></li>
-  <li id="ref-dep-track"><a href="https://dependencytrack.org/" target="_blank" rel="noopener noreferrer">OWASP Dependency-Track, "Intelligent Component Analysis Platform," OWASP Foundation</a></li>
-  <li id="ref-tea"><a href="https://ecma-international.org/technical-committees/tc54/" target="_blank" rel="noopener noreferrer">ECMA TC54, "Transparency Exchange API (TEA)," ECMA International</a></li>
-</ol>
+The numbered sources cited on this page are collected on the [References & Resources](/references#works-cited) page, alongside citations from the rest of the site.
