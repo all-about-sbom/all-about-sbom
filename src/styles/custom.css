@@ -1,183 +1,207 @@
-/* src/styles/custom.css */
+/* src/styles/custom.css
+   Site styling: "Dependency" direction. An SBOM is a tree — depth and
+   nesting are the organizing idea. The connector rail (a vertical
+   guide with a node stub at each child) lives in the header dropdowns
+   and in nested content lists, so the navigation itself reads as a
+   dependency graph.
+   Colors and fonts are declared once below as custom properties and
+   referenced throughout, purely to keep the many repeated values
+   (header/footer/dropdown/card colors, etc.) consistent and easy to
+   retune in one place — this is a single fixed theme, not a
+   swappable system.
+   Fonts (Space Grotesk, Public Sans, IBM Plex Mono) are self-hosted
+   via @fontsource, imported in Header.astro so Vite bundles the font
+   files locally instead of fetching them from Google at render time. */
 
 :root {
-  /* ==========================================================
-     GLOBAL THEME COLORS
-     ========================================================== */
-    /* Color 1: Deep Navy (Your primary brand color) */
-    --color-1-main: #003366;
-    --color-1-dark: #000c3f;
-    --color-1-light: #3f72a5;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-nav: 'Space Grotesk', system-ui, sans-serif;
+  --sl-font: 'Public Sans', system-ui, sans-serif;
+  --sl-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 
-    /* Color 2: Bright Blue */
-    --color-2-main: #1E88E5;
-    --color-2-dark: #0061be;
-    --color-2-light: #5dc7ff;
+  /* Five node categories. */
+  --node-1: #2bb8bd;
+  --node-2: #4c8dff;
+  --node-3: #9b7bff;
+  --node-4: #e8a33d;
+  --node-5: #3fc57a;
 
-    /* Color 3: Vivid Purple */
-    --color-3-main: #8E24AA;
-    --color-3-dark: #670083;
-    --color-3-light: #cd63e9;
+  --sl-color-accent: #2bb8bd;
+  --sl-color-accent-low: #0d2f33;
+  --sl-color-accent-high: #9fe8ea;
+  --sl-color-text-accent: var(--sl-color-accent-high);
 
-    /* Color 4: Vibrant Orange */
-    --color-4-main: #F87B1B;
-    --color-4-dark: #d15400;
-    --color-4-light: #ffba5a;
+  --sl-color-white: #f2f5f8;
+  --sl-color-gray-1: #dde3ea;
+  --sl-color-gray-2: #b6bfcb;
+  --sl-color-gray-3: #7e8898;
+  --sl-color-gray-4: #4d5766;
+  --sl-color-gray-5: #2a3341;
+  --sl-color-gray-6: #1a212c;
+  --sl-color-black: #0f1620;
 
-    /* Color 5: Teal / Green */
-    --color-5-main: #008080;
-    --color-5-dark: #005959;
-    --color-5-light: #3fbfbf;
+  --dep-rail: #2a3341;
+  --sl-content-width: 50rem;
 
-    /* ==========================================================
-        STARLIGHT THEME MAPPINGS
-        ========================================================== */
-    
-    /* Wire Starlight's theme to your Color 1 (Navy) */
-    --sl-color-accent: var(--color-1-main); 
-    --sl-color-accent-high: var(--color-1-dark);
-    --sl-color-accent-low: var(--color-1-light);
+  --header-bg: #131b26;
+  --header-fg: #f2f5f8;
+  --header-border: 1px solid #2a3341;
+  --header-control-border: rgba(255, 255, 255, 0.2);
+  --logo-bg: #2bb8bd;
+  --logo-fg: #0f1620;
+  --logo-radius: 8px;
+  --nav-weight: 600;
+  --nav-size: 0.9375rem;
+  --nav-tracking: -0.01em;
+  --nav-transform: none;
+  --dropdown-bg: #182230;
+  --dropdown-hover-bg: #202c3d;
+  --dropdown-radius: 0 0 8px 8px;
+  --dropdown-border: 1px solid #2a3341;
+  --dropdown-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --control-radius: 6px;
+  --focus-ring: #2bb8bd;
 
-    --sl-color-bg-nav: var(--color-1-main);
-    --sl-color-text-accent: var(--color-1-main);
+  --card-radius: 8px;
+  --card-fg: #ffffff;
+  --card-border-width: 1px;
+  --card-top-rule: 3px;
+  --card-hover-transform: translateY(-4px);
+  --card-1-bg: #16202c; --card-1-rule: var(--node-1);
+  --card-2-bg: #16202c; --card-2-rule: var(--node-2);
+  --card-3-bg: #16202c; --card-3-rule: var(--node-3);
+  --card-4-bg: #16202c; --card-4-rule: var(--node-4);
+  --card-5-bg: #16202c; --card-5-rule: var(--node-5);
 
-    --sl-content-width: 60rem;
+  --btn-primary-bg: #2bb8bd;
+  --btn-primary-hover: #1f9599;
+  --btn-primary-fg: #0f1620;
+  --btn-minimal-fg: #9fe8ea;
+  --btn-minimal-hover: #ffffff;
+
+  --footer-bg: #0b111a;
+  --footer-fg: #f2f5f8;
+  --footer-top-rule: 2px solid #2bb8bd;
+  --footer-divider: rgba(255, 255, 255, 0.1);
+  --footer-heading-size: 1.0625rem;
+  --footer-heading-transform: none;
+  --footer-heading-tracking: -0.01em;
 }
 
+:root[data-theme='light'] {
+  --sl-color-accent: #10797e;
+  --sl-color-accent-low: #cdeef0;
+  --sl-color-accent-high: #06393c;
+  --sl-color-text-accent: var(--sl-color-accent);
+
+  --sl-color-white: #0f1620;
+  --sl-color-gray-1: #1a212c;
+  --sl-color-gray-2: #2a3341;
+  --sl-color-gray-3: #626d7d;
+  --sl-color-gray-4: #8d97a5;
+  --sl-color-gray-5: #d5dbe3;
+  --sl-color-gray-6: #eaeef3;
+  --sl-color-gray-7: #f5f7fa;
+  --sl-color-black: #ffffff;
+
+  --dep-rail: #d5dbe3;
+  --card-1-bg: #12406b; --card-2-bg: #1c4a99;
+  --card-3-bg: #4a3a99; --card-4-bg: #9a6415;
+  --card-5-bg: #1a7a4a;
+  --btn-primary-bg: #10797e;
+  --btn-primary-hover: #0b5c60;
+  --btn-primary-fg: #ffffff;
+  --btn-minimal-fg: #10797e;
+  --btn-minimal-hover: #06393c;
+  --focus-ring: #10797e;
+}
 
 /* ==========================================================
-   BUTTON STYLING 
+   FOCUS RINGS
+   ========================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--control-radius);
+}
+
+/* ==========================================================
+   BUTTON STYLING
    ========================================================== */
 
 .sl-link-button.primary {
-  background-color: var(--color-1-main) !important;
-  border-color: var(--color-1-main) !important;
-  color: #ffffff !important;
+  background-color: var(--btn-primary-bg) !important;
+  border-color: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-fg) !important;
+  border-radius: var(--control-radius) !important;
 }
 
 .sl-link-button.primary:hover {
-  background-color: var(--color-1-dark) !important;
-  border-color: var(--color-1-dark) !important;
+  background-color: var(--btn-primary-hover) !important;
+  border-color: var(--btn-primary-hover) !important;
 }
 
-/* Color the text and icon of the 'minimal' LinkButton variant */
 .sl-link-button.minimal {
-  color: var(--color-1-main) !important;
-  font-weight: 600; /* Makes it slightly bolder so it feels like a button */
+  color: var(--btn-minimal-fg) !important;
+  font-weight: 600;
 }
 
-/* Add a hover effect so it feels interactive */
 .sl-link-button.minimal:hover {
-  color: var(--color-1-light) !important;
+  color: var(--btn-minimal-hover) !important;
   text-decoration: underline;
 }
 
-/* Wrapper only for color variants */
+/* ==========================================================
+   CUSTOM COLORED LINK CARDS
+   (use-case cards on the homepage, stakeholder roles, and the
+   "What To Do" / "References" grids in the consumer/producer
+   sections all share this wrapper + Starlight LinkCard pairing)
+   ========================================================== */
+
+.use-case-card .sl-link-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 100%;
+}
+
 .use-case-card {
+  border-radius: var(--card-radius);
+  border-style: solid;
+  border-width: var(--card-border-width);
+  border-top-width: var(--card-top-rule);
+  transition: transform 0.2s, box-shadow 0.2s;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Style the actual Starlight card */
-.use-case-card .sl-link-card {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.75rem;
-  padding: 1.4rem 1.5rem;
-  border-radius: 1rem;
-  border: 1px solid var(--sl-color-gray-5);
-  background: var(--sl-color-black);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease;
-}
-
-.use-case-card .sl-link-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
-}
-
-/* Better text hierarchy */
-.use-case-card .title {
-  color: var(--sl-color-white);
-  font-weight: 700;
-  font-size: 1.2rem;
-  line-height: 1.25;
-}
-
-.use-case-card .description {
-  color: var(--sl-color-gray-3);
-  line-height: 1.6;
-  font-size: 0.98rem;
-  max-width: 34ch;
-}
-
-/* Arrow/icon styling */
-.use-case-card .sl-link-card svg,
-.use-case-card .sl-link-card .icon {
-  opacity: 0.9;
-  transition: transform 180ms ease, color 180ms ease;
-}
-
-.use-case-card .sl-link-card:hover svg,
-.use-case-card .sl-link-card:hover .icon {
-  transform: translateX(3px);
-}
-
-/* Accent variants: tinted background + colored border */
-.use-case-card.c2 .sl-link-card {
-  background: color-mix(in srgb, var(--color-2-main) 16%, var(--sl-color-black));
-  border-color: color-mix(in srgb, var(--color-2-main) 45%, transparent);
-}
-
-.use-case-card.c3 .sl-link-card {
-  background: color-mix(in srgb, var(--color-3-main) 16%, var(--sl-color-black));
-  border-color: color-mix(in srgb, var(--color-3-main) 45%, transparent);
-}
-
-.use-case-card.c4 .sl-link-card {
-  background: color-mix(in srgb, var(--color-4-main) 16%, var(--sl-color-black));
-  border-color: color-mix(in srgb, var(--color-4-main) 45%, transparent);
-}
-
-.use-case-card.c5 .sl-link-card {
-  background: color-mix(in srgb, var(--color-5-main) 16%, var(--sl-color-black));
-  border-color: color-mix(in srgb, var(--color-5-main) 45%, transparent);
-}
-
-/* Stronger title/accent color per card */
-.use-case-card.c2 .title,
-.use-case-card.c2 .icon {
-  color: var(--color-2-light) !important;
-}
-
-.use-case-card.c3 .title,
-.use-case-card.c3 .icon {
-  color: var(--color-3-light) !important;
-}
-
-.use-case-card.c4 .title,
-.use-case-card.c4 .icon {
-  color: var(--color-4-light) !important;
-}
-
-.use-case-card.c5 .title,
-.use-case-card.c5 .icon {
-  color: var(--color-5-light) !important;
-}
-
-.use-case-card .sl-link-card {
-  justify-items: center;
-  text-align: center;
+.use-case-card:hover {
+  transform: var(--card-hover-transform);
 }
 
 .use-case-card .title,
-.use-case-card .description {
-  text-align: center;
+.use-case-card .description,
+.use-case-card .sl-link-card svg {
+  color: var(--card-fg) !important;
 }
+
+.use-case-card.c1 { background-color: var(--card-1-bg); border-color: var(--card-1-rule); }
+.use-case-card.c2 { background-color: var(--card-2-bg); border-color: var(--card-2-rule); }
+.use-case-card.c3 { background-color: var(--card-3-bg); border-color: var(--card-3-rule); }
+.use-case-card.c4 { background-color: var(--card-4-bg); border-color: var(--card-4-rule); }
+.use-case-card.c5 { background-color: var(--card-5-bg); border-color: var(--card-5-rule); }
+
+/* Hover shadow is tinted per card — a darker tone of that card's own
+   accent color — instead of one generic rgba(0,0,0,...) shared across
+   all five. A plain black shadow reads as a flat grey on the light
+   background and is essentially invisible against the dark one. */
+.use-case-card.c1:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-1-rule) 55%, black); }
+.use-case-card.c2:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-2-rule) 55%, black); }
+.use-case-card.c3:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-3-rule) 55%, black); }
+.use-case-card.c4:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-4-rule) 55%, black); }
+.use-case-card.c5:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-5-rule) 55%, black); }
 
 .stakeholder-grid .card-grid {
   display: grid;
@@ -202,17 +226,19 @@
   width: 100%;
   height: 100%;
   padding: 0 1rem;
-  background-color: var(--color-1-main); 
-  overflow: visible !important; 
+  background-color: var(--header-bg);
+  color: var(--header-fg);
+  border-bottom: var(--header-border);
+  overflow: visible !important;
 }
 
 .logo-area .logo {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: white;
-  color: var(--color-1-main);
-  border-radius: 50%;
+  background: var(--logo-bg);
+  color: var(--logo-fg);
+  border-radius: var(--logo-radius);
   width: 50px;
   height: 50px;
   text-align: center;
@@ -220,30 +246,43 @@
   font-weight: bold;
   text-decoration: none;
   line-height: 1.1;
+  font-family: var(--font-nav);
 }
 
 .custom-nav {
-  display: flex;
+  /* display is intentionally left to the sl-hidden/lg:sl-flex utility
+     classes on the element (Starlight's @layer starlight.utils) —
+     setting display here unlayered would always win the cascade over
+     that layer regardless of media query, permanently defeating the
+     responsive hide/show. */
   gap: 2rem;
   align-items: center;
   height: 100%;
+  font-family: var(--font-nav);
 }
 
-.custom-nav a {
-  color: white;
+.custom-nav > a,
+.dropdown > .dropbtn {
+  color: var(--header-fg);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: var(--nav-weight);
+  font-size: var(--nav-size);
+  letter-spacing: var(--nav-tracking);
+  text-transform: var(--nav-transform);
   transition: opacity 0.2s;
 }
 
-.custom-nav a:hover {
+.custom-nav > a:hover,
+.dropdown > .dropbtn:hover {
   opacity: 0.8;
 }
 
 /* ==========================================================
-   DROPDOWN MENU CSS
+   DROPDOWN MENU
+   Signature: the connector rail. Dropdown children hang off a
+   rail, so each menu reads as a subtree.
    ========================================================== */
+
 .dropdown {
   position: relative;
   display: flex;
@@ -254,58 +293,251 @@
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%; 
+  top: 100%;
   left: -10px;
-  background-color: var(--color-1-main);
+  background-color: var(--dropdown-bg);
   min-width: 240px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4); 
-  z-index: 9999 !important; 
-  border-radius: 0 0 8px 8px;
-  padding: 0.5rem 0;
+  box-shadow: var(--dropdown-shadow);
+  z-index: 9999 !important;
+  border: var(--dropdown-border);
+  border-top: none;
+  border-radius: var(--dropdown-radius);
+  padding: 0.5rem 0 0.5rem 0.75rem;
 }
 
 .dropdown-content a {
-  color: white !important;
-  padding: 12px 16px;
+  position: relative;
+  color: var(--header-fg) !important;
+  padding: 12px 16px 12px 1.5rem;
+  margin-left: 0.5rem;
   text-decoration: none;
   display: block;
   font-size: 0.95rem;
   font-weight: 400;
+  font-family: var(--sl-font);
+  border-left: 1px solid var(--dep-rail);
+}
+
+.dropdown-content a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--dep-rail);
 }
 
 .dropdown-content a:hover {
-  background-color: var(--color-1-dark);
-  opacity: 1 !important; 
+  background-color: var(--dropdown-hover-bg);
+  opacity: 1 !important;
+}
+
+.dropdown-content a:hover::before {
+  background: var(--sl-color-accent);
+  height: 2px;
+}
+
+.dropdown-content a:last-child {
+  border-left-color: transparent;
+  box-shadow: inset 1px 0 0 var(--dep-rail);
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
+/* Nested prose lists inherit the same rail so the idea holds inside
+   the content, not only in the chrome. */
+.sl-markdown-content ul ul,
+.sl-markdown-content ol ol,
+.sl-markdown-content ol ul {
+  border-inline-start: 1px solid var(--dep-rail);
+  padding-inline-start: 1.25rem;
+  margin-inline-start: 0.25rem;
+}
+
 /* ==========================================================
    HEADER RIGHT ACTIONS (Search & Theme)
    ========================================================== */
+
 .right-actions {
   gap: 1rem;
   align-items: center;
 }
 
-/* Make the search icon/button stand out on the dark background */
 .custom-header .sl-search-btn {
-  color: white !important;
-  border-color: rgba(255,255,255,0.3) !important;
+  color: var(--header-fg) !important;
+  border-color: var(--header-control-border) !important;
+  border-radius: var(--control-radius) !important;
+}
+
+/* Starlight's theme-select label colors itself with --sl-color-gray-2
+   / --sl-color-white, which flip to a dark value in light mode
+   (correct for controls sitting on the page background). The header
+   here stays a fixed dark color in both modes, so without this
+   override the light-mode toggle text renders dark-on-dark. */
+.custom-header .right-actions label {
+  color: var(--header-fg) !important;
+}
+
+.custom-header .right-actions label:hover {
+  color: var(--header-fg) !important;
+  opacity: 0.8;
+}
+
+/* ==========================================================
+   MOBILE NAVIGATION
+   Below the lg breakpoint (72rem/1152px) the desktop nav
+   (.custom-nav) is hidden and this drawer is the only way to
+   navigate the site. The cutover is lg, not Starlight's usual md,
+   because six top-level items — two with long labels — don't fit
+   comfortably in the header until well past md (verified: wraps to
+   two rows around 900px, fits cleanly by 950px+; lg gives headroom
+   above that without shrinking nav text/spacing to cram more in).
+   State lives on <body data-mobile-nav-expanded>, toggled by the
+   <mobile-nav-button> custom element in Header.astro — CSS below
+   just reacts to that attribute.
+   ========================================================== */
+
+.mobile-nav-toggle {
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--header-fg);
+  border-radius: var(--control-radius);
+  cursor: pointer;
+}
+
+.mobile-nav-toggle .close-menu {
+  display: none;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-toggle .open-menu {
+  display: none;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-toggle .close-menu {
+  display: block;
+}
+
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  overflow-y: auto;
+  background: var(--dropdown-bg);
+  color: var(--header-fg);
+  box-shadow: var(--dropdown-shadow);
+  padding: calc(var(--sl-nav-height, 4rem) + 1rem) 1.25rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  z-index: 9999;
+  font-family: var(--sl-font);
+}
+
+body[data-mobile-nav-expanded] .mobile-nav-drawer {
+  transform: translateX(0);
+}
+
+body[data-mobile-nav-expanded] {
+  overflow: hidden;
+}
+
+.mobile-nav-drawer > a,
+.mobile-nav-drawer details summary {
+  display: block;
+  padding: 0.875rem 0.25rem;
+  color: var(--header-fg);
+  text-decoration: none;
+  font-weight: var(--nav-weight);
+  font-size: 1rem;
+  font-family: var(--font-nav);
+  border-bottom: 1px solid var(--dep-rail);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-nav-drawer details summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-nav-drawer details summary::after {
+  content: '+';
+  float: right;
+  color: var(--dep-rail);
+}
+
+.mobile-nav-drawer details[open] summary::after {
+  content: '\2212';
+}
+
+.mobile-nav-drawer details[open] summary {
+  border-bottom-color: transparent;
+}
+
+.mobile-nav-drawer details a {
+  display: block;
+  padding: 0.75rem 0.25rem 0.75rem 1.25rem;
+  margin-left: 0.5rem;
+  color: var(--header-fg);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-family: var(--sl-font);
+  border-left: 1px solid var(--dep-rail);
+  opacity: 0.85;
+}
+
+.mobile-nav-drawer details a:last-child {
+  border-bottom: 1px solid var(--dep-rail);
+}
+
+.mobile-nav-drawer > a:hover,
+.mobile-nav-drawer details summary:hover,
+.mobile-nav-drawer details a:hover {
+  opacity: 1;
+  background: var(--dropdown-hover-bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav-drawer,
+  .mobile-nav-backdrop {
+    transition: none !important;
+  }
 }
 
 /* ==========================================================
    FOOTER
    ========================================================== */
+
 .custom-footer {
-  background-color: var(--color-1-dark); 
-  color: white;
+  background-color: var(--footer-bg);
+  color: var(--footer-fg);
   padding: 3rem 2rem 1rem;
   margin-top: 4rem;
-  border-top: 4px solid var(--color-2-main); 
-  
+  border-top: var(--footer-top-rule);
+
   /* Forces the footer background to break out of the container and span full width */
   width: 100vw;
   position: relative;
@@ -313,6 +545,16 @@
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+
+  /* Starlight's "On this Page" TOC column is position:fixed with
+     height:100vh (it scrolls independently, pinned to the viewport,
+     by design — see TwoColumnContent.astro). It normally never
+     collides with anything because the default footer stays within
+     the content column width. Ours breaks out to full 100vw, which
+     puts it underneath that fixed column once you scroll far enough
+     for the footer to enter view. This z-index guarantees the
+     (opaque) footer always paints over it instead of the reverse. */
+  z-index: 10;
 }
 
 .custom-footer .footer-content {
@@ -332,15 +574,16 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background: white;
-  color: var(--color-1-main);
-  border-radius: 50%;
+  background: var(--logo-bg);
+  color: var(--logo-fg);
+  border-radius: var(--logo-radius);
   width: 60px;
   height: 60px;
   text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  font-family: var(--font-nav);
 }
 
 .custom-footer .footer-brand p {
@@ -356,15 +599,18 @@
 }
 
 .custom-footer .link-group h4 {
-  color: white;
-  font-size: 1.1rem;
+  color: var(--footer-fg);
+  font-size: var(--footer-heading-size);
+  text-transform: var(--footer-heading-transform);
+  letter-spacing: var(--footer-heading-tracking);
   margin-bottom: 1rem;
   font-weight: 600;
+  font-family: var(--font-nav);
 }
 
 .custom-footer .link-group a {
   display: block;
-  color: white;
+  color: var(--footer-fg);
   text-decoration: none;
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
@@ -381,7 +627,7 @@
   max-width: 1200px;
   margin: 3rem auto 0;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--footer-divider);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -394,9 +640,8 @@
   width: 100%;
 }
 
-
 /* ==========================================================
-   Homepage Design
+   HOMEPAGE LAYOUT
    ========================================================== */
 
 .homepage-lead,
@@ -453,156 +698,189 @@
   text-align: center;
 }
 
-.stakeholder-grid .card-grid {
+/* ==========================================================
+   ORGANIZATION TYPE CARDS
+   (reads only Starlight's own tokens, so no dedicated tokens
+   are needed here)
+   ========================================================== */
+
+.sbom-org-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
 }
 
-@media (min-width: 72rem) {
-  .stakeholder-grid .card-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-
-.info-card .card {
-  height: 100%;
-  background: var(--sl-color-black);
-  border: 2px solid var(--sl-color-gray-5);
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  padding: 1.4rem 1.5rem;
-  text-align: center;
-  transition: none;
-  cursor: default;
-}
-
-.info-card .card .title {
+.sbom-org-card {
   display: flex;
-  justify-content: center !important;
-  align-items: center;
-  text-align: center;
+  flex-direction: column;
+  padding: 0 0 1.1rem;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--sl-color-hairline);
+  background: var(--sl-color-bg-sidebar);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+
+.sbom-org-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  border-color: var(--sl-color-accent);
+  text-decoration: none;
+}
+
+.sbom-org-accent {
+  height: 4px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.sbom-org-body {
+  padding: 0 1.1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 0.35rem;
+}
+
+.sbom-org-title {
   font-weight: 700;
-  font-size: 1.1rem;
-  line-height: 1.25;
+  font-size: 0.9rem;
+  color: var(--sl-color-white);
+  margin: 0;
+  line-height: 1.3;
+  font-family: var(--font-nav);
 }
 
-.info-card .card .body {
-  text-align: center;
+.sbom-org-desc {
+  font-size: 0.78rem;
   color: var(--sl-color-gray-3);
-  line-height: 1.6;
-  font-size: 0.98rem;
-  margin-top: 0.75rem;
+  margin: 0;
+  line-height: 1.5;
+  flex-grow: 1;
 }
 
-.info-card .card .icon {
-  border: none;
-  background: transparent;
-  padding: 0;
-  margin-inline: auto;
+.sbom-org-cta {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sl-color-accent);
+  margin-top: 0.65rem;
+  letter-spacing: 0.01em;
 }
 
-.info-card.c2 .card {
-  border-color: color-mix(in srgb, var(--color-2-main) 65%, white);
+/* ==========================================================
+   TYPOGRAPHY
+   ========================================================== */
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.content-panel h1,
+.hero h1,
+.site-title,
+.use-case-card .title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
-.info-card.c2 .card .title,
-.info-card.c2 .card .icon {
-  color: var(--color-2-main);
+.hero h1,
+.content-panel h1 {
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
-.info-card.c3 .card {
-  border-color: color-mix(in srgb, var(--color-3-main) 65%, white);
+.hero h1 {
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  line-height: 1.02;
 }
 
-.info-card.c3 .card .title,
-.info-card.c3 .card .icon {
-  color: var(--color-3-main);
+.sl-markdown-content h2 {
+  margin-top: 3rem;
+  font-size: 1.5rem;
 }
 
-.info-card.c4 .card {
-  border-color: color-mix(in srgb, var(--color-4-main) 65%, white);
+/* ==========================================================
+   CONTENT COMPONENTS
+   ========================================================== */
+
+.sl-markdown-content code {
+  font-size: 0.875em;
+  border-radius: 4px;
+  background: var(--sl-color-gray-6);
+  padding: 0.15em 0.4em;
 }
 
-.info-card.c4 .card .title,
-.info-card.c4 .card .icon {
-  color: var(--color-4-main);
+.sl-markdown-content pre,
+.sl-markdown-content .expressive-code .frame,
+.starlight-aside {
+  border-radius: 6px;
 }
 
-.info-card.c5 .card {
-  border-color: color-mix(in srgb, var(--color-5-main) 65%, white);
+.starlight-aside {
+  border-inline-start-width: 2px;
 }
 
-.info-card.c5 .card .title,
-.info-card.c5 .card .icon {
-  color: var(--color-5-main);
+.starlight-aside__title {
+  font-family: var(--font-display);
+  font-weight: 600;
 }
 
+.sl-markdown-content table {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9375rem;
+}
 
+.sl-markdown-content th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-align: left;
+}
 
-  .sbom-org-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0 2rem;
+.sl-steps > li::before {
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+}
+
+/* Starlight renders the Tabs wrapper as the <starlight-tabs> custom
+   element on this version (no .starlight-tabs class), so the element
+   selector is what actually matches; the class selector is kept
+   alongside it in case that ever changes. */
+starlight-tabs [role='tab'],
+.starlight-tabs [role='tab'] {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+starlight-tabs [role='tab'][aria-selected='true'],
+.starlight-tabs [role='tab'][aria-selected='true'] {
+  /* Starlight draws the tab underline as a box-shadow, not a real
+     border, so the indicator thickness is set there. */
+  box-shadow: 0 2px 0 var(--sl-tab-color-border);
+}
+
+/* ==========================================================
+   REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .use-case-card,
+  .sbom-org-card,
+  .custom-nav > a,
+  .dropdown > .dropbtn,
+  .dropdown-content a,
+  .custom-footer .link-group a {
+    transition: none !important;
   }
 
-  .sbom-org-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 1.1rem;
-    border-radius: 0.5rem;
-    border: 1px solid var(--sl-color-hairline);
-    background: var(--sl-color-bg-sidebar);
-    text-decoration: none;
-    color: inherit;
-    overflow: hidden;
-    transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-  }
-
+  .use-case-card:hover,
   .sbom-org-card:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transform: translateY(-3px);
-    border-color: var(--sl-color-accent);
-    text-decoration: none;
+    transform: none !important;
   }
-
-  .sbom-org-accent {
-    height: 4px;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .sbom-org-body {
-    padding: 0 1.1rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: 0.35rem;
-  }
-
-  .sbom-org-title {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--sl-color-white);
-    margin: 0;
-    line-height: 1.3;
-  }
-
-  .sbom-org-desc {
-    font-size: 0.78rem;
-    color: var(--sl-color-gray-3);
-    margin: 0;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-
-  .sbom-org-cta {
-    display: inline-block;
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--sl-color-accent);
-    margin-top: 0.65rem;
-    letter-spacing: 0.01em;
-  }
+}
