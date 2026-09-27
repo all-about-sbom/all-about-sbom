@@ -15,6 +15,10 @@ pnpm-debug.log*
 # IDE temp
 .vscode/
 
+# JetBrains / PyCharm
+.idea/
+*.iml
+
 # environment variables
 .env
 .env.production
