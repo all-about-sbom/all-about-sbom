@@ -13,7 +13,7 @@ Selecting the right SBOM tooling is not a single decision. Most organizations re
 
 ## How SBOM Tools Are Categorized
 
-SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in CISA guidance<sup><a href="/references#ref-cisa-tooling-taxonomy">[TODO]</a></sup> defines three primary categories. Many tools operate across more than one of them.
+SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in [CISA guidance](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf) defines three primary categories. Many tools operate across more than one of them.
 
 <details>
 <summary><strong>Produce — SBOM generation and authoring</strong></summary>
@@ -27,13 +27,13 @@ Produce tools generate SBOMs by analyzing software artifacts. The methods they u
 - Sign and hash generated SBOMs to support downstream integrity verification
 
 **What varies between tools in this category:**
-- Which SBOM types they support — source, build, binary-analyzed, runtime, and design SBOMs each require different instrumentation<sup><a href="/references#ref-cisa-sbom-types">[1]</a></sup>
+- Which SBOM types they support — source, build, binary-analyzed, runtime, and design SBOMs each require different instrumentation
 - Which ecosystems, languages, and package managers they recognize
 - Whether they integrate into CI/CD pipelines, developer IDEs, or operate as standalone utilities
 - The accuracy of component identification, particularly for transitive dependencies and components not delivered via package managers
 
 <Aside type="note">
-A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The 2025 CISA Minimum Elements draft<sup><a href="/references#ref-cisa-minimum-elements-2025">[TODO]</a></sup> notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.
+A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The [2026 CISA Minimum Elements](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.
 </Aside>
 
 </details>
@@ -103,7 +103,7 @@ Several organizations maintain catalogs of SBOM-related tools. Two long-standing
 
 Both catalogs are valuable but limited by their format specificity. Tools that support both SPDX and CycloneDX may appear in both catalogs, but tools are not represented in a catalog for a format they do not support — which can obscure otherwise capable tools from view during evaluation.
 
-The **[OpenSSF SBOM Everywhere project](https://sbom-catalog.openssf.org)** maintains a format-agnostic SBOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the OpenSSF catalog effort to bring richer attributes to tool listings.<sup><a href="/references#ref-cisa-tooling-taxonomy">[TODO]</a></sup>
+The **[OpenSSF SBOM Everywhere project](https://sbom-catalog.openssf.org)** maintains a format-agnostic SBOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the [OpenSSF catalog](https://sbom-catalog.openssf.org/catalog/) effort to bring richer attributes to tool listings.
 
 ---
 
@@ -117,12 +117,22 @@ The person or team responsible for identifying and selecting SBOM tools — refe
   <Card title="SBOM Tool Attributes — White Paper" icon="document">
     Explains the complete SBOM tool attribute framework organized by function (Produce, Consume, Transform) and General categories. Describes each attribute, its purpose, and how to apply the framework during tool evaluation or procurement. Suitable for use in RFI and RFP processes.
 
-    [Download White Paper](/resources/sbom-tool-attributes-whitepaper.docx)
+    <a
+      href="/resources/sbom-tool-attributes-whitepaper.docx"
+      download="sbom-tool-attributes-whitepaper.docx"
+    >
+      Download White Paper (.docx)
+    </a>
   </Card>
   <Card title="SBOM Tool Attributes — Spreadsheet" icon="list-format">
     The companion evaluation tool. Each row is a discrete tool attribute with its category, subcategory, unique ID, description, expected response format, and references to relevant publications. Use to survey and compare tools against your organization's requirements.
 
-    [Download Spreadsheet](/resources/sbom-tool-attributes-spreadsheet.xlsx)
+      <a
+        href="/resources/sbom-tool-attributes-spreadsheet.xlsx"
+        download="sbom-tool-attributes-spreadsheet.xlsx"
+      >
+      Download Spreadsheet (.xlsx)
+      </a>
   </Card>
 </CardGrid>
 
