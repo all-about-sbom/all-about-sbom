@@ -3,7 +3,8 @@ title: "SBOM Tooling"
 description: "An orientation to the SBOM tooling landscape — how tools are categorized by function, what to consider when evaluating them, and where to find current tool catalogs."
 ---
 
-import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+import BrandCard from '../../../components/BrandCard.astro';
 
 The market for SBOM-related tooling has expanded significantly since the first wave of SBOM adoption following the 2021 NTIA Minimum Elements publication. SBOM tooling has matured far beyond the capabilities and functionalities of tools available in 2021, and organizations implementing SBOM programs now face a dense and growing landscape of options across generation, consumption, management, and analysis functions.
 
@@ -13,7 +14,7 @@ Selecting the right SBOM tooling is not a single decision. Most organizations re
 
 ## How SBOM Tools Are Categorized
 
-SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in [CISA guidance](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf) defines three primary categories. Many tools operate across more than one of them.
+SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in [CISA guidance](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf) defines three primary categories.<sup>[<a href="/references#ref-cisa-tooling-taxonomy">27</a>]</sup> Many tools operate across more than one of them.
 
 <details>
 <summary><strong>Produce — SBOM generation and authoring</strong></summary>
@@ -33,7 +34,7 @@ Produce tools generate SBOMs by analyzing software artifacts. The methods they u
 - The accuracy of component identification, particularly for transitive dependencies and components not delivered via package managers
 
 <Aside type="note">
-A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The [2026 CISA Minimum Elements](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.
+A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The [2026 CISA Minimum Elements](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.<sup>[<a href="/references#ref-cisa-minimum-elements-2026">28</a>]</sup>
 </Aside>
 
 </details>
@@ -114,7 +115,7 @@ An organization's requirements for SBOM tooling are shaped by both internal and 
 The person or team responsible for identifying and selecting SBOM tools — referred to as the **Chooser** in NTIA and CISA guidance — benefits from a structured set of tool attributes to use during evaluation or in formal RFI/RFP processes. The CISA SBOM Tooling and Implementation Working Group produced two resources specifically for this purpose:
 
 <CardGrid>
-  <Card title="SBOM Tool Attributes — White Paper" icon="document">
+  <BrandCard title="SBOM Tool Attributes — White Paper" icon="document">
     Explains the complete SBOM tool attribute framework organized by function (Produce, Consume, Transform) and General categories. Describes each attribute, its purpose, and how to apply the framework during tool evaluation or procurement. Suitable for use in RFI and RFP processes.
 
     <a
@@ -123,8 +124,8 @@ The person or team responsible for identifying and selecting SBOM tools — refe
     >
       Download White Paper (.docx)
     </a>
-  </Card>
-  <Card title="SBOM Tool Attributes — Spreadsheet" icon="list-format">
+  </BrandCard>
+  <BrandCard title="SBOM Tool Attributes — Spreadsheet" icon="spreadsheet">
     The companion evaluation tool. Each row is a discrete tool attribute with its category, subcategory, unique ID, description, expected response format, and references to relevant publications. Use to survey and compare tools against your organization's requirements.
 
       <a
@@ -133,7 +134,7 @@ The person or team responsible for identifying and selecting SBOM tools — refe
       >
       Download Spreadsheet (.xlsx)
       </a>
-  </Card>
+  </BrandCard>
 </CardGrid>
 
 <Aside type="tip" title="How to use these resources">

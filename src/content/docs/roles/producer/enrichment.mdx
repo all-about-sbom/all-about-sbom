@@ -3,7 +3,8 @@ title: "SBOM Enrichment: Adding Value to Your SBOM"
 description: "Learn how to enrich your Software Bills of Materials (SBOMs) with release metadata to make them more useful for downstream consumers."
 ---
 
-import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+import { CardGrid, Aside } from '@astrojs/starlight/components';
+import BrandCard from '../../../../components/BrandCard.astro';
 
 A generated SBOM provides a baseline inventory of software components. However, producers can significantly increase the value of their SBOMs by enriching them with additional release metadata before sharing them with consumers and distributors.
 
@@ -19,18 +20,18 @@ Enrichment improves the quality and completeness of the SBOM, making it more act
 ## What Data to Add
 
 <CardGrid>
-    <Card title="Release Metadata" icon="rocket">
+    <BrandCard title="Release Metadata" icon="rocket">
         Add product version, build identifiers, release timestamps, and supplier contact information. This helps consumers map the SBOM to a specific software release and verify its authenticity.
-    </Card>
-    <Card title="License Data" icon="approve-check">
+    </BrandCard>
+    <BrandCard title="License Data" icon="license">
         Go beyond auto-detected licenses. Confirm and correct license expressions for each component, resolve ambiguities, and document any license exceptions or dual-licensing arrangements. Accurate license data is essential for procurement and legal compliance.
-    </Card>
-    <Card title="Component Relationships" icon="code-branch">
+    </BrandCard>
+    <BrandCard title="Component Relationships" icon="graph">
         Ensure the dependency graph is complete. Document direct vs. transitive dependencies, build-time vs. runtime dependencies, and the composition completeness of each section. This allows consumers to understand the full supply chain depth.
-    </Card>
-    <Card title="Provenance & Pedigree" icon="magnifier">
+    </BrandCard>
+    <BrandCard title="Provenance & Pedigree" icon="trace">
         Add information about where each component's source code originates (download URLs, source repositories), how it was built, and any modifications applied (patches, backports). This supports supply chain integrity verification.
-    </Card>
+    </BrandCard>
 </CardGrid>
 
 ## SBOM Updates
@@ -63,5 +64,5 @@ Instead, vulnerability communication is handled through **separate, companion do
 
 The SBOM and VEX/CSAF documents are **linked** through shared identifiers (such as CPE or PURL), but they serve different purposes and follow different update cycles. The SBOM changes only when the software changes. VEX documents change whenever the vulnerability landscape changes.
 
-Learn more about how consumers use SBOMs together with VEX data in the [Consumer](/lifecycle/consumer) section.
+Learn more about how consumers use SBOMs together with VEX data in the [Consumer](/roles/consumer) section.
 </Aside>
