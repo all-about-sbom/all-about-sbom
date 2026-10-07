@@ -4,15 +4,15 @@ description: "How SBOMs help track the licenses of every component and meet lega
 ---
 
 Software licensing is a complex legal topic.
-This is not only because there is vast amount of different licenses with different requirements but also because software must not be considered to have a single license.
-Each component that is added to a software may carry its own license implications.
-Whereas the MIT license likely carries no additional implications a software component that uses strict copyleft license such as the GNU Affero General Public License (AGPL) has strong implications how the software can be deployed and how any derivatives have to be managed.
-Thus it is vital to know all licenses of all components and their transitive components a software uses.
-SBOMs can do this as they list all components which can then subsequently be checked for license compatibility.
+This is not only because there is a vast number of licenses with different requirements, but also because software cannot be assumed to have a single license.
+Each component added to a piece of software may carry its own license implications.
+Whereas the MIT license likely carries no additional implications, a component that uses a strict copyleft license such as the GNU Affero General Public License (AGPL) has strong implications for how the software can be deployed and how any derivatives have to be managed.
+Thus, it is vital to know the licenses of all components, including transitive components, that a piece of software uses.
+SBOMs make this possible because they list all components, which can then be checked for license compatibility.
 
 
 ##### Example
 
-The currently developed software requires a functionality for which a compatible open source project with a seemingly compatible open source license has been identified.
-However, an analysis of the corresponding SBOM reveals a transitive dependency that does not allow for usage in a closed-source commercial product and would force the publication of any depending source code.
-As this is incompatible with the business model, and could have severe financial implications, usage of this component is abstained and the required functionality self implemented.
+The software under development requires functionality for which a suitable open source project with a seemingly compatible open source license has been identified.
+However, an analysis of the corresponding SBOM reveals a transitive dependency that does not allow use in a closed-source commercial product and would force the publication of any dependent source code.
+As this is incompatible with the business model and could have severe financial implications, the team decides not to use this component and implements the required functionality itself.
