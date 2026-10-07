@@ -1,0 +1,254 @@
+/* THEME: TWILIGHT INDIGO
+   The chosen All About SBOM theme: Twilight Indigo palette with the Lens
+   character. Fonts come from custom.css (Space Grotesk display and nav,
+   Public Sans body, Space Mono code). Brand art lives in public/brand/.
+   Starlight convention: dark values on :root, light values on
+   :root[data-theme='light']. Load after custom.css. */
+
+:root {
+  --sl-content-width: 48rem;
+
+  --sl-color-accent: #7F77D9;
+  --sl-color-accent-low: #211A65;
+  --sl-color-accent-high: #A9A2FF;
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-white: #ECEAFB;
+  --sl-color-gray-1: #D6D4E6;
+  --sl-color-gray-2: #B5B3C6;
+  --sl-color-gray-3: #89879B;
+  --sl-color-gray-4: #646177;
+  --sl-color-gray-5: #3C3951;
+  --sl-color-gray-6: #26233B;
+  --sl-color-black: #100D26;
+
+  --brand-primary: #A9A2FF;
+  --brand-highlight: #FF9A3D;
+  --brand-hint-1: #2F9BEA;
+  --brand-hint-2: #20B07C;
+  --brand-ink: #17123F;
+
+  --header-bg: #1A1638;
+  --header-fg: #ECEAFB;
+  --header-border: 1px solid #3A3655;
+  --header-control-border: rgba(255, 255, 255, 0.28);
+  --dropdown-bg: #1A1638;
+  --dropdown-hover-bg: #2A227E;
+  --dropdown-border: 1px solid #3A3655;
+  --focus-ring: #A9A2FF;
+
+  --card-1-bg: #251F5D; --card-1-rule: #655CE5; --card-1-head: #AEA9F1;  /* Indigo */
+  --card-2-bg: #34245F; --card-2-rule: #A16EEB; --card-2-head: #CDB2F5;  /* Violet */
+  --card-3-bg: #1F335F; --card-3-rule: #4EAAED; --card-3-head: #A1D2F6;  /* Sky */
+  --card-4-bg: #492D30; --card-4-rule: #F29137; --card-4-head: #F8C595;  /* Tangerine */
+  --card-5-bg: #1B3847; --card-5-rule: #41BC90; --card-5-head: #9BDBC4;  /* Mint */
+  --card-fg: #ECEAFB;
+  --card-hover-shadow: 0 10px 24px rgba(0,0,0,.45);
+
+  --btn-primary-bg: #A9A2FF;
+  --btn-primary-hover: #BEB9FF;
+  --btn-primary-fg: #17123F;
+  --btn-minimal-fg: #A9A2FF;
+  --btn-minimal-hover: #FFFFFF;
+
+  --footer-bg: #0D0A1E;
+  --footer-fg: #ECEAFB;
+  --footer-top-rule: 3px solid #FF9A3D;
+
+  /* Code hero (src/components/Hero.astro) */
+  --hero-code-faint: #5B586E;
+  --hero-code-key: #A9A2FF;
+  --hero-code-str: #FF9A3D;
+  --hero-code-num: #63B4EF;
+  --hero-code-punct: #9F9DB0;
+  --hero-beam: #A9A2FF22;
+
+  /* Structure tokens consumed by custom.css */
+  --logo-bg: transparent;
+  --logo-fg: var(--header-fg);
+  --logo-radius: 10px;
+  --nav-weight: 500;
+  --nav-size: 0.8125rem;
+  --nav-tracking: 0.02em;
+  --nav-transform: uppercase;
+  --dropdown-radius: 0 0 10px 10px;
+  --dropdown-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --control-radius: 8px;
+  --card-radius: 14px;
+  --card-border-width: 1.5px;
+  --card-top-rule: 1.5px;
+  --card-hover-transform: translateY(-3px);
+  --footer-divider: rgba(255, 255, 255, 0.12);
+  --footer-heading-size: 0.8125rem;
+  --footer-heading-transform: uppercase;
+  --footer-heading-tracking: 0.08em;
+
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent: #3A2EC4;
+  --sl-color-accent-low: #E3E2F7;
+  --sl-color-accent-high: #261E7F;
+  --sl-color-text-accent: var(--sl-color-accent);
+  --sl-color-white: #1A1640;
+  --sl-color-gray-1: #302C53;
+  --sl-color-gray-2: #514E6F;
+  --sl-color-gray-3: #7D7B95;
+  --sl-color-gray-4: #A3A1B5;
+  --sl-color-gray-5: #CBC9D7;
+  --sl-color-gray-6: #E1E0EA;
+  --sl-color-gray-7: #ECEBF4;
+  --sl-color-black: #F7F6FD;
+
+  --brand-primary: #3A2EC4;
+  --brand-highlight: #FF9A3D;
+  --brand-hint-1: #2F9BEA;
+  --brand-hint-2: #20B07C;
+  --brand-ink: #17123F;
+
+  --header-bg: #3A2EC4;
+  --header-fg: #FFFFFF;
+  --header-border: 1px solid #2E259D;
+  --header-control-border: rgba(255, 255, 255, 0.28);
+  --dropdown-bg: #3026A1;
+  --dropdown-hover-bg: #271F85;
+  --dropdown-border: 1px solid #292089;
+  --focus-ring: #3A2EC4;
+
+  --card-1-bg: #E9E8FB; --card-1-rule: #4A3FE0; --card-1-head: #262174;  /* Indigo */
+  --card-2-bg: #F2EAFC; --card-2-rule: #9054E8; --card-2-head: #4B2C79;  /* Violet */
+  --card-3-bg: #E6F3FC; --card-3-rule: #2F9BEA; --card-3-head: #18517A;  /* Sky */
+  --card-4-bg: #FDF0E3; --card-4-rule: #F07E14; --card-4-head: #7D420A;  /* Tangerine */
+  --card-5-bg: #E4F6EF; --card-5-rule: #20B07C; --card-5-head: #115C40;  /* Mint */
+  --card-fg: #1A1640;
+  --card-hover-shadow: 0 10px 24px #B0ABE780;
+
+  --btn-primary-bg: #3A2EC4;
+  --btn-primary-hover: #2E259D;
+  --btn-primary-fg: #FFFFFF;
+  --btn-minimal-fg: #3A2EC4;
+  --btn-minimal-hover: #2C2293;
+
+  --footer-bg: #17123F;
+  --footer-fg: #ECEAFB;
+  --footer-top-rule: 3px solid #FF9A3D;
+
+  /* Code hero (src/components/Hero.astro) */
+  --hero-code-faint: #BEBCCC;
+  --hero-code-key: #3A2EC4;
+  --hero-code-str: #216CA4;
+  --hero-code-num: #A66428;
+  --hero-code-punct: #7D7B95;
+  --hero-beam: #3A2EC414;
+}
+
+/* ---------- Typography ---------- */
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.content-panel h1,
+.hero h1,
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; }
+.hero .tagline { font-size: 1.0625rem; max-width: 46ch; }
+
+.sl-markdown-content h2 {
+  border-bottom: 1px solid var(--sl-color-hairline);
+  padding-bottom: 0.4em;
+  margin-top: 2.75rem;
+  font-size: 1.375rem;
+}
+
+/* Signature: a small graph node before each h2, in the highlight color. */
+.sl-markdown-content h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.6ch;
+  border-radius: 50%;
+  vertical-align: 0.12em;
+  background: radial-gradient(circle at 35% 30%, #fff 0 18%, var(--brand-highlight) 45%, var(--brand-primary) 100%);
+}
+
+.sl-markdown-content th {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 2px solid var(--sl-color-gray-3);
+  padding: 0.5rem 0.75rem;
+}
+.sl-markdown-content td { border-bottom: 1px solid var(--sl-color-hairline); padding: 0.5rem 0.75rem; }
+.sl-markdown-content code { font-size: 0.875em; border-radius: 6px; padding: 0.1em 0.35em; }
+.sl-markdown-content pre, .sl-markdown-content .expressive-code .frame, .starlight-aside { border-radius: 10px; }
+.starlight-aside__title { font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.sl-steps > li::before { font-family: var(--font-display) !important; font-weight: 600 !important; }
+.starlight-tabs [role='tab'] { font-family: var(--font-display); font-size: 0.8125rem; }
+
+/* ---------- Brand logo in the header and footer ---------- */
+
+.logo-area .logo,
+.custom-footer .footer-brand .logo {
+  width: auto;
+  height: auto;
+  gap: 0.6rem;
+  background: none;
+  font: 600 1rem/1 var(--font-display);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--header-fg);
+}
+.logo-area .logo img { width: 40px; height: 40px; }
+.custom-footer .footer-brand .logo { color: var(--footer-fg); }
+.custom-footer .footer-brand .logo img { width: 44px; height: 44px; }
+
+/* Header controls sit on the brand color in light mode */
+.custom-header starlight-theme-select,
+.custom-header starlight-theme-select select,
+.custom-header starlight-theme-select svg { color: var(--header-fg) !important; }
+.custom-header .sl-search-btn { background: rgba(255, 255, 255, 0.1) !important; }
+.custom-header .sl-search-btn kbd { background: transparent !important; color: var(--header-fg) !important; }
+
+
+/* ---------- Cards: tinted fills, colored headings, section icons ---------- */
+
+.use-case-card.c1 .title { color: var(--card-1-head) !important; }
+.use-case-card.c2 .title { color: var(--card-2-head) !important; }
+.use-case-card.c3 .title { color: var(--card-3-head) !important; }
+.use-case-card.c4 .title { color: var(--card-4-head) !important; }
+.use-case-card.c5 .title { color: var(--card-5-head) !important; }
+.use-case-card .title { font-family: var(--font-display); font-weight: 600; }
+.use-case-card .description { color: var(--card-fg) !important; opacity: 0.85; }
+.use-case-card .sl-link-card svg { color: var(--sl-color-gray-3) !important; }
+
+.use-case-card::before {
+  content: '';
+  display: block;
+  width: 52px;
+  height: 52px;
+  margin: 1.1rem auto -0.4rem;
+  background: var(--card-icon) center / contain no-repeat;
+}
+.use-case-card:has(a[href$="/use-cases/security"]) { --card-icon: url("/brand/icons/security.svg"); }
+.use-case-card:has(a[href$="/use-cases/license"]) { --card-icon: url("/brand/icons/license.svg"); }
+.use-case-card:has(a[href$="/use-cases/technical-debt"]) { --card-icon: url("/brand/icons/techdebt.svg"); }
+.use-case-card:has(a[href$="/use-cases/supplier"]) { --card-icon: url("/brand/icons/supplier.svg"); }
+.use-case-card:has(a[href$="/producer"]) { --card-icon: url("/brand/icons/producer.svg"); }
+.use-case-card:has(a[href$="/distributor"]) { --card-icon: url("/brand/icons/distributor.svg"); }
+.use-case-card:has(a[href$="/consumer"]) { --card-icon: url("/brand/icons/consumer.svg"); }
+
+@media (prefers-reduced-motion: reduce) {
+  .use-case-card { transition: none !important; }
+}
+
+/* ---------- Hero character (set in index.mdx as hero.image.html) ---------- */
+
+.hero > .hero-html { width: min(100%, 26rem); justify-self: center; }
+.hero > .hero-html img { width: 100%; height: auto; }

@@ -42,7 +42,14 @@ export default defineConfig({
 		}),
 		starlight({
 			title: 'All About SBOMs',
-			customCss: ['./src/styles/custom.css'],
+			head: [
+				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' } },
+				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' } },
+			],
+			customCss: [
+				'./src/styles/custom.css',
+				'./src/styles/theme-twilight-indigo.css',
+			],
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 			components: {
         		Header: './src/components/Header.astro',
