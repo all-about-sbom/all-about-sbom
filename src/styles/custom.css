@@ -9,7 +9,7 @@
    (header/footer/dropdown/card colors, etc.) consistent and easy to
    retune in one place — this is a single fixed theme, not a
    swappable system.
-   Fonts (Space Grotesk, Public Sans, IBM Plex Mono) are self-hosted
+   Fonts (Space Grotesk, Public Sans, Space Mono) are self-hosted
    via @fontsource, imported in Header.astro so Vite bundles the font
    files locally instead of fetching them from Google at render time. */
 
@@ -17,7 +17,7 @@
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-nav: 'Space Grotesk', system-ui, sans-serif;
   --sl-font: 'Public Sans', system-ui, sans-serif;
-  --sl-font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --sl-font-mono: 'Space Mono', ui-monospace, monospace;
 
   /* Five node categories. */
   --node-1: #2bb8bd;
