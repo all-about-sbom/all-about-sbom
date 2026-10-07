@@ -246,6 +246,32 @@ starlight-tabs [role='tab'] { font-family: var(--font-display); font-size: 0.812
 .custom-header .sl-search-btn { background: rgba(255, 255, 255, 0.1) !important; }
 .custom-header .sl-search-btn kbd { background: transparent !important; color: var(--header-fg) !important; }
 
+/* ---------- Content links: glow in the highlight orange on hover ---------- */
+/* Dark mode uses the highlight itself. On the light background #FF9A3D text is
+   about 2:1 contrast, so light mode deepens the text to #A65000 (5:1) and keeps
+   the highlight for the underline and glow. Link cards and buttons keep their
+   own hover treatment. */
+:root { --link-hover: #FF9A3D; --link-glow: color-mix(in srgb, #FF9A3D 60%, transparent); }
+:root[data-theme='light'] { --link-hover: #A65000; --link-glow: color-mix(in srgb, #FF9A3D 45%, transparent); }
+
+.sl-markdown-content a:not(.sl-link-button, .sl-link-card a, .sl-anchor-link),
+.card .body a {
+  transition: color 0.2s, text-decoration-color 0.2s, text-shadow 0.2s;
+}
+.sl-markdown-content a:not(.sl-link-button, .sl-link-card a, .sl-anchor-link):is(:hover, :focus-visible),
+.card .body a:is(:hover, :focus-visible) {
+  color: var(--link-hover);
+  text-decoration-color: #FF9A3D;
+  text-shadow: 0 0 10px var(--link-glow);
+}
+/* "On this page" links get the color without the glow */
+.right-sidebar a:hover,
+mobile-starlight-toc a:hover { color: var(--link-hover); }
+@media (prefers-reduced-motion: reduce) {
+  .sl-markdown-content a,
+  .card .body a { transition: none; }
+}
+
 /* ---------- Navigation hover: the highlight orange, as in the hero reveal ---------- */
 
 .custom-nav > a,
