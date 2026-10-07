@@ -21,16 +21,16 @@ Not every organization needs to act as a distributor. This role is relevant when
 ## Key Responsibilities
 
 <CardGrid>
-    <Card title="Integrity Verification">
+    <Card title="Integrity Verification" icon="approve-check-circle">
         Before redistributing an SBOM, verify its integrity. Check cryptographic signatures or hashes provided by the producer to ensure the SBOM has not been tampered with during transit.
     </Card>
-    <Card title="Aggregation">
+    <Card title="Aggregation" icon="list-format">
         When distributing a product that bundles multiple upstream components, aggregate the individual SBOMs into a coherent view. Ensure that dependency relationships between bundled components are accurately represented.
     </Card>
-    <Card title="Format Transformation">
+    <Card title="Format Transformation" icon="random">
         Downstream consumers may require SBOMs in a different format than what was provided by the producer. Distributors may need to convert between SPDX and CycloneDX, or between different serialization formats (JSON, XML) while preserving data fidelity.
     </Card>
-    <Card title="Access Control">
+    <Card title="Access Control" icon="padlock">
         Some SBOM data may be sensitive. Distributors must implement appropriate access controls, ensuring that SBOMs are shared only with authorized consumers while meeting contractual and regulatory obligations.
     </Card>
 </CardGrid>
