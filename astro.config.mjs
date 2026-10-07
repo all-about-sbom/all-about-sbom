@@ -53,6 +53,7 @@ export default defineConfig({
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
 			components: {
         		Header: './src/components/Header.astro',
+				Hero: './src/components/Hero.astro',
 				Footer: './src/components/Footer.astro',
       		},
 			sidebar: [
