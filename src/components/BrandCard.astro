@@ -1,0 +1,44 @@
+---
+// src/components/BrandCard.astro
+// Starlight's <Card> with a brand icon from public/brand/icons/ in place of a
+// Starlight line icon, so information cards match the home page and role
+// cards. Colors and spacing come from the .card rules in the theme stylesheet.
+// Usage: <BrandCard title="Aggregation" icon="merge">…</BrandCard>
+interface Props {
+  title: string;
+  /** File name in public/brand/icons/, without .svg */
+  icon?: string;
+}
+
+const { title, icon } = Astro.props;
+---
+
+<article class="card sl-flex">
+  <p class="title sl-flex">
+    {icon && <img class="brand-icon" src={`/brand/icons/${icon}.svg`} alt="" width="44" height="44" />}
+    <span set:html={title} />
+  </p>
+  <div class="body"><slot /></div>
+</article>
+
+<style>
+  .card {
+    flex-direction: column;
+    gap: clamp(0.5rem, calc(0.125rem + 1vw), 1rem);
+  }
+  .card .title {
+    margin: 0;
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    align-items: center;
+  }
+  .card .body {
+    margin: 0;
+    font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
+  }
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+</style>
