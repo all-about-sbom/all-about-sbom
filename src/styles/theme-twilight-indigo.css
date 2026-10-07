@@ -5,6 +5,11 @@
    Starlight convention: dark values on :root, light values on
    :root[data-theme='light']. Load after custom.css. */
 
+/* Starlight widens content to 67.5rem on pages without a sidebar, meant for
+   splash pages. The sidebar is off site-wide (src/routeData.ts), so keep
+   docs pages (the ones with an "On this page" column) at reading width. */
+html[data-has-toc]:not([data-has-sidebar]) { --sl-content-width: 48rem; }
+
 :root {
   --sl-content-width: 48rem;
 
@@ -20,6 +25,15 @@
   --sl-color-gray-5: #3C3951;
   --sl-color-gray-6: #26233B;
   --sl-color-black: #100D26;
+
+  /* Starlight's named hues, used by asides (note = blue, tip = purple,
+     caution = orange, danger = red), badges, and card icons. Mapped to the
+     card palette so built-in components match the theme. */
+  --sl-color-purple-low: #34245F; --sl-color-purple: #A16EEB; --sl-color-purple-high: #CDB2F5;
+  --sl-color-blue-low: #1F335F;   --sl-color-blue: #4EAAED;   --sl-color-blue-high: #A1D2F6;
+  --sl-color-green-low: #1B3847;  --sl-color-green: #41BC90;  --sl-color-green-high: #9BDBC4;
+  --sl-color-orange-low: #492D30; --sl-color-orange: #F29137; --sl-color-orange-high: #F8C595;
+  --sl-color-red-low: #4A1F35;    --sl-color-red: #F06A8A;    --sl-color-red-high: #F9B6C6;
 
   --brand-primary: #A9A2FF;
   --brand-highlight: #FF9A3D;
@@ -95,6 +109,12 @@
   --sl-color-gray-7: #ECEBF4;
   --sl-color-black: #F7F6FD;
 
+  --sl-color-purple-low: #F2EAFC; --sl-color-purple: #9054E8; --sl-color-purple-high: #4B2C79;
+  --sl-color-blue-low: #E6F3FC;   --sl-color-blue: #2F9BEA;   --sl-color-blue-high: #18517A;
+  --sl-color-green-low: #E4F6EF;  --sl-color-green: #20B07C;  --sl-color-green-high: #115C40;
+  --sl-color-orange-low: #FDF0E3; --sl-color-orange: #F07E14; --sl-color-orange-high: #7D420A;
+  --sl-color-red-low: #FCE9EE;    --sl-color-red: #D93B62;    --sl-color-red-high: #7A1C34;
+
   --brand-primary: #3A2EC4;
   --brand-highlight: #FF9A3D;
   --brand-hint-1: #2F9BEA;
@@ -160,6 +180,10 @@
   font-size: 1.375rem;
 }
 
+/* h2 is reduced above, so step h3 and h4 down with it to keep the hierarchy */
+.sl-markdown-content h3 { font-size: 1.125rem; margin-top: 2rem; color: var(--sl-color-text-accent); }
+.sl-markdown-content h4 { font-size: 1rem; }
+
 /* Signature: a small graph node before each h2, in the highlight color. */
 .sl-markdown-content h2::before {
   content: '';
@@ -186,7 +210,7 @@
 .sl-markdown-content pre, .sl-markdown-content .expressive-code .frame, .starlight-aside { border-radius: 10px; }
 .starlight-aside__title { font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .sl-steps > li::before { font-family: var(--font-display) !important; font-weight: 600 !important; }
-.starlight-tabs [role='tab'] { font-family: var(--font-display); font-size: 0.8125rem; }
+starlight-tabs [role='tab'] { font-family: var(--font-display); font-size: 0.8125rem; }
 
 /* ---------- Brand logo in the header and footer ---------- */
 
@@ -207,6 +231,10 @@
    aria-label. */
 @media (min-width: 72rem) and (max-width: 90rem) {
   .logo-area .logo span { display: none; }
+  /* Tighter spacing keeps all six nav items on one line down to 72rem */
+  .custom-nav { gap: 1.25rem; }
+  .custom-nav > a,
+  .dropdown > .dropbtn { white-space: nowrap; font-size: 0.875rem; }
 }
 .custom-footer .footer-brand .logo { color: var(--footer-fg); }
 .custom-footer .footer-brand .logo img { width: 44px; height: 44px; }
@@ -244,17 +272,65 @@
 /* Home page sections */
 .use-case-card:has(a[href$="/sbom_basics"]) { --card-icon: url("/brand/icons/basics.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/use-cases"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
-.use-case-card:has(a[href$="/roles"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles"]) { --card-icon: url("/brand/icons/tooling.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/regulations"]) { --card-icon: url("/brand/icons/references.svg"); --card-icon-display: block; }
 /* Use cases */
 .use-case-card:has(a[href$="/use-cases/security"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/use-cases/license"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/use-cases/technical-debt"]) { --card-icon: url("/brand/icons/techdebt.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/use-cases/supplier"]) { --card-icon: url("/brand/icons/supplier.svg"); --card-icon-display: block; }
+/* Roles */
+.use-case-card:has(a[href$="/roles/producer"]) { --card-icon: url("/brand/icons/producer.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles/distributor"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles/consumer"]) { --card-icon: url("/brand/icons/consumer.svg"); --card-icon-display: block; }
 /* Producer steps */
 .use-case-card:has(a[href$="/producer/generation"]) { --card-icon: url("/brand/icons/producer.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/producer/enrichment"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
 .use-case-card:has(a[href$="/producer/sharing"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+
+/* Starlight's <Card> (information cards on References, Tooling, and the role
+   pages) gets the same tinted fill, colored rule, and colored heading as the
+   link cards. Colors run in the same order as the home page cards. */
+.card-grid > .card { --ci-bg: var(--card-2-bg); --ci-rule: var(--card-2-rule); --ci-head: var(--card-2-head); }
+.card-grid > .card:nth-child(5n + 2) { --ci-bg: var(--card-3-bg); --ci-rule: var(--card-3-rule); --ci-head: var(--card-3-head); }
+.card-grid > .card:nth-child(5n + 3) { --ci-bg: var(--card-5-bg); --ci-rule: var(--card-5-rule); --ci-head: var(--card-5-head); }
+.card-grid > .card:nth-child(5n + 4) { --ci-bg: var(--card-4-bg); --ci-rule: var(--card-4-rule); --ci-head: var(--card-4-head); }
+.card-grid > .card:nth-child(5n + 5) { --ci-bg: var(--card-1-bg); --ci-rule: var(--card-1-rule); --ci-head: var(--card-1-head); }
+.card {
+  background-color: var(--ci-bg, var(--card-1-bg));
+  border: var(--card-border-width) solid var(--ci-rule, var(--card-1-rule));
+  border-radius: var(--card-radius);
+  padding: clamp(1rem, calc(0.25rem + 2vw), 1.75rem);
+}
+.card .title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  color: var(--ci-head, var(--card-1-head));
+  gap: 0.75rem;
+}
+.card .icon {
+  color: var(--ci-head, var(--card-1-head));
+  border-color: var(--ci-rule, var(--card-1-rule));
+  background-color: color-mix(in srgb, var(--ci-rule, var(--card-1-rule)) 18%, transparent);
+  border-radius: 8px;
+  font-size: 2rem;
+  padding: 0.35rem;
+}
+.card .body { color: var(--card-fg); }
+.card .body a { color: var(--ci-head, var(--card-1-head)); font-weight: 600; }
+
+/* Expandable sections (<details>) in page content, as on the Tooling page */
+.sl-markdown-content details {
+  border: 1px solid var(--sl-color-gray-5);
+  border-inline-start: 3px solid var(--sl-color-accent);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: color-mix(in srgb, var(--sl-color-accent-low) 35%, transparent);
+}
+.sl-markdown-content details + details { margin-top: 0.75rem; }
+.sl-markdown-content details summary { color: var(--sl-color-white); cursor: pointer; }
+.sl-markdown-content details summary::marker { color: var(--brand-highlight); }
+.sl-markdown-content details[open] summary { margin-bottom: 0.75rem; }
 
 @media (prefers-reduced-motion: reduce) {
   .use-case-card { transition: none !important; }
