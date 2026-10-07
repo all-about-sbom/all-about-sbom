@@ -58,6 +58,7 @@ export default defineConfig({
       		},
 			sidebar: [
 			],
+			routeMiddleware: './src/routeData.ts',
 		}),
 	],
 });

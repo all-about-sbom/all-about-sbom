@@ -538,13 +538,16 @@ body[data-mobile-nav-expanded] {
   margin-top: 4rem;
   border-top: var(--footer-top-rule);
 
-  /* Forces the footer background to break out of the container and span full width */
-  width: 100vw;
+  /* Breaks the footer out of the content column to span the window.
+     The content column is not centered in the window on docs pages
+     (the "On this page" column sits to its right), so centering tricks
+     like left:50% / margin-left:-50vw land off by half that column, and
+     100vw also includes the scrollbar. Footer.astro measures the
+     column's left edge and the scrollbar-free window width into these
+     two properties; without that script the footer stays in the column. */
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: var(--footer-width, auto);
+  margin-left: calc(-1 * var(--footer-shift, 0px));
 
   /* Starlight's "On this Page" TOC column is position:fixed with
      height:100vh (it scrolls independently, pinned to the viewport,
@@ -555,6 +558,22 @@ body[data-mobile-nav-expanded] {
      for the footer to enter view. This z-index guarantees the
      (opaque) footer always paints over it instead of the reverse. */
   z-index: 10;
+}
+
+/* Starlight isolates .main-pane, so the footer's z-index only applies
+   inside it. Lifting the pane itself lets the full-width footer paint over
+   the fixed "On this page" column; the two only overlap at the footer. */
+.main-pane {
+  position: relative;
+  z-index: 1;
+}
+
+/* Full-width pieces (the footer and the home page hero backdrop) are sized
+   from the window, which includes the scrollbar on Windows. Clipping here
+   stops that from adding a sideways scroll; clip, unlike hidden, keeps
+   sticky positioning working. */
+.main-frame {
+  overflow-x: clip;
 }
 
 .custom-footer .footer-content {

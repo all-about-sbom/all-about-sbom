@@ -47,3 +47,19 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+{/* Stretches the footer to the window edges (see .custom-footer in custom.css).
+    Runs inline so the footer never paints at the narrow column width first. */}
+<script is:inline>
+  (() => {
+    const footer = document.querySelector('.custom-footer');
+    if (!footer) return;
+    const fit = () => {
+      footer.style.setProperty('--footer-shift', `${footer.parentElement.getBoundingClientRect().left}px`);
+      footer.style.setProperty('--footer-width', `${document.documentElement.clientWidth}px`);
+    };
+    fit();
+    addEventListener('resize', fit);
+    new ResizeObserver(fit).observe(document.documentElement);
+  })();
+</script>
