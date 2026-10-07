@@ -66,10 +66,6 @@
   --logo-bg: transparent;
   --logo-fg: var(--header-fg);
   --logo-radius: 10px;
-  --nav-weight: 500;
-  --nav-size: 0.8125rem;
-  --nav-tracking: 0.02em;
-  --nav-transform: uppercase;
   --dropdown-radius: 0 0 10px 10px;
   --dropdown-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
   --control-radius: 8px;
@@ -206,6 +202,12 @@
   color: var(--header-fg);
 }
 .logo-area .logo img { width: 40px; height: 40px; }
+/* Between the desktop nav breakpoint and 90rem the six nav items need the
+   room, so the header shows the Lens icon alone. The link keeps its
+   aria-label. */
+@media (min-width: 72rem) and (max-width: 90rem) {
+  .logo-area .logo span { display: none; }
+}
 .custom-footer .footer-brand .logo { color: var(--footer-fg); }
 .custom-footer .footer-brand .logo img { width: 44px; height: 44px; }
 
@@ -228,21 +230,31 @@
 .use-case-card .description { color: var(--card-fg) !important; opacity: 0.85; }
 .use-case-card .sl-link-card svg { color: var(--sl-color-gray-3) !important; }
 
+/* Each mapping below sets the icon and turns the slot on, so a card with
+   no mapping shows no icon and no empty space. */
 .use-case-card::before {
   content: '';
-  display: block;
+  display: var(--card-icon-display, none);
   width: 52px;
   height: 52px;
-  margin: 1.1rem auto -0.4rem;
+  /* Left-aligned with the card title (Starlight's link card padding) */
+  margin: 1rem 1rem -0.25rem;
   background: var(--card-icon) center / contain no-repeat;
 }
-.use-case-card:has(a[href$="/use-cases/security"]) { --card-icon: url("/brand/icons/security.svg"); }
-.use-case-card:has(a[href$="/use-cases/license"]) { --card-icon: url("/brand/icons/license.svg"); }
-.use-case-card:has(a[href$="/use-cases/technical-debt"]) { --card-icon: url("/brand/icons/techdebt.svg"); }
-.use-case-card:has(a[href$="/use-cases/supplier"]) { --card-icon: url("/brand/icons/supplier.svg"); }
-.use-case-card:has(a[href$="/producer"]) { --card-icon: url("/brand/icons/producer.svg"); }
-.use-case-card:has(a[href$="/distributor"]) { --card-icon: url("/brand/icons/distributor.svg"); }
-.use-case-card:has(a[href$="/consumer"]) { --card-icon: url("/brand/icons/consumer.svg"); }
+/* Home page sections */
+.use-case-card:has(a[href$="/sbom_basics"]) { --card-icon: url("/brand/icons/basics.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/regulations"]) { --card-icon: url("/brand/icons/references.svg"); --card-icon-display: block; }
+/* Use cases */
+.use-case-card:has(a[href$="/use-cases/security"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/license"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/technical-debt"]) { --card-icon: url("/brand/icons/techdebt.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/supplier"]) { --card-icon: url("/brand/icons/supplier.svg"); --card-icon-display: block; }
+/* Producer steps */
+.use-case-card:has(a[href$="/producer/generation"]) { --card-icon: url("/brand/icons/producer.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/producer/enrichment"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/producer/sharing"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .use-case-card { transition: none !important; }
