@@ -1,0 +1,258 @@
+---
+// src/components/Hero.astro
+// Wraps Starlight's default hero (title, tagline, image, actions stay as set in
+// index.mdx frontmatter) and adds a backdrop of SBOM text, alternating CycloneDX
+// JSON and SPDX tag-value columns that scroll slowly upward. The text is faint and
+// out of focus except inside a soft circle that drifts across it, where it is sharp
+// and in color. There is no visible lens; the reveal is the effect.
+// The circle follows the mouse while it is over the hero. Reduced motion stops the
+// scroll and holds the circle still. The backdrop is hidden from screen readers.
+import Default from '@astrojs/starlight/components/Hero.astro';
+
+type Tok = [cls: string, text: string];
+const t = (cls: string, text: string): Tok => [cls, text];
+const P = (s: string) => t('p', s);
+const K = (s: string) => t('k', `"${s}"`);
+const S = (s: string) => t('s', `"${s}"`);
+const N = (s: string) => t('n', s);
+const I = (n: number) => t('i', '  '.repeat(n));
+const K2 = (s: string) => t('k', s);
+const V = (s: string) => t('s', s);
+
+const comp = (name: string, version: string, purl: string, license: string): Tok[][] => [
+  [I(2), P('{')],
+  [I(3), K('type'), P(': '), S('library'), P(',')],
+  [I(3), K('name'), P(': '), S(name), P(',')],
+  [I(3), K('version'), P(': '), S(version), P(',')],
+  [I(3), K('purl'), P(': '), S(purl), P(',')],
+  [I(3), K('licenses'), P(': [{ '), K('license'), P(': { '), K('id'), P(': '), S(license), P(' } }]')],
+  [I(2), P('},')],
+];
+
+const cdx: Tok[][] = [
+  [P('{')],
+  [I(1), K('bomFormat'), P(': '), S('CycloneDX'), P(',')],
+  [I(1), K('specVersion'), P(': '), S('1.6'), P(',')],
+  [I(1), K('serialNumber'), P(': '), S('urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79'), P(',')],
+  [I(1), K('version'), P(': '), N('1'), P(',')],
+  [I(1), K('metadata'), P(': { '), K('timestamp'), P(': '), S('2026-10-07T09:14:00Z'), P(', '), K('component'), P(': { '), K('name'), P(': '), S('all-about-sbom'), P(' } },')],
+  [I(1), K('components'), P(': [')],
+  ...comp('log4j-core', '2.20.0', 'pkg:maven/org.apache.logging.log4j/log4j-core@2.20.0', 'Apache-2.0'),
+  ...comp('lodash', '4.17.21', 'pkg:npm/lodash@4.17.21', 'MIT'),
+  ...comp('express', '4.18.2', 'pkg:npm/express@4.18.2', 'MIT'),
+  ...comp('netty-handler', '4.1.100', 'pkg:maven/io.netty/netty-handler@4.1.100.Final', 'Apache-2.0'),
+  ...comp('requests', '2.31.0', 'pkg:pypi/requests@2.31.0', 'Apache-2.0'),
+  ...comp('openssl', '3.0.13', 'pkg:generic/openssl@3.0.13', 'Apache-2.0'),
+  ...comp('jackson-databind', '2.15.3', 'pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.15.3', 'Apache-2.0'),
+  ...comp('axios', '1.6.7', 'pkg:npm/axios@1.6.7', 'MIT'),
+  ...comp('urllib3', '2.2.1', 'pkg:pypi/urllib3@2.2.1', 'MIT'),
+  ...comp('spring-core', '6.1.4', 'pkg:maven/org.springframework/spring-core@6.1.4', 'Apache-2.0'),
+  ...comp('zlib', '1.3.1', 'pkg:generic/zlib@1.3.1', 'Zlib'),
+  ...comp('react', '18.2.0', 'pkg:npm/react@18.2.0', 'MIT'),
+  ...comp('golang.org/x/net', '0.21.0', 'pkg:golang/golang.org/x/net@v0.21.0', 'BSD-3-Clause'),
+  ...comp('serde', '1.0.197', 'pkg:cargo/serde@1.0.197', 'MIT OR Apache-2.0'),
+  ...comp('guava', '33.0.0', 'pkg:maven/com.google.guava/guava@33.0.0-jre', 'Apache-2.0'),
+  [I(1), P('],')],
+  [I(1), K('dependencies'), P(': [')],
+  [I(2), P('{ '), K('ref'), P(': '), S('pkg:npm/express@4.18.2'), P(', '), K('dependsOn'), P(': ['), S('pkg:npm/lodash@4.17.21'), P('] },')],
+  [I(2), P('{ '), K('ref'), P(': '), S('all-about-sbom'), P(', '), K('dependsOn'), P(': ['), S('pkg:npm/express@4.18.2'), P(', '), S('pkg:pypi/requests@2.31.0'), P('] }')],
+  [I(1), P(']')],
+  [P('}')],
+];
+
+const pkg = (name: string, version: string, purl: string, license: string, sum: string): Tok[][] => [
+  [],
+  [K2('PackageName'), P(': '), V(name)],
+  [K2('SPDXID'), P(': '), V('SPDXRef-Package-' + name.replace(/[^A-Za-z0-9]/g, '-'))],
+  [K2('PackageVersion'), P(': '), N(version)],
+  [K2('PackageDownloadLocation'), P(': '), V('NOASSERTION')],
+  [K2('FilesAnalyzed'), P(': '), V('false')],
+  [K2('PackageChecksum'), P(': '), V('SHA256: ' + sum)],
+  [K2('PackageLicenseConcluded'), P(': '), V(license)],
+  [K2('ExternalRef'), P(': '), V('PACKAGE-MANAGER purl ' + purl)],
+];
+
+const spdx: Tok[][] = [
+  [K2('SPDXVersion'), P(': '), V('SPDX-2.3')],
+  [K2('DataLicense'), P(': '), V('CC0-1.0')],
+  [K2('SPDXID'), P(': '), V('SPDXRef-DOCUMENT')],
+  [K2('DocumentName'), P(': '), V('all-about-sbom')],
+  [K2('DocumentNamespace'), P(': '), V('https://example.org/spdx/all-about-sbom-4b1c')],
+  [K2('Creator'), P(': '), V('Tool: syft-1.4.1')],
+  [K2('Created'), P(': '), V('2026-10-07T09:14:00Z')],
+  ...pkg('flask', '3.0.2', 'pkg:pypi/flask@3.0.2', 'BSD-3-Clause', '4e1c0a7f9b2d61e8'),
+  ...pkg('commons-io', '2.15.1', 'pkg:maven/commons-io/commons-io@2.15.1', 'Apache-2.0', 'a07b5d3e8c91f246'),
+  ...pkg('chalk', '5.3.0', 'pkg:npm/chalk@5.3.0', 'MIT', '9d33e10b7a4c5f82'),
+  ...pkg('tokio', '1.36.0', 'pkg:cargo/tokio@1.36.0', 'MIT', 'c2f8a61d0e7b4935'),
+  ...pkg('numpy', '1.26.4', 'pkg:pypi/numpy@1.26.4', 'BSD-3-Clause', '57ab90e3d1c8f604'),
+  ...pkg('slf4j-api', '2.0.12', 'pkg:maven/org.slf4j/slf4j-api@2.0.12', 'MIT', 'e4097bc25a1d38f6'),
+  ...pkg('libxml2', '2.12.5', 'pkg:generic/libxml2@2.12.5', 'MIT', '1fb6d84a0c39e72d'),
+  ...pkg('webpack', '5.90.3', 'pkg:npm/webpack@5.90.3', 'MIT', '8a2e57f1c06d9b43'),
+  [],
+  [K2('Relationship'), P(': '), V('SPDXRef-DOCUMENT DESCRIBES SPDXRef-Package-flask')],
+  [K2('Relationship'), P(': '), V('SPDXRef-Package-flask DEPENDS_ON SPDXRef-Package-numpy')],
+  [K2('Relationship'), P(': '), V('SPDXRef-Package-webpack DEPENDS_ON SPDXRef-Package-chalk')],
+  [],
+];
+
+const esc = (s: string) => s.split('&').join('&amp;').split(String.fromCharCode(60)).join('&lt;').split(String.fromCharCode(62)).join('&gt;');
+const wrap = (cls: string, inner: string) => '<span class="' + cls + '">' + inner + '</span>';
+const render = (doc: Tok[][]) =>
+  doc.map((line) => wrap('line', line.length ? line.map(([cls, text]) => wrap(cls, esc(text))).join('') : ' ')).join('');
+const cdxHtml = render([...cdx, []]);
+const spdxHtml = render(spdx);
+
+// Six columns alternate between the two formats. Each track holds its pair twice so
+// the upward scroll loops without a jump. Base and lit layers share the same markup.
+const columns = Array.from({ length: 6 }, (_, i) => {
+  const pair = i % 2 === 0 ? cdxHtml + spdxHtml : spdxHtml + cdxHtml;
+  return '<div class="col"><div class="track">' + pair + pair + '</div></div>';
+}).join('');
+---
+
+<div class="code-hero">
+  <div class="code-hero__backdrop" aria-hidden="true">
+    <div class="code-hero__code code-hero__code--base" set:html={columns} />
+    <div class="code-hero__glow"></div>
+    <div class="code-hero__code code-hero__code--lit" set:html={columns} />
+    <div class="code-hero__scrim"></div>
+  </div>
+  <Default />
+</div>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hero = document.querySelector('.code-hero');
+  if (hero && !reduce) {
+    hero.addEventListener('pointermove', (ev) => {
+      if (ev.pointerType !== 'mouse') return;
+      const back = hero.querySelector('.code-hero__backdrop');
+      if (!back) return;
+      const r = back.getBoundingClientRect();
+      hero.classList.add('tracking');
+      hero.style.setProperty('--mx', `${(((ev.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+      hero.style.setProperty('--my', `${(((ev.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+    });
+    hero.addEventListener('pointerleave', () => hero.classList.remove('tracking'));
+  }
+</script>
+
+<style>
+  @property --mx { syntax: '<percentage>'; inherits: true; initial-value: 62%; }
+  @property --my { syntax: '<percentage>'; inherits: true; initial-value: 40%; }
+  @property --clock { syntax: '<number>'; inherits: true; initial-value: 0; }
+
+  .code-hero {
+    /* Theme files set these; the fallbacks use Starlight colors. */
+    --code-faint: var(--hero-code-faint, color-mix(in srgb, var(--sl-color-white) 22%, transparent));
+    --code-key: var(--hero-code-key, var(--sl-color-accent-high));
+    --code-str: var(--hero-code-str, var(--sl-color-accent));
+    --code-num: var(--hero-code-num, var(--sl-color-accent));
+    --code-punct: var(--hero-code-punct, var(--sl-color-gray-3));
+    --glow: var(--hero-beam, color-mix(in srgb, var(--sl-color-accent) 14%, transparent));
+    --r: 10rem;
+    --mx: 62%;
+    --my: 40%;
+    /* Soft-edged reveal circle, shared by both layers so they always line up */
+    --reveal: radial-gradient(circle var(--r) at var(--mx) var(--my), #000 0, #000 55%, transparent 100%);
+    --hide: radial-gradient(circle var(--r) at var(--mx) var(--my), transparent 0, transparent 45%, #000 100%);
+    position: relative;
+    isolation: isolate;
+    animation: code-hero-sweep 18s ease-in-out infinite alternate;
+  }
+  .code-hero.tracking { animation: none; }
+
+  @keyframes code-hero-sweep {
+    0%   { --mx: 54%; --my: 26%; }
+    25%  { --mx: 62%; --my: 74%; }
+    50%  { --mx: 92%; --my: 70%; }
+    75%  { --mx: 90%; --my: 22%; }
+    100% { --mx: 70%; --my: 40%; }
+  }
+
+  .code-hero__backdrop {
+    position: absolute;
+    z-index: -1;
+    inset: -2.5rem calc(50% - 50vw) -1.5rem;
+    overflow: hidden;
+    pointer-events: none;
+    /* Soft top and bottom edges so the text fades into the page */
+    mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 82%, transparent 100%);
+    /* About four minutes per lap for a column with 10 laps */
+    animation: code-hero-clock 2400s linear infinite;
+  }
+
+  .code-hero__code {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 28rem);
+    column-gap: 2rem;
+    padding: 0 1.5rem;
+    overflow: hidden;
+    font: 400 0.8125rem/1.75 var(--sl-font-mono, ui-monospace, monospace);
+    white-space: pre;
+  }
+  .code-hero__code :global(.col) { overflow: hidden; }
+  /* One clock drives every column in both layers, so the sharp and faint copies
+     never drift apart. Each column loops a whole number of times per clock cycle
+     (--laps), which keeps the loop seamless when the clock wraps. */
+  .code-hero__code :global(.track) {
+    --laps: 10;
+    --offset: 0;
+    translate: 0 calc(mod(var(--clock) * var(--laps) + var(--offset), 1) * -50%);
+  }
+  .code-hero__code :global(.col:nth-child(2) .track) { --laps: 8;  --offset: 0.31; }
+  .code-hero__code :global(.col:nth-child(3) .track) { --laps: 11; --offset: 0.62; }
+  .code-hero__code :global(.col:nth-child(4) .track) { --laps: 9;  --offset: 0.17; }
+  .code-hero__code :global(.col:nth-child(5) .track) { --laps: 12; --offset: 0.78; }
+  .code-hero__code :global(.col:nth-child(6) .track) { --laps: 7;  --offset: 0.45; }
+  .code-hero__code :global(.line) { display: block; }
+
+  @keyframes code-hero-clock {
+    from { --clock: 0; }
+    to   { --clock: 1; }
+  }
+
+  /* Outside the reveal: faint, single color, slightly out of focus */
+  .code-hero__code--base {
+    color: var(--code-faint);
+    filter: blur(1.1px);
+    -webkit-mask-image: var(--hide);
+            mask-image: var(--hide);
+  }
+  .code-hero__code--base :global(span) { color: inherit; }
+
+  /* Inside the reveal: sharp and in color */
+  .code-hero__code--lit {
+    color: var(--code-punct);
+    -webkit-mask-image: var(--reveal);
+            mask-image: var(--reveal);
+  }
+  .code-hero__code--lit :global(.k) { color: var(--code-key); }
+  .code-hero__code--lit :global(.s) { color: var(--code-str); }
+  .code-hero__code--lit :global(.n) { color: var(--code-num); }
+
+  .code-hero__glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle calc(var(--r) * 1.2) at var(--mx) var(--my), var(--glow), transparent 70%);
+  }
+
+  /* Keeps the headline and tagline readable over the text */
+  .code-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--sl-color-black) 88%, transparent) 0, color-mix(in srgb, var(--sl-color-black) 78%, transparent) calc(50vw - 6rem), transparent calc(50vw + 8rem));
+  }
+
+  @media (max-width: 50rem) {
+    .code-hero { --r: 7.5rem; }
+    .code-hero__scrim { background: color-mix(in srgb, var(--sl-color-black) 55%, transparent); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .code-hero { animation: none; --mx: 70%; --my: 45%; }
+    .code-hero__backdrop { animation: none; }
+  }
+</style>

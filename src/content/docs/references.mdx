@@ -3,86 +3,81 @@ title: "References & Resources"
 description: "A collection of useful links and resources for learning more about SBOMs and software supply chain security."
 ---
 
-import { Card, CardGrid, Aside } from '@astrojs/starlight/components';
+import { CardGrid, Aside } from '@astrojs/starlight/components';
+import BrandCard from '../../components/BrandCard.astro';
 
 This page contains a curated list of external resources to help you on your SBOM journey.
 
 ## Official Standards
 
 <CardGrid>
-    <Card title="SPDX (Software Package Data Exchange)" icon="document">
+    <BrandCard title="SPDX (Software Package Data Exchange)" icon="standard">
         The official website for the SPDX standard.
         <a href="https://spdx.dev/" target="_blank">Visit website</a>
-    </Card>
-    <Card title="CycloneDX" icon="document">
+    </BrandCard>
+    <BrandCard title="CycloneDX" icon="standard">
         The official website for the CycloneDX standard.
         <a href="https://cyclonedx.org/" target="_blank">Visit website</a>
-    </Card>
+    </BrandCard>
 </CardGrid>
 
 ## Government Initiatives
 
 <CardGrid>
-    <Card title="NTIA: Software Bill of Materials" icon="government">
+    <BrandCard title="NTIA: Software Bill of Materials" icon="government">
         The website of the US National Telecommunications and Information Administration (NTIA) on SBOMs.
         <a href="https://www.ntia.gov/SBOM" target="_blank">Visit website</a>
-    </Card>
-    <Card title="CISA: Software Bill of Materials" icon="government">
+    </BrandCard>
+    <BrandCard title="CISA: Software Bill of Materials" icon="government">
         The website of the US Cybersecurity and Infrastructure Security Agency (CISA) on SBOMs.
         <a href="https://www.cisa.gov/sbom" target="_blank">Visit website</a>
-    </Card>
+    </BrandCard>
 </CardGrid>
 
 ## Industry Frameworks
 
 <CardGrid>
-    <Card title="FIRST: SBOM and CSAF/VEX Operational Framework" icon="document">
+    <BrandCard title="FIRST: SBOM and CSAF/VEX Operational Framework" icon="framework">
         A comprehensive guide by FIRST on implementing SBOM and CSAF/VEX practices, covering the relationship between static SBOMs and dynamic vulnerability data.
         <a href="https://www.first.org/standards/frameworks/psirts/Consolidated-SBOM-VEX-Operational-Framework.pdf" target="_blank">Download PDF</a>
-    </Card>
-    <Card title="CISA: SBOM Sharing Primer" icon="document">
+    </BrandCard>
+    <BrandCard title="CISA: SBOM Sharing Primer" icon="framework">
         CISA's guide on SBOM sharing roles (Producer, Distributor, Consumer), sharing mechanisms, and best practices for SBOM distribution.
         <a href="https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf" target="_blank">Download PDF</a>
-    </Card>
-    <Card title="CISA: Types of SBOMs" icon="document">
+    </BrandCard>
+    <BrandCard title="CISA: Types of SBOMs" icon="framework">
         <span id="ref-cisa-sbom-types" />
         Defines the six types of SBOMs (Design, Source, Build, Analyzed, Deployed, Runtime) and their appropriate use across the software lifecycle.
         <a href="https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf" target="_blank">Download PDF</a>
-    </Card>
-    <Card title="CSAF: Common Security Advisory Framework" icon="document">
+    </BrandCard>
+    <BrandCard title="CSAF: Common Security Advisory Framework" icon="framework">
         The OASIS standard for machine-readable security advisories, including VEX profiles for communicating vulnerability exploitability status.
         <a href="https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html" target="_blank">View specification</a>
-    </Card>
+    </BrandCard>
 </CardGrid>
 
 ## Community Resources
 
 <CardGrid>
-    <Card title="OWASP SCVS" icon="community">
+    <BrandCard title="OWASP SCVS" icon="community">
         The OWASP Software Component Verification Standard (SCVS) is a community-driven effort to establish a framework for verifying the security of software components.
         <a href="https://owasp.org/www-project-software-component-verification-standard/" target="_blank">Visit website</a>
-    </Card>
-    <Card title="SLSA" icon="community">
-        Supply-chain Levels for Software Artifacts (SLSA) is a security framework, a check-list of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure.
+    </BrandCard>
+    <BrandCard title="SLSA" icon="community">
+        Supply-chain Levels for Software Artifacts (SLSA) is a security framework, a checklist of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure.
         <a href="https://slsa.dev/" target="_blank">Visit website</a>
-    </Card>
-    <Card title="OpenChain Project" icon="community">
+    </BrandCard>
+    <BrandCard title="OpenChain Project" icon="community">
         The OpenChain Project identifies key requirements of a quality open source compliance program to build trust in the open source supply chain.
         <a href="https://www.openchainproject.org/" target="_blank">Visit website</a>
-    </Card>
+    </BrandCard>
 </CardGrid>
 
 ## Works Cited
 
 Numbered citations referenced by superscript links from individual pages across the site.
 
-<Aside type="caution" title="Two sources need a real citation">
-`ref-cisa-tooling-taxonomy` and `ref-cisa-minimum-elements-2025` below are placeholders — the page that cites them (`/tooling`) named these sources in passing without a confirmed title/URL. Replace the TODO text and href once the actual CISA/NTIA publications are identified.
-</Aside>
-
 <ol>
-  <li id="ref-cisa-tooling-taxonomy">TODO — source for "the functional taxonomy established by the NTIA and carried forward in CISA guidance" and the CISA Tooling and Implementation Working Group's collaboration with the OpenSSF SBOM Everywhere catalog, cited from <a href="/tooling">the Tooling page</a>.</li>
-  <li id="ref-cisa-minimum-elements-2025">TODO — "2025 CISA Minimum Elements draft," cited from <a href="/tooling">the Tooling page</a>.</li>
   <li id="ref-csaf"><a href="https://oasis-open.github.io/csaf-documentation/" target="_blank" rel="noopener noreferrer">OASIS CSAF Technical Committee, "Common Security Advisory Framework (CSAF) Version 2.0," OASIS Open</a></li>
   <li id="ref-cdx-vex"><a href="https://cyclonedx.org/capabilities/vex/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Exploitability eXchange (VEX)," OWASP CycloneDX</a></li>
   <li id="ref-openvex"><a href="https://github.com/openvex/spec" target="_blank" rel="noopener noreferrer">OpenVEX Project, "OpenVEX Specification," OpenSSF / OpenVEX</a></li>
@@ -109,4 +104,12 @@ Numbered citations referenced by superscript links from individual pages across 
   <li id="ref-spdx-3"><a href="https://spdx.github.io/spdx-spec/v3.0/" target="_blank" rel="noopener noreferrer">SPDX 3.0 Specification, The Linux Foundation (2024)</a></li>
   <li id="ref-dep-track"><a href="https://dependencytrack.org/" target="_blank" rel="noopener noreferrer">OWASP Dependency-Track, "Intelligent Component Analysis Platform," OWASP Foundation</a></li>
   <li id="ref-tea"><a href="https://ecma-international.org/technical-committees/tc54/" target="_blank" rel="noopener noreferrer">ECMA TC54, "Transparency Exchange API (TEA)," ECMA International</a></li>
+  <li id="ref-cisa-tooling-taxonomy"><a href="https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf" target="_blank" rel="noopener noreferrer">NTIA, “SBOM Tool Classification Taxonomy,” National Telecommunications and Information Administration (March 2021)</a></li>
+  <li id="ref-cisa-minimum-elements-2026"><a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom" target="_blank" rel="noopener noreferrer">CISA, “2026 Minimum Elements for a Software Bill of Materials (SBOM),” Cybersecurity and Infrastructure Security Agency</a></li>
+  <li id="ref-ftc-safeguards"><a href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener noreferrer">FTC, “FTC Safeguards Rule: What Your Business Needs to Know,” Federal Trade Commission</a></li>
+  <li id="ref-hipaa-security"><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" target="_blank" rel="noopener noreferrer">HHS, “The Security Rule,” U.S. Department of Health and Human Services</a></li>
+  <li id="ref-pci-dss"><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI Security Standards Council, “PCI DSS v4.0,” Document Library</a></li>
+  <li id="ref-nist-csf"><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST, “Cybersecurity Framework (CSF) 2.0,” National Institute of Standards and Technology (2024)</a></li>
+  <li id="ref-cis-controls"><a href="https://www.cisecurity.org/controls/v8" target="_blank" rel="noopener noreferrer">CIS, “CIS Critical Security Controls Version 8,” Center for Internet Security</a></li>
+  <li id="ref-sec-cyber-rules"><a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" rel="noopener noreferrer">SEC, “Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure,” Final Rule, Release No. 33-11216 (2023)</a></li>
 </ol>

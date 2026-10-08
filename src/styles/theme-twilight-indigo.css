@@ -1,0 +1,399 @@
+/* THEME: TWILIGHT INDIGO
+   The chosen All About SBOM theme: Twilight Indigo palette with the Lens
+   character. Fonts come from custom.css (Space Grotesk display and nav,
+   Public Sans body, Space Mono code). Brand art lives in public/brand/.
+   Starlight convention: dark values on :root, light values on
+   :root[data-theme='light']. Load after custom.css. */
+
+/* Starlight widens content to 67.5rem on pages without a sidebar, meant for
+   splash pages. The sidebar is off site-wide (src/routeData.ts), so keep
+   docs pages (the ones with an "On this page" column) at reading width. */
+html[data-has-toc]:not([data-has-sidebar]) { --sl-content-width: 48rem; }
+
+:root {
+  --sl-content-width: 48rem;
+
+  --sl-color-accent: #7F77D9;
+  --sl-color-accent-low: #211A65;
+  --sl-color-accent-high: #A9A2FF;
+  --sl-color-text-accent: var(--sl-color-accent-high);
+  --sl-color-white: #ECEAFB;
+  --sl-color-gray-1: #D6D4E6;
+  --sl-color-gray-2: #B5B3C6;
+  --sl-color-gray-3: #89879B;
+  --sl-color-gray-4: #646177;
+  --sl-color-gray-5: #3C3951;
+  --sl-color-gray-6: #26233B;
+  --sl-color-black: #100D26;
+
+  /* Starlight's named hues, used by asides (note = blue, tip = purple,
+     caution = orange, danger = red), badges, and card icons. Mapped to the
+     card palette so built-in components match the theme. */
+  --sl-color-purple-low: #34245F; --sl-color-purple: #A16EEB; --sl-color-purple-high: #CDB2F5;
+  --sl-color-blue-low: #1F335F;   --sl-color-blue: #4EAAED;   --sl-color-blue-high: #A1D2F6;
+  --sl-color-green-low: #1B3847;  --sl-color-green: #41BC90;  --sl-color-green-high: #9BDBC4;
+  --sl-color-orange-low: #492D30; --sl-color-orange: #F29137; --sl-color-orange-high: #F8C595;
+  --sl-color-red-low: #4A1F35;    --sl-color-red: #F06A8A;    --sl-color-red-high: #F9B6C6;
+
+  --brand-primary: #A9A2FF;
+  --brand-highlight: #FF9A3D;
+  --brand-hint-1: #2F9BEA;
+  --brand-hint-2: #20B07C;
+  --brand-ink: #17123F;
+
+  --header-bg: #1A1638;
+  --header-fg: #ECEAFB;
+  --header-border: 1px solid #3A3655;
+  --header-control-border: rgba(255, 255, 255, 0.28);
+  --dropdown-bg: #1A1638;
+  --dropdown-hover-bg: #2A227E;
+  --dropdown-border: 1px solid #3A3655;
+  --focus-ring: #A9A2FF;
+
+  --card-1-bg: #251F5D; --card-1-rule: #655CE5; --card-1-head: #AEA9F1;  /* Indigo */
+  --card-2-bg: #34245F; --card-2-rule: #A16EEB; --card-2-head: #CDB2F5;  /* Violet */
+  --card-3-bg: #1F335F; --card-3-rule: #4EAAED; --card-3-head: #A1D2F6;  /* Sky */
+  --card-4-bg: #492D30; --card-4-rule: #F29137; --card-4-head: #F8C595;  /* Tangerine */
+  --card-5-bg: #1B3847; --card-5-rule: #41BC90; --card-5-head: #9BDBC4;  /* Mint */
+  --card-fg: #ECEAFB;
+  --card-hover-shadow: 0 10px 24px rgba(0,0,0,.45);
+
+  --btn-primary-bg: #A9A2FF;
+  --btn-primary-hover: #BEB9FF;
+  --btn-primary-fg: #17123F;
+  --btn-minimal-fg: #A9A2FF;
+  --btn-minimal-hover: #FFFFFF;
+
+  --footer-bg: #0D0A1E;
+  --footer-fg: #ECEAFB;
+  --footer-top-rule: 3px solid #FF9A3D;
+
+  /* Code hero (src/components/Hero.astro) */
+  --hero-code-faint: #5B586E;
+  --hero-code-key: #A9A2FF;
+  --hero-code-str: #FF9A3D;
+  --hero-code-num: #63B4EF;
+  --hero-code-punct: #9F9DB0;
+  --hero-beam: #A9A2FF22;
+
+  /* Structure tokens consumed by custom.css */
+  --logo-bg: transparent;
+  --logo-fg: var(--header-fg);
+  --logo-radius: 10px;
+  --dropdown-radius: 0 0 10px 10px;
+  --dropdown-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  --control-radius: 8px;
+  --card-radius: 14px;
+  --card-border-width: 1.5px;
+  --card-top-rule: 1.5px;
+  --card-hover-transform: translateY(-3px);
+  --footer-divider: rgba(255, 255, 255, 0.12);
+  --footer-heading-size: 0.8125rem;
+  --footer-heading-transform: uppercase;
+  --footer-heading-tracking: 0.08em;
+
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent: #3A2EC4;
+  --sl-color-accent-low: #E3E2F7;
+  --sl-color-accent-high: #261E7F;
+  --sl-color-text-accent: var(--sl-color-accent);
+  --sl-color-white: #1A1640;
+  --sl-color-gray-1: #302C53;
+  --sl-color-gray-2: #514E6F;
+  --sl-color-gray-3: #7D7B95;
+  --sl-color-gray-4: #A3A1B5;
+  --sl-color-gray-5: #CBC9D7;
+  --sl-color-gray-6: #E1E0EA;
+  --sl-color-gray-7: #ECEBF4;
+  --sl-color-black: #F7F6FD;
+
+  --sl-color-purple-low: #F2EAFC; --sl-color-purple: #9054E8; --sl-color-purple-high: #4B2C79;
+  --sl-color-blue-low: #E6F3FC;   --sl-color-blue: #2F9BEA;   --sl-color-blue-high: #18517A;
+  --sl-color-green-low: #E4F6EF;  --sl-color-green: #20B07C;  --sl-color-green-high: #115C40;
+  --sl-color-orange-low: #FDF0E3; --sl-color-orange: #F07E14; --sl-color-orange-high: #7D420A;
+  --sl-color-red-low: #FCE9EE;    --sl-color-red: #D93B62;    --sl-color-red-high: #7A1C34;
+
+  --brand-primary: #3A2EC4;
+  --brand-highlight: #FF9A3D;
+  --brand-hint-1: #2F9BEA;
+  --brand-hint-2: #20B07C;
+  --brand-ink: #17123F;
+
+  --header-bg: #3A2EC4;
+  --header-fg: #FFFFFF;
+  --header-border: 1px solid #2E259D;
+  --header-control-border: rgba(255, 255, 255, 0.28);
+  --dropdown-bg: #3026A1;
+  --dropdown-hover-bg: #271F85;
+  --dropdown-border: 1px solid #292089;
+  --focus-ring: #3A2EC4;
+
+  --card-1-bg: #E9E8FB; --card-1-rule: #4A3FE0; --card-1-head: #262174;  /* Indigo */
+  --card-2-bg: #F2EAFC; --card-2-rule: #9054E8; --card-2-head: #4B2C79;  /* Violet */
+  --card-3-bg: #E6F3FC; --card-3-rule: #2F9BEA; --card-3-head: #18517A;  /* Sky */
+  --card-4-bg: #FDF0E3; --card-4-rule: #F07E14; --card-4-head: #7D420A;  /* Tangerine */
+  --card-5-bg: #E4F6EF; --card-5-rule: #20B07C; --card-5-head: #115C40;  /* Mint */
+  --card-fg: #1A1640;
+  --card-hover-shadow: 0 10px 24px #B0ABE780;
+
+  --btn-primary-bg: #3A2EC4;
+  --btn-primary-hover: #2E259D;
+  --btn-primary-fg: #FFFFFF;
+  --btn-minimal-fg: #3A2EC4;
+  --btn-minimal-hover: #2C2293;
+
+  --footer-bg: #17123F;
+  --footer-fg: #ECEAFB;
+  --footer-top-rule: 3px solid #FF9A3D;
+
+  /* Code hero (src/components/Hero.astro) */
+  --hero-code-faint: #BEBCCC;
+  --hero-code-key: #3A2EC4;
+  --hero-code-str: #216CA4;
+  --hero-code-num: #A66428;
+  --hero-code-punct: #7D7B95;
+  --hero-beam: #3A2EC414;
+}
+
+/* ---------- Typography ---------- */
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.content-panel h1,
+.hero h1,
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; }
+.hero .tagline { font-size: 1.0625rem; max-width: 46ch; }
+
+.sl-markdown-content h2 {
+  border-bottom: 1px solid var(--sl-color-hairline);
+  padding-bottom: 0.4em;
+  margin-top: 2.75rem;
+  font-size: 1.375rem;
+}
+
+/* h2 is reduced above, so step h3 and h4 down with it to keep the hierarchy */
+.sl-markdown-content h3 { font-size: 1.125rem; margin-top: 2rem; color: var(--sl-color-text-accent); }
+.sl-markdown-content h4 { font-size: 1rem; }
+
+/* Signature: a small graph node before each h2, in the highlight color. */
+.sl-markdown-content h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.6ch;
+  border-radius: 50%;
+  vertical-align: 0.12em;
+  background: radial-gradient(circle at 35% 30%, #fff 0 18%, var(--brand-highlight) 45%, var(--brand-primary) 100%);
+}
+
+.sl-markdown-content th {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  border-bottom: 2px solid var(--sl-color-gray-3);
+  padding: 0.5rem 0.75rem;
+}
+.sl-markdown-content td { border-bottom: 1px solid var(--sl-color-hairline); padding: 0.5rem 0.75rem; }
+.sl-markdown-content code { font-size: 0.875em; border-radius: 6px; padding: 0.1em 0.35em; }
+.sl-markdown-content pre, .sl-markdown-content .expressive-code .frame, .starlight-aside { border-radius: 10px; }
+.starlight-aside__title { font-family: var(--font-display); font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.sl-steps > li::before { font-family: var(--font-display) !important; font-weight: 600 !important; }
+starlight-tabs [role='tab'] { font-family: var(--font-display); font-size: 0.8125rem; }
+
+/* ---------- Brand logo in the header and footer ---------- */
+
+.logo-area .logo,
+.custom-footer .footer-brand .logo {
+  width: auto;
+  height: auto;
+  gap: 0.6rem;
+  background: none;
+  font: 600 1rem/1 var(--font-display);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: var(--header-fg);
+}
+.logo-area .logo img { width: 40px; height: 40px; }
+/* Between the desktop nav breakpoint and 90rem the six nav items need the
+   room, so the header shows the Lens icon alone. The link keeps its
+   aria-label. */
+@media (min-width: 72rem) and (max-width: 90rem) {
+  .logo-area .logo span { display: none; }
+  /* Tighter spacing keeps all six nav items on one line down to 72rem */
+  .custom-nav { gap: 1.25rem; }
+  .custom-nav > a,
+  .dropdown > .dropbtn { white-space: nowrap; font-size: 0.875rem; }
+}
+.custom-footer .footer-brand .logo { color: var(--footer-fg); }
+.custom-footer .footer-brand .logo img { width: 44px; height: 44px; }
+
+/* Header controls sit on the brand color in light mode */
+.custom-header starlight-theme-select,
+.custom-header starlight-theme-select select,
+.custom-header starlight-theme-select svg { color: var(--header-fg) !important; }
+.custom-header .sl-search-btn { background: rgba(255, 255, 255, 0.1) !important; }
+.custom-header .sl-search-btn kbd { background: transparent !important; color: var(--header-fg) !important; }
+
+/* ---------- Content links: glow in the highlight orange on hover ---------- */
+/* Dark mode uses the highlight itself. On the light background #FF9A3D text is
+   about 2:1 contrast, so light mode deepens the text to #A65000 (5:1) and keeps
+   the highlight for the underline and glow. Link cards and buttons keep their
+   own hover treatment. */
+:root { --link-hover: #FF9A3D; --link-glow: color-mix(in srgb, #FF9A3D 60%, transparent); }
+:root[data-theme='light'] { --link-hover: #A65000; --link-glow: color-mix(in srgb, #FF9A3D 45%, transparent); }
+
+.sl-markdown-content a:not(.sl-link-button, .sl-link-card a, .sl-anchor-link),
+.card .body a {
+  transition: color 0.2s, text-decoration-color 0.2s, text-shadow 0.2s;
+}
+.sl-markdown-content a:not(.sl-link-button, .sl-link-card a, .sl-anchor-link):is(:hover, :focus-visible),
+.card .body a:is(:hover, :focus-visible) {
+  color: var(--link-hover);
+  text-decoration-color: #FF9A3D;
+  text-shadow: 0 0 10px var(--link-glow);
+}
+/* "On this page" links get the color without the glow */
+.right-sidebar a:hover,
+mobile-starlight-toc a:hover { color: var(--link-hover); }
+@media (prefers-reduced-motion: reduce) {
+  .sl-markdown-content a,
+  .card .body a { transition: none; }
+}
+
+/* ---------- Navigation hover: the highlight orange, as in the hero reveal ---------- */
+
+.custom-nav > a,
+.dropdown > .dropbtn {
+  transition: color 0.2s, text-decoration-color 0.2s;
+  text-decoration: underline 2px transparent;
+  text-underline-offset: 6px;
+}
+.custom-nav > a:hover,
+.custom-nav > a:focus-visible,
+.dropdown:hover > .dropbtn,
+.dropdown:focus-within > .dropbtn {
+  color: var(--brand-highlight);
+  text-decoration-color: var(--brand-highlight);
+  opacity: 1;
+}
+/* Dropdown items: orange text and an orange stub on the connector rail */
+.dropdown-content a:hover,
+.dropdown-content a:focus-visible { color: var(--brand-highlight) !important; }
+.dropdown-content a:hover::before,
+.dropdown-content a:focus-visible::before { background: var(--brand-highlight); }
+/* Same treatment in the mobile drawer and the footer link lists */
+.mobile-nav-drawer > a:hover,
+.mobile-nav-drawer details summary:hover,
+.mobile-nav-drawer details a:hover,
+.custom-footer .link-group a:hover { color: var(--brand-highlight); }
+@media (prefers-reduced-motion: reduce) {
+  .custom-nav > a,
+  .dropdown > .dropbtn { transition: none; }
+}
+
+
+/* ---------- Cards: tinted fills, colored headings, section icons ---------- */
+
+.use-case-card.c1 .title { color: var(--card-1-head) !important; }
+.use-case-card.c2 .title { color: var(--card-2-head) !important; }
+.use-case-card.c3 .title { color: var(--card-3-head) !important; }
+.use-case-card.c4 .title { color: var(--card-4-head) !important; }
+.use-case-card.c5 .title { color: var(--card-5-head) !important; }
+.use-case-card .title { font-family: var(--font-display); font-weight: 600; }
+.use-case-card .description { color: var(--card-fg) !important; opacity: 0.85; }
+.use-case-card .sl-link-card svg { color: var(--sl-color-gray-3) !important; }
+
+/* Each mapping below sets the icon and turns the slot on, so a card with
+   no mapping shows no icon and no empty space. */
+.use-case-card::before {
+  content: '';
+  display: var(--card-icon-display, none);
+  width: 52px;
+  height: 52px;
+  /* Left-aligned with the card title (Starlight's link card padding) */
+  margin: 1rem 1rem -0.25rem;
+  background: var(--card-icon) center / contain no-repeat;
+}
+/* Home page sections */
+.use-case-card:has(a[href$="/sbom_basics"]) { --card-icon: url("/brand/icons/basics.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles"]) { --card-icon: url("/brand/icons/tooling.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/regulations"]) { --card-icon: url("/brand/icons/references.svg"); --card-icon-display: block; }
+/* Use cases */
+.use-case-card:has(a[href$="/use-cases/security"]) { --card-icon: url("/brand/icons/security.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/license"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/technical-debt"]) { --card-icon: url("/brand/icons/techdebt.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/use-cases/supplier"]) { --card-icon: url("/brand/icons/supplier.svg"); --card-icon-display: block; }
+/* Roles */
+.use-case-card:has(a[href$="/roles/producer"]) { --card-icon: url("/brand/icons/producer.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles/distributor"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/roles/consumer"]) { --card-icon: url("/brand/icons/consumer.svg"); --card-icon-display: block; }
+/* Producer steps */
+.use-case-card:has(a[href$="/producer/generation"]) { --card-icon: url("/brand/icons/producer.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/producer/enrichment"]) { --card-icon: url("/brand/icons/license.svg"); --card-icon-display: block; }
+.use-case-card:has(a[href$="/producer/sharing"]) { --card-icon: url("/brand/icons/distributor.svg"); --card-icon-display: block; }
+
+/* Starlight's <Card> (information cards on References, Tooling, and the role
+   pages) gets the same tinted fill, colored rule, and colored heading as the
+   link cards. Colors run in the same order as the home page cards. */
+.card-grid > .card { --ci-bg: var(--card-2-bg); --ci-rule: var(--card-2-rule); --ci-head: var(--card-2-head); }
+.card-grid > .card:nth-child(5n + 2) { --ci-bg: var(--card-3-bg); --ci-rule: var(--card-3-rule); --ci-head: var(--card-3-head); }
+.card-grid > .card:nth-child(5n + 3) { --ci-bg: var(--card-5-bg); --ci-rule: var(--card-5-rule); --ci-head: var(--card-5-head); }
+.card-grid > .card:nth-child(5n + 4) { --ci-bg: var(--card-4-bg); --ci-rule: var(--card-4-rule); --ci-head: var(--card-4-head); }
+.card-grid > .card:nth-child(5n + 5) { --ci-bg: var(--card-1-bg); --ci-rule: var(--card-1-rule); --ci-head: var(--card-1-head); }
+.card {
+  background-color: var(--ci-bg, var(--card-1-bg));
+  border: var(--card-border-width) solid var(--ci-rule, var(--card-1-rule));
+  border-radius: var(--card-radius);
+  padding: clamp(1rem, calc(0.25rem + 2vw), 1.75rem);
+}
+.card .title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  color: var(--ci-head, var(--card-1-head));
+  gap: 0.75rem;
+}
+.card .icon {
+  color: var(--ci-head, var(--card-1-head));
+  border-color: var(--ci-rule, var(--card-1-rule));
+  background-color: color-mix(in srgb, var(--ci-rule, var(--card-1-rule)) 18%, transparent);
+  border-radius: 8px;
+  font-size: 2rem;
+  padding: 0.35rem;
+}
+.card .body { color: var(--card-fg); }
+.card .body a { color: var(--ci-head, var(--card-1-head)); font-weight: 600; }
+
+/* Expandable sections (<details>) in page content, as on the Tooling page */
+.sl-markdown-content details {
+  border: 1px solid var(--sl-color-gray-5);
+  border-inline-start: 3px solid var(--sl-color-accent);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: color-mix(in srgb, var(--sl-color-accent-low) 35%, transparent);
+}
+.sl-markdown-content details + details { margin-top: 0.75rem; }
+.sl-markdown-content details summary { color: var(--sl-color-white); cursor: pointer; }
+.sl-markdown-content details summary::marker { color: var(--brand-highlight); }
+.sl-markdown-content details[open] summary { margin-bottom: 0.75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .use-case-card { transition: none !important; }
+}
+
+/* ---------- Hero character (set in index.mdx as hero.image.html) ---------- */
+
+.hero > .hero-html { width: min(100%, 26rem); justify-self: center; }
+.hero > .hero-html img { width: 100%; height: auto; }

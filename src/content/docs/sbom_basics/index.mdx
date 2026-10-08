@@ -58,7 +58,7 @@ SBOMs are usually stored in a machine-readable format such as JSON or XML. The f
 More examples of real-world SBOM documents, including different formats and use cases, can be found in the official [CycloneDX bom-examples](https://github.com/CycloneDX/bom-examples) and [SPDX examples](https://github.com/spdx/spdx-examples) repositories.
 
 
-## Why SBOMs Matter?
+## Why SBOMs Matter
 
 SBOMs provide transparency into the software supply chain. They help organizations understand which components are included in a product, where those components came from, and how they may affect security, compliance, and maintenance activities.
 
@@ -102,7 +102,7 @@ The NTIA Minimum Elements define a practical baseline of what an SBOM should con
 ## SBOM Formats
 An SBOM is first and foremost a **technical concept**: a structured inventory of the software components contained in a product. The term **SBOM** itself does not describe one specific file format. Instead, it refers to the idea of documenting software composition in a way that can be shared, reviewed, and analyzed.
 
-To make this concept practical, interoperable, and machine readable, standardized formats are needed. Today, the two most important standards used to represent SBOMs are [**SPDX**](https://spdx.dev/) and [**CycloneDX**](https://cyclonedx.org/). These standards define how component information, metadata, relationships, and other relevant details are encoded so that tools can generate, exchange, and process SBOMs automatically.
+To make this concept practical, interoperable, and machine-readable, standardized formats are needed. Today, the two most important standards used to represent SBOMs are [**SPDX**](https://spdx.dev/) and [**CycloneDX**](https://cyclonedx.org/). These standards define how component information, metadata, relationships, and other relevant details are encoded so that tools can generate, exchange, and process SBOMs automatically.
 
 <Aside type="tip" title="Concept vs. format">
 An SBOM is the concept of describing software components and their relationships. SPDX and CycloneDX are the standards that define how this information is represented in a machine-readable way.
@@ -111,7 +111,7 @@ An SBOM is the concept of describing software components and their relationships
 ### SPDX
 [**SPDX**](https://spdx.dev/) (Software Package Data Exchange) is an open standard from the Linux Foundation, standardized as [ISO/IEC 5962:2021](https://www.iso.org/standard/81870.html). Initially focused on license compliance, SPDX has expanded to cover security, provenance, and AI. Version 3.x introduced a modular profile architecture (Software, Security, Licensing, AI, Build, Dataset, and more) and shifted from a document-centric to an element-centric data model. 
 
-SPDX 2 supports several flat-file serializations, including tag-value, JSON, and YAML, while SPDX 3 moves away from flat files toward linked information, using a more graph-oriented model that is designed for richer and more flexible exchange, utilizing file formats like JSON-ld.
+SPDX 2 supports several flat-file serializations, including tag-value, JSON, and YAML, while SPDX 3 moves away from flat files toward linked information, using a more graph-oriented model that is designed for richer and more flexible exchange, utilizing file formats like JSON-LD.
 
 ### CycloneDX
 [**CycloneDX**](https://cyclonedx.org/) is a lightweight BOM standard from the [OWASP](https://owasp.org/) community, standardized as [ECMA-424](https://ecma-international.org/publications-and-standards/standards/ecma-424/). It is designed with a strong focus on security and component analysis and provides SBOMs in JSON, XML, and Protocol Buffers. 
@@ -120,7 +120,7 @@ SPDX 2 supports several flat-file serializations, including tag-value, JSON, and
 
 To use SBOMs in practice, it helps to think in terms of three simple roles: **Producer**, **Distributor**, and **Consumer**. These roles describe what actually needs to happen for SBOM technology to be useful: someone must create the SBOM, someone must make it available, and someone must use it.
 
-The **Producer** is the party that creates the SBOM. In practice, this usually means introducing tooling that automatically generats an SBOM. The producer’s task is to ensure that the SBOM accurately reflects the released software and contains the component and metadata information needed by downstream users.
+The **Producer** is the party that creates the SBOM. In practice, this usually means introducing tooling that automatically generates an SBOM. The producer’s task is to ensure that the SBOM accurately reflects the released software and contains the component and metadata information needed by downstream users.
 
 The **Distributor** is the party that provides the SBOM to others. This may be the software vendor, a package repository, a platform operator, or an internal team that ships software to another part of the organization. The distributor’s task is to publish or transfer the SBOM in a way that keeps it associated with the correct software artifact and makes it accessible to those who need it.
 
@@ -148,9 +148,9 @@ Understanding these types is important because the scope shifts across phases. A
 Both SPDX and CycloneDX allow producers to indicate the lifecycle phase in which the SBOM was generated.
 
 ## SBOM Extensions and Related Artifacts
-SBOMs statically describe for a software product which components it contains. However, it does not answer the question: **is a known vulnerability actually exploitable in my environment?** This is where extensions and related artifacts like **Vulnerability Exploitability eXchange (VEX)** come in. They extend the SBOM view by adding additional (dynamic) information and context.
+An SBOM statically describes which components a software product contains. However, it does not answer the question: **is a known vulnerability actually exploitable in my environment?** This is where extensions and related artifacts like **Vulnerability Exploitability eXchange (VEX)** come in. They extend the SBOM view by adding additional (dynamic) information and context.
 
-Among the most well-know extensions and Artifacts are:
+Among the best-known extensions and artifacts are:
 
 - **VEX** — Vulnerability Exploitability eXchange. It states whether a known vulnerability affects a product and whether it is exploitable in a specific context.
 - **VDR** — Vulnerability Disclosure Report. It provides structured information about a vulnerability disclosure, including details about affected products and remediation guidance.
@@ -166,14 +166,14 @@ Among the most well-know extensions and Artifacts are:
 
 SBOMs describe the components of a software product, but other kinds of Bill of Materials (BOMs) are used to describe different parts of the digital supply chain. These related standards extend the same basic idea of structured inventory into areas such as hardware, software-as-a-service, cryptography, and AI/ML systems.
 
-Among the most well-known related BOM standards are:
+Among the best-known related BOM standards are:
 
 - **HBOM** — Hardware Bill of Materials. It describes the physical components, parts, and hardware dependencies that make up a device or system.
 - **SaaSBOM** — Software-as-a-Service Bill of Materials. It describes the third-party services, dependencies, and software components used to deliver a SaaS product.
 - **AI/ML-BOM** — Artificial Intelligence / Machine Learning Bill of Materials. It describes models, datasets, training components, and other artifacts used in AI or ML systems.
 - **CBOM** — Cryptography Bill of Materials. It describes the cryptographic algorithms, libraries, certificates, keys, and related dependencies used in a product or system.
 
-These types of bills of materials can either be viewed separately or combined in a single document to describe various properties. In fact, the SPDX or CycloneDX standard can be used for all of these bill of materials. Both standards support the documenting of various properties of a system and are not limited to software components. You can think of it this way: the bill of materials lists the various components of a system, and each component has a type—for example, software, cryptography, or hardware. Depending on the types included in the bill of materials, it is an SBOM, CBOM, HBOM, SaaSBOM, AI-BOM, or a combination of these. The term “xBOM” often comes up in this context. It refers to the concept of an “Extended or Everything Bill of Materials”—that is, a bill of materials that describes various aspects of a system.
+These types of bills of materials can either be viewed separately or combined in a single document to describe various properties. In fact, both SPDX and CycloneDX can be used for all of these bills of materials. Both standards support documenting various properties of a system and are not limited to software components. You can think of it this way: the bill of materials lists the various components of a system, and each component has a type—for example, software, cryptography, or hardware. Depending on the types included in the bill of materials, it is an SBOM, CBOM, HBOM, SaaSBOM, AI-BOM, or a combination of these. The term “xBOM” often comes up in this context. It refers to the concept of an “Extended or Everything Bill of Materials”—that is, a bill of materials that describes various aspects of a system.
 
 <LinkButton href="/sbom_basics/related_boms/" variant="primary" icon="right-arrow">
   More information

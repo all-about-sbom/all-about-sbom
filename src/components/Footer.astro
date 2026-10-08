@@ -9,7 +9,10 @@ const currentYear = new Date().getFullYear();
   <div class="footer-content">
     
     <div class="footer-brand">
-      <div class="logo">YOUR<br/>LOGO</div>
+      <div class="logo">
+        <img src="/brand/lens/favicon.svg" alt="" width="44" height="44" />
+        <span>All About SBOM</span>
+      </div>
       <p>Publishing informational content and guidelines to help you navigate modern software supply chains.</p>
     </div>
 
@@ -44,3 +47,19 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+{/* Stretches the footer to the window edges (see .custom-footer in custom.css).
+    Runs inline so the footer never paints at the narrow column width first. */}
+<script is:inline>
+  (() => {
+    const footer = document.querySelector('.custom-footer');
+    if (!footer) return;
+    const fit = () => {
+      footer.style.setProperty('--footer-shift', `${footer.parentElement.getBoundingClientRect().left}px`);
+      footer.style.setProperty('--footer-width', `${document.documentElement.clientWidth}px`);
+    };
+    fit();
+    addEventListener('resize', fit);
+    new ResizeObserver(fit).observe(document.documentElement);
+  })();
+</script>
