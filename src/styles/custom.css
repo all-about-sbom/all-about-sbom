@@ -203,6 +203,60 @@
 .use-case-card.c4:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-4-rule) 55%, black); }
 .use-case-card.c5:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-5-rule) 55%, black); }
 
+.sbom-process {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  max-width: 48rem;
+  margin: 2.5rem auto;
+}
+
+.sbom-process::before {
+  position: absolute;
+  top: 1.75rem;
+  bottom: 1.75rem;
+  left: 1.65rem;
+  width: 0.2rem;
+  background: color-mix(in srgb, var(--brand-highlight) 45%, transparent);
+  content: '';
+}
+
+.sbom-process-step {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.sbom-process-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0.2rem solid var(--brand-highlight);
+  border-radius: 50%;
+  background: var(--sl-color-bg);
+  color: var(--brand-highlight);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.sbom-process-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;
+  color: var(--brand-highlight);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .stakeholder-grid .card-grid {
   display: grid;
   grid-template-columns: 1fr;

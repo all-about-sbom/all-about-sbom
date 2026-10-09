@@ -1,36 +1,51 @@
 ---
 title: "Implementing SBOMs"
-description: "The three SBOM roles (producer, distributor, and consumer) and what each one is responsible for."
+description: "The three steps that make an SBOM useful: produce, distribute, and consume."
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
 
+An SBOM is more than a file that is created once. It becomes useful when it moves through three simple steps: someone creates it, makes it available, and uses the information it contains.
 
-Regardless of the use case, the use of SBOMs always involves three steps and associated roles.
-Click on the roles to learn about the responsibilities and get step-by-step guides.
+These steps are called **Produce**, **Distribute**, and **Consume**. They may be carried out by people, teams, automated tools, or a combination of all three.
 
-<CardGrid>
-  <div class="use-case-card c2">
-    <LinkCard
-      title="1. Producer"
-      href="/roles/producer"
-      description="The SBOM must be generated initially. This role is often fulfilled by the organization that has access to the source code or compiles the software."
-    />
+Check out the pages below to learn more about the three steps of using an SBOM and the roles involved in each step.
+
+<div class="sbom-process" aria-label="The three steps of using an SBOM">
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">1</span>
+    <div class="use-case-card c2">
+      <LinkCard
+        title="Produce"
+        href="/roles/producer"
+        description="The SBOM must be generated initially. This role is often fulfilled by the organization that has access to the source code or compiles the software."
+      />
+    </div>
   </div>
 
-  <div class="use-case-card c3">
-    <LinkCard
-      title="2. Distributor"
-      href="/roles/distributor"
-      description="The generated SBOM must be provided to the recipients."
-    />
+  <div class="sbom-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">2</span>
+    <div class="use-case-card c3">
+      <LinkCard
+        title="Distribute"
+        href="/roles/distributor"
+        description="The generated SBOM must be provided to the recipients."
+      />
+    </div>
   </div>
 
-  <div class="use-case-card c5">
-    <LinkCard
-      title="3. Consumer"
-      href="/roles/consumer"
-      description="The consumer must enrich the SBOM with additional information, such as vulnerability data, present the data in an understandable format, and incorporate it into a risk management process."
-    />
+  <div class="sbom-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">3</span>
+    <div class="use-case-card c5">
+      <LinkCard
+        title="Consume"
+        href="/roles/consumer"
+        description="The consumer must enrich the SBOM with additional information, such as vulnerability data, present the data in an understandable format, and incorporate it into a risk management process."
+      />
+    </div>
   </div>
-</CardGrid>
+</div>
