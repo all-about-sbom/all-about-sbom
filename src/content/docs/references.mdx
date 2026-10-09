@@ -6,110 +6,200 @@ description: "A collection of useful links and resources for learning more about
 import { CardGrid, Aside } from '@astrojs/starlight/components';
 import BrandCard from '../../components/BrandCard.astro';
 
-This page contains a curated list of external resources to help you on your SBOM journey.
+Use this page as a map to the most useful SBOM standards, guides, frameworks, and tools. Start with the cards below and follow the links that match your needs.
 
-## Official Standards
+## Start here
 
 <CardGrid>
-    <BrandCard title="SPDX (Software Package Data Exchange)" icon="standard">
-        The official website for the SPDX standard.
-        <a href="https://spdx.dev/" target="_blank">Visit website</a>
+    <BrandCard title="SBOM basics" icon="basics">
+        New to SBOMs? Start with our introduction to the concepts, formats, lifecycle, and use cases.
+        <a href="/sbom_basics">Read the introduction</a>
+    </BrandCard>
+    <BrandCard title="CISA SBOM resources" icon="government">
+        Practical guidance from the U.S. Cybersecurity and Infrastructure Security Agency.
+        <a href="https://www.cisa.gov/sbom" target="_blank" rel="noopener noreferrer">Explore CISA resources</a>
+    </BrandCard>
+    <BrandCard title="NTIA SBOM resources" icon="government">
+        Foundational U.S. government guidance on SBOMs and their minimum elements.
+        <a href="https://www.ntia.gov/SBOM" target="_blank" rel="noopener noreferrer">Explore NTIA resources</a>
+    </BrandCard>
+</CardGrid>
+
+<Aside type="tip" title="A simple learning path">
+Learn what an SBOM contains, compare [SPDX and CycloneDX](#standards-and-formats), then see how SBOMs are [produced, distributed, and consumed](/roles).
+</Aside>
+
+## Standards and formats
+
+These are the main standards used to describe SBOMs and related security information.
+
+<CardGrid>
+    <BrandCard title="SPDX" icon="standard">
+        <span id="ref-spdx-3" />
+        An open standard for describing software packages, licenses, components, relationships, and provenance.
+        <a href="https://spdx.dev/" target="_blank" rel="noopener noreferrer">Visit SPDX</a> ·
+        <a href="https://spdx.github.io/spdx-spec/v3.0/" target="_blank" rel="noopener noreferrer">SPDX 3.0 specification</a>
     </BrandCard>
     <BrandCard title="CycloneDX" icon="standard">
-        The official website for the CycloneDX standard.
-        <a href="https://cyclonedx.org/" target="_blank">Visit website</a>
+        <span id="ref-cdx-1-7" />
+        An SBOM standard focused on software supply chain security, with support for software, hardware, services, AI, and cryptography.
+        <a href="https://cyclonedx.org/" target="_blank" rel="noopener noreferrer">Visit CycloneDX</a> ·
+        <a href="https://cyclonedx.org/specification/overview/" target="_blank" rel="noopener noreferrer">CycloneDX 1.7 specification</a>
+    </BrandCard>
+    <BrandCard title="CSAF and VEX" icon="framework">
+        <span id="ref-csaf" />
+        <span id="ref-cdx-vex" />
+        <span id="ref-openvex" />
+        <span id="ref-cisa-vex" />
+        Machine-readable formats for security advisories and statements about whether a vulnerability affects a product.
+        <a href="https://oasis-open.github.io/csaf-documentation/" target="_blank" rel="noopener noreferrer">CSAF documentation</a> ·
+        <a href="https://cyclonedx.org/capabilities/vex/" target="_blank" rel="noopener noreferrer">CycloneDX VEX</a> ·
+        <a href="https://github.com/openvex/spec" target="_blank" rel="noopener noreferrer">OpenVEX</a> ·
+        <a href="https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex" target="_blank" rel="noopener noreferrer">CISA VEX guidance</a>
+    </BrandCard>
+    <BrandCard title="VDR and sharing" icon="framework">
+        <span id="ref-cdx-vdr" />
+        <span id="ref-tea" />
+        <span id="ref-cisa-minimum-elements-2026" />
+        Formats and guidance for sharing vulnerability information and making SBOM exchanges more consistent.
+        <a href="https://cyclonedx.org/capabilities/vdr/" target="_blank" rel="noopener noreferrer">CycloneDX VDR</a> ·
+        <a href="https://ecma-international.org/technical-committees/tc54/" target="_blank" rel="noopener noreferrer">Transparency Exchange API</a> ·
+        <a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom" target="_blank" rel="noopener noreferrer">CISA minimum elements</a>
     </BrandCard>
 </CardGrid>
 
-## Government Initiatives
+## Practical guides
+
+These documents explain how to create, share, and use SBOMs in real workflows.
 
 <CardGrid>
-    <BrandCard title="NTIA: Software Bill of Materials" icon="government">
-        The website of the US National Telecommunications and Information Administration (NTIA) on SBOMs.
-        <a href="https://www.ntia.gov/SBOM" target="_blank">Visit website</a>
+    <BrandCard title="SBOM Sharing Primer" icon="framework">
+        CISA's guide to the Producer, Distributor, and Consumer steps, including sharing methods and responsibilities.
+        <a href="https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf" target="_blank" rel="noopener noreferrer">Download the primer</a>
     </BrandCard>
-    <BrandCard title="CISA: Software Bill of Materials" icon="government">
-        The website of the US Cybersecurity and Infrastructure Security Agency (CISA) on SBOMs.
-        <a href="https://www.cisa.gov/sbom" target="_blank">Visit website</a>
-    </BrandCard>
-</CardGrid>
-
-## Industry Frameworks
-
-<CardGrid>
-    <BrandCard title="FIRST: SBOM and CSAF/VEX Operational Framework" icon="framework">
-        A comprehensive guide by FIRST on implementing SBOM and CSAF/VEX practices, covering the relationship between static SBOMs and dynamic vulnerability data.
-        <a href="https://www.first.org/standards/frameworks/psirts/Consolidated-SBOM-VEX-Operational-Framework.pdf" target="_blank">Download PDF</a>
-    </BrandCard>
-    <BrandCard title="CISA: SBOM Sharing Primer" icon="framework">
-        CISA's guide on SBOM sharing roles (Producer, Distributor, Consumer), sharing mechanisms, and best practices for SBOM distribution.
-        <a href="https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf" target="_blank">Download PDF</a>
-    </BrandCard>
-    <BrandCard title="CISA: Types of SBOMs" icon="framework">
+    <BrandCard title="Types of SBOMs" icon="framework">
         <span id="ref-cisa-sbom-types" />
-        Defines the six types of SBOMs (Design, Source, Build, Analyzed, Deployed, Runtime) and their appropriate use across the software lifecycle.
-        <a href="https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf" target="_blank">Download PDF</a>
+        Explains Design, Source, Build, Analyzed, Deployed, and Runtime SBOMs and when each type is useful.
+        <a href="https://www.cisa.gov/sites/default/files/2023-04/sbom-types-document-508c.pdf" target="_blank" rel="noopener noreferrer">Read the CISA guide</a>
     </BrandCard>
-    <BrandCard title="CSAF: Common Security Advisory Framework" icon="framework">
-        The OASIS standard for machine-readable security advisories, including VEX profiles for communicating vulnerability exploitability status.
-        <a href="https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html" target="_blank">View specification</a>
+    <BrandCard title="SBOM and VEX Operational Framework" icon="framework">
+        FIRST's guidance on connecting static SBOM data with dynamic vulnerability and VEX information.
+        <a href="https://www.first.org/standards/frameworks/psirts/Consolidated-SBOM-VEX-Operational-Framework.pdf" target="_blank" rel="noopener noreferrer">Download the framework</a>
+    </BrandCard>
+    <BrandCard title="NIST SSDF" icon="government">
+        <span id="ref-ssdf" />
+        A secure software development framework that provides useful context for building trustworthy software supply chains.
+        <a href="https://csrc.nist.gov/Projects/ssdf" target="_blank" rel="noopener noreferrer">Visit NIST SSDF</a>
+    </BrandCard>
+    <BrandCard title="SBOM tooling guidance" icon="tooling">
+        <span id="ref-cisa-tooling-taxonomy" />
+        A simple way to compare SBOM tools by what they do: generate, analyze, manage, or exchange SBOM data.
+        <a href="https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf" target="_blank" rel="noopener noreferrer">Read the tooling taxonomy</a>
     </BrandCard>
 </CardGrid>
 
-## Community Resources
+## Trust and supply chain security
+
+SBOMs describe what is present. These resources help establish where software came from and whether it was changed.
 
 <CardGrid>
-    <BrandCard title="OWASP SCVS" icon="community">
-        The OWASP Software Component Verification Standard (SCVS) is a community-driven effort to establish a framework for verifying the security of software components.
-        <a href="https://owasp.org/www-project-software-component-verification-standard/" target="_blank">Visit website</a>
-    </BrandCard>
     <BrandCard title="SLSA" icon="community">
-        Supply-chain Levels for Software Artifacts (SLSA) is a security framework, a checklist of standards and controls to prevent tampering, improve integrity, and secure packages and infrastructure.
-        <a href="https://slsa.dev/" target="_blank">Visit website</a>
+        <span id="ref-slsa" />
+        A framework for improving and communicating the integrity and provenance of software builds.
+        <a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">Visit SLSA</a>
     </BrandCard>
-    <BrandCard title="OpenChain Project" icon="community">
-        The OpenChain Project identifies key requirements of a quality open source compliance program to build trust in the open source supply chain.
-        <a href="https://www.openchainproject.org/" target="_blank">Visit website</a>
+    <BrandCard title="Sigstore" icon="community">
+        <span id="ref-sigstore" />
+        Tools and services for signing software artifacts and verifying who produced them.
+        <a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Visit Sigstore</a>
+    </BrandCard>
+    <BrandCard title="in-toto" icon="community">
+        <span id="ref-in-toto" />
+        A framework for recording and verifying the steps that happen in a software supply chain.
+        <a href="https://in-toto.io/" target="_blank" rel="noopener noreferrer">Visit in-toto</a>
+    </BrandCard>
+    <BrandCard title="OWASP Dependency-Track" icon="tooling">
+        <span id="ref-dep-track" />
+        An open source platform for ingesting SBOMs and monitoring components for vulnerabilities and policy issues.
+        <a href="https://dependencytrack.org/" target="_blank" rel="noopener noreferrer">Visit Dependency-Track</a>
+    </BrandCard>
+    <BrandCard title="CycloneDX Attestations" icon="framework">
+        <span id="ref-cdxa" />
+        Structured evidence that can connect an SBOM with compliance claims, provenance, and supporting documentation.
+        <a href="https://cyclonedx.org/capabilities/attestations/" target="_blank" rel="noopener noreferrer">Read about CDXA</a>
     </BrandCard>
 </CardGrid>
 
-## Works Cited
+## Beyond software SBOMs
 
-Numbered citations referenced by superscript links from individual pages across the site.
+The same inventory idea can describe other parts of a product and its supply chain.
 
-<ol>
-  <li id="ref-csaf"><a href="https://oasis-open.github.io/csaf-documentation/" target="_blank" rel="noopener noreferrer">OASIS CSAF Technical Committee, "Common Security Advisory Framework (CSAF) Version 2.0," OASIS Open</a></li>
-  <li id="ref-cdx-vex"><a href="https://cyclonedx.org/capabilities/vex/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Exploitability eXchange (VEX)," OWASP CycloneDX</a></li>
-  <li id="ref-openvex"><a href="https://github.com/openvex/spec" target="_blank" rel="noopener noreferrer">OpenVEX Project, "OpenVEX Specification," OpenSSF / OpenVEX</a></li>
-  <li id="ref-cisa-vex"><a href="https://www.cisa.gov/resources-tools/resources/minimum-requirements-vulnerability-exploitability-exchange-vex" target="_blank" rel="noopener noreferrer">CISA, "Minimum Requirements for Vulnerability Exploitability eXchange (VEX)," Cybersecurity and Infrastructure Security Agency (2023)</a></li>
-  <li id="ref-fda-cyber"><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions" target="_blank" rel="noopener noreferrer">FDA, "Cybersecurity in Medical Devices: Quality System Considerations and Content of Premarket Submissions," U.S. Food and Drug Administration</a></li>
-  <li id="ref-cra"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R2847" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/2847 — Cyber Resilience Act, Official Journal of the European Union (December 2024)</a></li>
-  <li id="ref-cdx-vdr"><a href="https://cyclonedx.org/capabilities/vdr/" target="_blank" rel="noopener noreferrer">CycloneDX, "Vulnerability Disclosure Report (VDR)," OWASP CycloneDX</a></li>
-  <li id="ref-nist-800-161"><a href="https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-161r1, "Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations," National Institute of Standards and Technology (2022)</a></li>
-  <li id="ref-sigstore"><a href="https://www.sigstore.dev/" target="_blank" rel="noopener noreferrer">Sigstore Project, "Sigstore: A New Standard for Signing, Verifying, and Protecting Software," OpenSSF</a></li>
-  <li id="ref-in-toto"><a href="https://in-toto.io/" target="_blank" rel="noopener noreferrer">in-toto Project, "in-toto: A Framework to Secure the Integrity of Software Supply Chains," Cloud Native Computing Foundation</a></li>
-  <li id="ref-slsa"><a href="https://slsa.dev/" target="_blank" rel="noopener noreferrer">SLSA Project, "Supply-chain Levels for Software Artifacts (SLSA)," OpenSSF</a></li>
-  <li id="ref-cdxa"><a href="https://cyclonedx.org/capabilities/attestations/" target="_blank" rel="noopener noreferrer">CycloneDX, "CycloneDX Attestations (CDXA)," OWASP CycloneDX</a></li>
-  <li id="ref-ssdf"><a href="https://csrc.nist.gov/Projects/ssdf" target="_blank" rel="noopener noreferrer">NIST SP 800-218, "Secure Software Development Framework (SSDF) Version 1.1," National Institute of Standards and Technology (2022)</a></li>
-  <li id="ref-hbom"><a href="https://www.cisa.gov/resources-tools/resources/hardware-bill-materials-hbom-framework-supply-chain-risk-management" target="_blank" rel="noopener noreferrer">CISA, "Hardware Bill of Materials (HBOM) Framework for Supply Chain Risk Management" (November 2023)</a></li>
-  <li id="ref-omb-m2605"><a href="https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05.pdf" target="_blank" rel="noopener noreferrer">OMB M-26-05, "Strengthening and Streamlining Federal Cybersecurity Procurement Requirements," Office of Management and Budget (January 2026)</a></li>
-  <li id="ref-cdx-saas"><a href="https://cyclonedx.org/capabilities/saasbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "SaaSBOM: Software as a Service Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-cdx-aiml"><a href="https://cyclonedx.org/capabilities/mlbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "ML-BOM: Machine Learning Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-nist-ai-rmf"><a href="https://airc.nist.gov/Docs/1" target="_blank" rel="noopener noreferrer">NIST, "Artificial Intelligence Risk Management Framework (AI RMF 1.0)," National Institute of Standards and Technology (2023)</a></li>
-  <li id="ref-eu-ai-act"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener noreferrer">European Parliament and Council, Regulation (EU) 2024/1689 — Artificial Intelligence Act, Official Journal of the European Union (July 2024)</a></li>
-  <li id="ref-nist-pqc"><a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener noreferrer">NIST, "Post-Quantum Cryptography Standardization," National Institute of Standards and Technology</a></li>
-  <li id="ref-cdx-cbom"><a href="https://cyclonedx.org/capabilities/cbom/" target="_blank" rel="noopener noreferrer">CycloneDX, "CBOM: Cryptography Bill of Materials," OWASP CycloneDX</a></li>
-  <li id="ref-nsa-pqc"><a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/" target="_blank" rel="noopener noreferrer">NSA, "Post-Quantum Cybersecurity Resources," National Security Agency</a></li>
-  <li id="ref-cdx-1-7"><a href="https://cyclonedx.org/specification/overview/" target="_blank" rel="noopener noreferrer">CycloneDX 1.7 Specification Overview, OWASP CycloneDX (October 2025)</a></li>
-  <li id="ref-spdx-3"><a href="https://spdx.github.io/spdx-spec/v3.0/" target="_blank" rel="noopener noreferrer">SPDX 3.0 Specification, The Linux Foundation (2024)</a></li>
-  <li id="ref-dep-track"><a href="https://dependencytrack.org/" target="_blank" rel="noopener noreferrer">OWASP Dependency-Track, "Intelligent Component Analysis Platform," OWASP Foundation</a></li>
-  <li id="ref-tea"><a href="https://ecma-international.org/technical-committees/tc54/" target="_blank" rel="noopener noreferrer">ECMA TC54, "Transparency Exchange API (TEA)," ECMA International</a></li>
-  <li id="ref-cisa-tooling-taxonomy"><a href="https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf" target="_blank" rel="noopener noreferrer">NTIA, “SBOM Tool Classification Taxonomy,” National Telecommunications and Information Administration (March 2021)</a></li>
-  <li id="ref-cisa-minimum-elements-2026"><a href="https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom" target="_blank" rel="noopener noreferrer">CISA, “2026 Minimum Elements for a Software Bill of Materials (SBOM),” Cybersecurity and Infrastructure Security Agency</a></li>
-  <li id="ref-ftc-safeguards"><a href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener noreferrer">FTC, “FTC Safeguards Rule: What Your Business Needs to Know,” Federal Trade Commission</a></li>
-  <li id="ref-hipaa-security"><a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" target="_blank" rel="noopener noreferrer">HHS, “The Security Rule,” U.S. Department of Health and Human Services</a></li>
-  <li id="ref-pci-dss"><a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI Security Standards Council, “PCI DSS v4.0,” Document Library</a></li>
-  <li id="ref-nist-csf"><a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST, “Cybersecurity Framework (CSF) 2.0,” National Institute of Standards and Technology (2024)</a></li>
-  <li id="ref-cis-controls"><a href="https://www.cisecurity.org/controls/v8" target="_blank" rel="noopener noreferrer">CIS, “CIS Critical Security Controls Version 8,” Center for Internet Security</a></li>
-  <li id="ref-sec-cyber-rules"><a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" rel="noopener noreferrer">SEC, “Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure,” Final Rule, Release No. 33-11216 (2023)</a></li>
-</ol>
+<CardGrid>
+    <BrandCard title="Hardware BOM (HBOM)" icon="supplier">
+        <span id="ref-hbom" />
+        CISA's framework for describing hardware components and their supply chain relationships.
+        <a href="https://www.cisa.gov/resources-tools/resources/hardware-bill-materials-hbom-framework-supply-chain-risk-management" target="_blank" rel="noopener noreferrer">Read the HBOM framework</a>
+    </BrandCard>
+    <BrandCard title="SaaSBOM and ML-BOM" icon="standard">
+        <span id="ref-cdx-saas" />
+        <span id="ref-cdx-aiml" />
+        CycloneDX guidance for describing cloud services, machine learning models, and their dependencies.
+        <a href="https://cyclonedx.org/capabilities/saasbom/" target="_blank" rel="noopener noreferrer">SaaSBOM</a> ·
+        <a href="https://cyclonedx.org/capabilities/mlbom/" target="_blank" rel="noopener noreferrer">ML-BOM</a>
+    </BrandCard>
+    <BrandCard title="Cryptography BOM (CBOM)" icon="key">
+        <span id="ref-cdx-cbom" />
+        <span id="ref-nist-pqc" />
+        <span id="ref-nsa-pqc" />
+        A way to inventory cryptographic algorithms, protocols, and keys to support post-quantum migration.
+        <a href="https://cyclonedx.org/capabilities/cbom/" target="_blank" rel="noopener noreferrer">CBOM guidance</a> ·
+        <a href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener noreferrer">NIST post-quantum cryptography</a> ·
+        <a href="https://www.nsa.gov/Cybersecurity/Post-Quantum-Cybersecurity-Resources/" target="_blank" rel="noopener noreferrer">NSA resources</a>
+    </BrandCard>
+</CardGrid>
+
+## Regulations and sector guidance
+
+SBOM expectations increasingly appear in procurement rules, cybersecurity frameworks, and sector-specific guidance.
+
+<CardGrid>
+    <BrandCard title="EU Cyber Resilience Act" icon="government">
+        <span id="ref-cra" />
+        European cybersecurity requirements for products with digital elements, including software supply chain obligations.
+        <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R2847" target="_blank" rel="noopener noreferrer">Read the regulation</a>
+    </BrandCard>
+    <BrandCard title="NIST Supply Chain Risk Management" icon="government">
+        <span id="ref-nist-800-161" />
+        <span id="ref-omb-m2605" />
+        Guidance for managing cybersecurity risks across suppliers and software dependencies.
+        <a href="https://csrc.nist.gov/publications/detail/sp/800-161/rev-1/final" target="_blank" rel="noopener noreferrer">NIST SP 800-161</a> ·
+        <a href="https://www.whitehouse.gov/wp-content/uploads/2026/01/M-26-05.pdf" target="_blank" rel="noopener noreferrer">OMB M-26-05</a>
+    </BrandCard>
+    <BrandCard title="AI governance" icon="government">
+        <span id="ref-nist-ai-rmf" />
+        <span id="ref-eu-ai-act" />
+        Guidance and rules for managing risks in AI systems, including the models and data behind them.
+        <a href="https://airc.nist.gov/Docs/1" target="_blank" rel="noopener noreferrer">NIST AI RMF</a> ·
+        <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689" target="_blank" rel="noopener noreferrer">EU AI Act</a>
+    </BrandCard>
+    <BrandCard title="FDA medical device guidance" icon="government">
+        <span id="ref-fda-cyber" />
+        Cybersecurity guidance for medical device manufacturers, including software component and vulnerability information.
+        <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-system-considerations-and-content-premarket-submissions" target="_blank" rel="noopener noreferrer">Read the FDA guidance</a>
+    </BrandCard>
+    <BrandCard title="Security and compliance frameworks" icon="framework">
+        <span id="ref-ftc-safeguards" />
+        <span id="ref-hipaa-security" />
+        <span id="ref-pci-dss" />
+        <span id="ref-nist-csf" />
+        <span id="ref-cis-controls" />
+        <span id="ref-sec-cyber-rules" />
+        Guidance that organizations may encounter in privacy, healthcare, payments, public-company reporting, and general cybersecurity programs.
+        <a href="https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know" target="_blank" rel="noopener noreferrer">FTC Safeguards</a> ·
+        <a href="https://www.hhs.gov/hipaa/for-professionals/security/index.html" target="_blank" rel="noopener noreferrer">HIPAA</a> ·
+        <a href="https://www.pcisecuritystandards.org/document_library/" target="_blank" rel="noopener noreferrer">PCI DSS</a> ·
+        <a href="https://www.nist.gov/cyberframework" target="_blank" rel="noopener noreferrer">NIST CSF</a> ·
+        <a href="https://www.cisecurity.org/controls/v8" target="_blank" rel="noopener noreferrer">CIS Controls</a> ·
+        <a href="https://www.sec.gov/rules/final/2023/33-11216.pdf" target="_blank" rel="noopener noreferrer">SEC rules</a>
+    </BrandCard>
+</CardGrid>
