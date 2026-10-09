@@ -42,6 +42,7 @@ export default defineConfig({
 		}),
 		starlight({
 			title: 'All About SBOMs',
+			favicon: '/favicon-32.png?v=3',
 			head: [
 				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' } },
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' } },
