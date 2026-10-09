@@ -4,7 +4,7 @@ description: Learn the fundamentals, formats, lifecycle roles, and use cases of 
 template: splash
 hero:
   title: All About SBOM
-  tagline: A beginner’s guide to SBOMs - what they are, why they matter, and how to use them.
+  tagline: A beginner’s guide to what is inside software, why it matters, and how SBOMs help you manage it.
   image:
     html: '<img class="light:sl-hidden" src="/brand/lens/lens-presenting-dark.svg" alt="Lens, the All About SBOM mascot, a magnifying glass reading lines of code" width="400" height="400" /><img class="dark:sl-hidden" src="/brand/lens/lens-presenting.svg" alt="Lens, the All About SBOM mascot, a magnifying glass reading lines of code" width="400" height="400" />'
   actions:
@@ -25,6 +25,15 @@ import sbomImage from '../../assets/houston.webp';
 
 
 <div class="homepage-lead">
+
+## What you will find here
+
+**All About SBOM** is a practical starting point for people who are new to Software Bills of Materials. It explains the basic idea, shows how SBOMs move through a software supply chain, and connects the topic to tools, use cases, and regulations.
+
+</div>
+
+<div class="homepage-lead">
+
 ## What is an SBOM?
 
 A Software Bill of Materials (SBOM) is a structured, machine‑readable inventory of the components, libraries, and dependencies inside a software product.  
@@ -63,61 +72,101 @@ This website helps you understand SBOMs and start using them in your own project
 
 <div class="homepage-lead">
 
-## How to get started with SBOMs
+## The SBOM flow - Roles & Implementation
 
-The term “SBOM” refers to a concept implemented primarily through the **CycloneDX** and **SPDX** standards.  
-SBOMs can be generated at different stages of the software development lifecycle, and the most useful form depends on your role and use case.
+An SBOM is most useful when it moves through a simple flow: it is **produced**, **distributed**, and **consumed**. These steps can be handled by people, teams, tools, or automated processes.
 
-If you’re just starting out, a simple approach is:
-
-<Steps>
-  1. **Assess your environment**  
-  and identify business‑critical applications.
-  2. **Pick a tool**
-  that matches your stack (e.g., containers, packages, language ecosystems).
-  3. **Generate or request your first SBOM**  
-  by building it yourself or requiring it from your vendors.
-  4. **Validate and store**  
-  the SBOM securely and make it available to the right stakeholders.
-  5. **Keep it updated**  
-  with each release and use it in vulnerability and license reviews.
-</Steps>
-
-## Get More Information
-
-<CardGrid>
-  <div class="use-case-card c2">
+<div class="sbom-process homepage-process" aria-label="The three steps of the SBOM flow">
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">1</span>
+    <div class="use-case-card c2">
       <LinkCard
-        title="SBOM Basics"
-        href="/sbom_basics"
-        description="Learn the technical basics of SBOMs."
+        title="Produce"
+        href="/roles/producer"
+        description="Create an SBOM that describes the software and its components."
       />
     </div>
+  </div>
 
+  <div class="sbom-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">2</span>
     <div class="use-case-card c3">
       <LinkCard
-        title="Use Cases"
-        href="/use-cases"
-        description="Learn what SBOMs can be used for."
+        title="Distribute"
+        href="/roles/distributor"
+        description="Make the SBOM available to the people and systems that need it."
       />
     </div>
+  </div>
 
+  <div class="sbom-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="sbom-process-step">
+    <span class="sbom-process-marker" aria-hidden="true">3</span>
     <div class="use-case-card c5">
       <LinkCard
-        title="Roles & Implementation"
-        href="/roles"
-        description="Learn how to implement SBOMs."
+        title="Consume"
+        href="/roles/consumer"
+        description="Use the information to understand risk, vulnerabilities, and dependencies."
       />
     </div>
-
-  <div class="use-case-card c4">
-    <LinkCard
-      title="Regulations & Frameworks"
-      href="/regulations"
-      description="Learn about Regulations and Frameworks"
-    />
   </div>
-</CardGrid>
+</div>
+
+</div>
+
+<div class="homepage-lead">
+
+## Follow the learning path
+
+You can explore the site in any order, but this path builds the ideas step by step: first understand SBOMs, then follow one through the supply chain, and finally explore tools, use cases, and requirements.
+
+<ol class="learning-path" aria-label="SBOM learning path">
+  <li class="learning-path-step">
+    <a class="learning-stop c2" href="/sbom_basics">
+      <span class="learning-path-number" aria-hidden="true">1</span>
+      <strong>Learn the basics</strong>
+      <span>What an SBOM is and what it contains.</span>
+    </a>
+  </li>
+  <li class="learning-path-step">
+    <a class="learning-stop c4" href="/use-cases">
+      <span class="learning-path-number" aria-hidden="true">2</span>
+      <strong>Explore use cases</strong>
+      <span>See how teams use SBOM data.</span>
+    </a>
+  </li>
+  <li class="learning-path-step">
+    <a class="learning-stop c3" href="/roles">
+      <span class="learning-path-number" aria-hidden="true">3</span>
+      <strong>Follow the flow</strong>
+      <span>Produce, distribute, and consume.</span>
+    </a>
+  </li>
+  <li class="learning-path-step">
+    <a class="learning-stop c5" href="/tooling">
+      <span class="learning-path-number" aria-hidden="true">4</span>
+      <strong>Explore tooling</strong>
+      <span>Find and compare SBOM tools.</span>
+    </a>
+  </li>
+  <li class="learning-path-step">
+    <a class="learning-stop c2" href="/regulations">
+      <span class="learning-path-number" aria-hidden="true">5</span>
+      <strong>Check requirements</strong>
+      <span>Review regulations and frameworks.</span>
+    </a>
+  </li>
+  <li class="learning-path-step">
+    <a class="learning-stop c3" href="/references">
+      <span class="learning-path-number" aria-hidden="true">6</span>
+      <strong>Keep exploring</strong>
+      <span>Find standards and further reading.</span>
+    </a>
+  </li>
+</ol>
 
 
 

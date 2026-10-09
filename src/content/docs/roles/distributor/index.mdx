@@ -1,71 +1,61 @@
 ---
-title: "The Distributor's Role"
-description: "A guide for organizations that receive, manage, and redistribute SBOMs from upstream producers to downstream consumers."
+title: "Distribute"
+description: "How an SBOM gets from the person or tool that creates it to the people and tools that use it."
 ---
 
-import { LinkCard, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
-import BrandCard from '../../../../components/BrandCard.astro';
+import { Aside, Steps } from '@astrojs/starlight/components';
 
-An SBOM Distributor is an organization that receives SBOMs from upstream producers and redistributes them to downstream consumers. Distributors play a critical role in the SBOM supply chain by ensuring that accurate and trustworthy SBOM data flows from producers to the organizations that need it.
+After an SBOM has been created, it needs to reach the people or tools that will use it. This is the **distribute** step.
+A recipient of an SBOM may be internal (e.g. a security team) or external (e.g. a customer or regulator), which can result in quite different approaches of how to share the SBOM.
 
-As defined by the [CISA SBOM Sharing Primer](https://www.cisa.gov/sites/default/files/2024-05/SBOM%20Sharing%20Primer.pdf), distributors are intermediaries who may aggregate, transform, or simply pass through SBOM data as part of a broader software distribution process.
+## Approaches to share an SBOM
 
-## When Does Distribution Apply?
+Which method is the right one depends on the purpose.
+Some examples include:
 
-Not every organization needs to act as a distributor. This role is relevant when you:
+- **Deliver it with the software:** Include it in a package, container image, installer, or release download.
+- **Along the Source Code:** Publish it next to the source code or release files.
+- **Through an API:** Send it directly to another system, such as a vulnerability management tool.
+- **Through a customer portal:** Make it available only to customers or other approved users.
+- **On request:** Send it by email or another agreed channel when someone asks for it.
 
-- **Bundle or integrate** third-party software into your own product and need to pass along upstream SBOMs together with your own.
-- **Operate a platform or marketplace** that hosts software from multiple producers.
-- **Act as a reseller or system integrator** who delivers software on behalf of upstream vendors.
-- **Manage an internal software catalog** within a large enterprise, aggregating SBOMs from various internal teams and external suppliers.
+For open-source software, publishing the SBOM with the source code or release is often the easiest option. For commercial or internal software, a portal, repository, or API may be more suitable.
 
-## Key Responsibilities
+## What to check before sharing
 
-<CardGrid>
-    <BrandCard title="Integrity Verification" icon="verify">
-        Before redistributing an SBOM, verify its integrity. Check cryptographic signatures or hashes provided by the producer to ensure the SBOM has not been tampered with during transit.
-    </BrandCard>
-    <BrandCard title="Aggregation" icon="merge">
-        When distributing a product that bundles multiple upstream components, aggregate the individual SBOMs into a coherent view. Ensure that dependency relationships between bundled components are accurately represented.
-    </BrandCard>
-    <BrandCard title="Format Transformation" icon="transform">
-        Downstream consumers may require SBOMs in a different format than what was provided by the producer. Distributors may need to convert between SPDX and CycloneDX, or between different serialization formats (JSON, XML) while preserving data fidelity.
-    </BrandCard>
-    <BrandCard title="Access Control" icon="key">
-        Some SBOM data may be sensitive. Distributors must implement appropriate access controls, ensuring that SBOMs are shared only with authorized consumers while meeting contractual and regulatory obligations.
-    </BrandCard>
-</CardGrid>
+The SBOM should be connected to the software it describes. Before sharing it, check:
 
+- Does it describe the correct product and version?
+- Is it in a format the recipient can use, such as SPDX or CycloneDX?
+- Is it clear where and how the recipient can get it?
+- Is the file still up to date?
+- If it was changed or combined with another SBOM, is that clear?
+- Are the information in the SBOM are approved for sharing?
 
+Keep the original SBOM when converting it to another format or adding information. This makes it easier to understand where the information came from and to fix problems later.
 
-## The Distribution Process
-
-<Steps>
-1. **Receive and Validate**
-
-    Obtain SBOMs from upstream producers alongside the software artifacts they describe. Validate the SBOM's integrity (signatures, hashes) and completeness. Confirm that the SBOM matches the specific version of the software being distributed.
-
-2. **Aggregate and Enrich (if needed)**
-
-    If your product bundles multiple upstream components, combine their SBOMs into an assembly that represents the complete product. Add your own metadata where appropriate, such as a top-level component describing your product and its relationship to the bundled components.
-
-3. **Store and Version**
-
-    Maintain an archive of all SBOMs you distribute. Use SBOM repositories or version-controlled storage to ensure you can trace which SBOM was distributed with which software release. This is essential for incident response and audit trails.
-
-4. **Redistribute**
-
-    Share SBOMs with downstream consumers using the same mechanisms as producers: embedded in the product, published on a website, available via an API, or provided on request. Include any upstream VEX/CSAF documents alongside the SBOM.
-</Steps>
-
-## Handling SBOM Updates
-
-When an upstream producer releases an updated SBOM (due to a new software version or corrections to the SBOM data), distributors must propagate these updates to their downstream consumers. Establish a process to:
-
-- Monitor upstream producers for SBOM updates.
-- Validate and re-aggregate updated SBOMs.
-- Notify downstream consumers of the availability of updated SBOM data.
-
-<Aside type="tip" title="VEX Forwarding">
-Distributors should also forward VEX/CSAF documents from upstream producers to downstream consumers. Since VEX documents are dynamic and change more frequently than SBOMs, consider automating the distribution of VEX updates through APIs or notification systems.
+<Aside type="tip" title="SBOM Extensions">
+Please note that SBOMs can be extended with addition information, such as VEX to communicate vulnerability status, CSAF to communicate security advisories, or attestation to ensure the integrity of the SBOM.
+If you are sharing an SBOM, consider whether you should also share these related documents.
+An overview of the SBOM extensions can be found in the [SBOM Extensions](../sbom_basics/sbom_extensions)
 </Aside>
+
+# Transparency Exchange API
+
+The [Transparency Exchange API (TEA)](https://github.com/CycloneDX/transparency-exchange-api) is a common way for software producers and consumers to exchange SBOMs automatically.
+
+With TEA, a producer can provide a known online service. A consumer's tool can then ask that service which SBOMs are available and retrieve the one for the product and version it needs.
+
+In simple terms:
+
+1. The producer or distributor makes an exchange service available.
+2. The consumer's tool connects to that service.
+3. The tool looks for the product, release, or other software identifier.
+4. The service returns the matching SBOM or related information.
+5. The tool downloads the document and can process it automatically.
+
+This is useful when many products, suppliers, or releases need to be handled.
+It reduces manual downloads and makes it easier to find updates.
+TEA is also designed to support other types of BOMs and supply-chain information, not only software SBOMs.
+
+For more information, please checkout the [Repository of the Project](https://github.com/CycloneDX/transparency-exchange-api).
