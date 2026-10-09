@@ -62,4 +62,9 @@ export default defineConfig({
 			routeMiddleware: './src/routeData.ts',
 		}),
 	],
+	vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
+  },
 });
