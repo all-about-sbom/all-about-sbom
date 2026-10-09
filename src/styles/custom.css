@@ -542,7 +542,17 @@
 
 .dropdown-content a:last-child {
   border-left-color: transparent;
-  box-shadow: inset 1px 0 0 var(--dep-rail);
+  box-shadow: none;
+}
+
+.dropdown-content a:last-child::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 1px;
+  height: 50%;
+  background: var(--dep-rail);
 }
 
 .dropdown:hover .dropdown-content {
