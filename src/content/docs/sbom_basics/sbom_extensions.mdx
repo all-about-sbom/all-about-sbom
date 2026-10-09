@@ -13,6 +13,9 @@ SBOMs describe what a software product contains, but they do not answer every op
 
 VEX is the most operationally important companion artifact. It addresses the core problem that a component appearing in an SBOM may carry hundreds of CVEs without any of them being actually exploitable in the product that ships the component. A raw SBOM-plus-CVE-feed correlation produces enormous noise. VEX exists to cut through it.
 
+<details>
+<summary>Read more about VEX</summary>
+
 A VEX statement is a machine-readable assertion that answers the question: *for this specific product version, does this specific CVE represent a real risk?* The four canonical statuses, established in CISA's VEX guidance and carried through all three major implementations, are:
 
 - **`not_affected`** — the product contains the component, but the vulnerability cannot be triggered in the way the product uses it. The producer should provide a justification (e.g., `component_not_present`, `vulnerable_code_not_in_execute_path`, `inline_mitigations_already_exist`).
@@ -47,11 +50,16 @@ All three carry the same conceptual payload. They differ in syntax, how tightly 
 VEX is a machine-readable way to say whether a known vulnerability in a component is actually exploitable in the context of a specific product.
 </Aside>
 
+</details>
+
 ---
 
 ## VDR — Vulnerability Disclosure Report
 
 A VDR is a producer-issued document listing the known vulnerabilities affecting a product, with their status and recommended remediation or mitigation actions. It overlaps conceptually with VEX but is broader, less formally structured, and predates the VEX standardization effort.
+
+<details>
+<summary>Read more about VDR</summary>
 
 CycloneDX defines VDR as a first-class artifact type. [NIST SP 800-161r1](https://csrc.nist.gov/pubs/sp/800/161/r1/upd1/final) (Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations) references VDRs as a component of supplier transparency. In practice, a VDR tends to serve as the human-readable narrative companion to the machine-readable SBOM and VEX — it explains the broader vulnerability posture of a product in a way that security and compliance reviewers can read directly without tooling.
 
@@ -67,11 +75,16 @@ CycloneDX defines VDR as a first-class artifact type. [NIST SP 800-161r1](https:
 VDR is a structured vulnerability disclosure document that tells consumers which vulnerabilities affect a product and how the producer recommends responding.
 </Aside>
 
+</details>
+
 ---
 
 ## Attestations and provenance
 
 An SBOM becomes significantly more credible when it can be cryptographically tied to a specific build, signed by the producer, and independently verified. Three complementary frameworks provide this infrastructure.
+
+<details>
+<summary>Read more about attestations and provenance</summary>
 
 ### Sigstore and cosign
 
@@ -111,11 +124,16 @@ CycloneDX Attestations (CDXA), introduced in CycloneDX 1.5, provide a structured
 Attestations improve trust by attesting the origin of the SBOM and ensuring integrity. However, it cannot ensure correctness or completeness of the SBOM.
 </Aside>
 
+</details>
+
 ---
 
 ## PURL
 
 A **PURL** (Package URL) is a standardized way to identify a software package in a format that is consistent across ecosystems. Instead of relying only on a human-readable name, a PURL captures enough structure to make automated matching more reliable across package managers, repositories, and vulnerability databases.
+
+<details>
+<summary>Read more about PURLs</summary>
 
 A typical PURL includes the package **type**, **namespace**, **name**, **version**, and optional qualifiers or subpath information. For example, a Maven package might be represented in a way that clearly distinguishes it from the same package name in a different ecosystem. This reduces ambiguity and helps tools correlate SBOM entries with advisories, registries, and dependency data.
 
@@ -126,3 +144,5 @@ In practice, PURL is not a replacement for the SBOM itself. Instead, it is one o
 <Aside type="note" title="What PURL provides">
 PURL is a standardized package identifier that lets tools match software components across ecosystems without relying on ambiguous names alone.
 </Aside>
+
+</details>
