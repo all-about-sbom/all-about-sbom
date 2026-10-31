@@ -3,14 +3,18 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import mermaid from 'astro-mermaid';
 import rehypeExternalLinks from 'rehype-external-links';
+import { unified } from '@astrojs/markdown-remark';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://all-about-sbom.org',
 	markdown: {
-        rehypePlugins: [
-            [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
-        ],
-    },
+		processor: unified({
+        		rehypePlugins: [
+            			[rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]
+        		],
+		}),
+    	},
 	integrations: [
 		mermaid({
 			// autoTheme (default: true) already swaps between mermaid's
@@ -42,6 +46,7 @@ export default defineConfig({
 		}),
 		starlight({
 			title: 'All About SBOMs',
+			favicon: '/favicon-32.png?v=3',
 			head: [
 				{ tag: 'link', attrs: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' } },
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' } },
@@ -61,4 +66,9 @@ export default defineConfig({
 			routeMiddleware: './src/routeData.ts',
 		}),
 	],
+	vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
+  },
 });
