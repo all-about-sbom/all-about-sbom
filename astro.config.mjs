@@ -61,6 +61,7 @@ export default defineConfig({
 				Hero: './src/components/Hero.astro',
 				Footer: './src/components/Footer.astro',
       		},
+			disable404Route: true,
 			sidebar: [
 			],
 			routeMiddleware: './src/routeData.ts',

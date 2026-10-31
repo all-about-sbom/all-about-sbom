@@ -1,0 +1,24 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Page not found',
+    description: 'The requested page could not be found.',
+    template: 'splash',
+    hero: {
+      title: 'Page not found',
+      tagline: 'The page you are looking for may have moved or may no longer be available.',
+      image: {
+        html: '<img src="/brand/lens/lens-hello.svg" alt="Lens, the All About SBOM mascot, looking for the requested page" width="400" height="400" />',
+      },
+      actions: [
+        { text: 'Return to the homepage', link: '/', icon: 'right-arrow', variant: 'primary' },
+        { text: 'Learn about SBOMs', link: '/sbom_basics/', icon: 'right-arrow', variant: 'minimal' },
+      ],
+    },
+  }}
+>
+  <p>The requested page could not be found. Use the navigation to browse the available SBOM resources.</p>
+</StarlightPage>
