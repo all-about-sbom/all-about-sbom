@@ -18,6 +18,10 @@ A beginner's guide to Software Bills of Materials (SBOMs) — what they are, why
 
 Contributions are welcome — corrections, new pages, and better examples all help.
 
+Read [DEVELOPMENT_GUIDELINES.md](./DEVELOPMENT_GUIDELINES.md) for the site's
+audience, editorial voice, visual language, component conventions, and review
+checklist.
+
 1. Fork the repo and create a branch.
 2. Add or edit a `.md` / `.mdx` file under `src/content/docs/`. The file path
    becomes the page URL, so `src/content/docs/formats/spdx.md` is served at
