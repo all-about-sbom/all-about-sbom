@@ -3,7 +3,7 @@
 Use this guide when adding or revising documentation, components, styles,
 illustrations, or navigation.
 
-## Audience and purpose
+## Audience and Purpose
 
 All About SBOM provides a neutral, accessible starting point for people who are new to SBOMs but need to work with them. It helps readers navigate information that is often fragmented, highly technical, or commercially focused, offering a clear overview of core concepts with further detail on dedicated pages.
 
@@ -13,7 +13,7 @@ Therefore, content should be beginner-friendly and accurate, introducing core co
 
 The website complements existing resources rather than replacing them. Contributors should link to useful documentation, guidelines, and tool directories instead of duplicating their content.
 
-## Editorial voice
+## Editorial Voice
 
 Use an informational tone: state what is known, explain how it applies, and
 avoid addressing the reader as a participant in a conversation. The writing
@@ -42,7 +42,7 @@ to readers making technical or organizational decisions.
 | “Click here to learn more.” | “See [SBOM formats](/sbom_basics/#formats) for format details.” |
 | “Start your SBOM journey.” | “Begin with the SBOM basics.” |
 
-## Components and embedded content
+## Components and Embedded Content
 
 Use the existing Starlight components instead of creating a new visual pattern.
 Import only the components used on the page:
@@ -51,7 +51,7 @@ Import only the components used on the page:
 import { Aside, CardGrid, LinkButton, LinkCard, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 ```
 
-### Navigation cards
+### Navigation Cards
 
 Use `LinkCard` inside `CardGrid` to link to related pages. Keep the title
 short and describe the destination, not the action required from the reader.
@@ -82,7 +82,7 @@ import BrandCard from '../../components/BrandCard.astro';
 </CardGrid>
 ```
 
-### Callouts and actions
+### Callouts and Actions
 
 Use `Aside` for a short clarification, warning, or practical note. Do not put
 essential content only in a callout.
@@ -103,7 +103,7 @@ site-relative URL.
 </LinkButton>
 ```
 
-### Procedures and comparisons
+### Procedures and Comparisons
 
 Use `Steps` for an ordered process where sequence matters:
 
@@ -137,7 +137,7 @@ Use a short code block for small abstract data or dependency relationships.
 Use a diagram only when it explains a relationship more clearly than prose,
 and provide a text alternative or concise accessible description.
 
-## Project structure and pages
+## Project Structure and Pages
 
 The project is an Astro site using Starlight for documentation:
 
@@ -153,7 +153,7 @@ The project is an Astro site using Starlight for documentation:
 | `astro.config.mjs` | Starlight, Markdown, Mermaid, styles, and site configuration. |
 | `src/routeData.ts` | Route-specific data and navigation behavior. |
 
-### Add a page
+### Add a Page
 
 1. Choose the content section and URL. Use a directory with `index.mdx` for
    pages that may later have child pages, for example
@@ -179,7 +179,7 @@ The project is an Astro site using Starlight for documentation:
 6. Run the validation checks described below and confirm that the new route is
    generated without warnings.
 
-### Modify an existing page
+### Modify an Existing Page
 
 1. Read the complete page before changing its structure or wording.
 2. Check related pages for duplicate explanations, references, and links that
@@ -193,7 +193,7 @@ The project is an Astro site using Starlight for documentation:
 6. Check the rendered page in both themes and at narrow and wide viewport
    sizes when the change affects layout or components.
 
-### Sources and maintenance
+### Sources and Maintenance
 
 - Prefer primary sources, such as standards bodies, government agencies, and
   project documentation.
