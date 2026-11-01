@@ -203,6 +203,174 @@
 .use-case-card.c4:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-4-rule) 55%, black); }
 .use-case-card.c5:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-5-rule) 55%, black); }
 
+.sbom-process {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  max-width: 48rem;
+  margin: 2.5rem auto;
+}
+
+.sbom-process-step {
+  min-width: 0;
+}
+
+.homepage-process {
+  max-width: 54rem;
+  margin: 1rem auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.homepage-process .sbom-process-step {
+  display: block;
+  align-self: start;
+  height: auto;
+  margin: 0;
+}
+
+.homepage-process .use-case-card {
+  box-sizing: border-box;
+  align-self: start;
+  height: 100%;
+  min-height: 9.5rem;
+  margin: 0;
+}
+
+.homepage-process .use-case-card::before {
+  width: 44px;
+  height: 44px;
+  margin: 0.75rem 0.75rem -0.25rem;
+}
+
+.homepage-process .use-case-card .sl-link-card {
+  box-sizing: border-box;
+  display: flex;
+  min-height: 5.5rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.homepage-process .use-case-card .title {
+  font-size: 0.95rem;
+}
+
+.homepage-process .use-case-card .description {
+  font-size: 0.8rem;
+}
+
+@media (min-width: 55rem) {
+  .homepage-process {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.learning-path {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+  max-width: 64rem;
+  padding: 0;
+  margin: 2rem auto;
+  list-style: none;
+}
+
+.learning-path::before {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  left: 2rem;
+  height: 0.2rem;
+  background: color-mix(in srgb, var(--brand-highlight) 45%, transparent);
+  content: '';
+}
+
+.learning-path-step {
+  min-width: 0;
+  z-index: 1;
+}
+
+.learning-stop {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  height: 100%;
+  padding: 0 0.35rem;
+  color: var(--sl-color-text);
+  text-align: center;
+  text-decoration: none;
+}
+
+.learning-path-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto;
+  border: 0.15rem solid var(--brand-highlight);
+  border-radius: 50%;
+  background: var(--sl-color-bg);
+  color: var(--brand-highlight);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.learning-stop strong {
+  color: var(--sl-color-text-accent);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  line-height: 1.15;
+}
+
+.learning-stop > span:last-child {
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 55rem) {
+  .learning-path {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    max-width: 38rem;
+    margin: 1.5rem auto;
+    padding-left: 0;
+  }
+
+  .learning-path::before {
+    top: 1.25rem;
+    right: auto;
+    bottom: 1.25rem;
+    left: 1.2rem;
+    width: 0.15rem;
+    height: auto;
+  }
+
+  .learning-path-step {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 0.65rem;
+  }
+
+  .learning-stop {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0;
+    text-align: left;
+  }
+
+  .learning-path-number {
+    grid-row: span 2;
+    margin: 0;
+  }
+}
+
 .stakeholder-grid .card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -340,7 +508,17 @@
 
 .dropdown-content a:last-child {
   border-left-color: transparent;
-  box-shadow: inset 1px 0 0 var(--dep-rail);
+  box-shadow: none;
+}
+
+.dropdown-content a:last-child::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 1px;
+  height: 50%;
+  background: var(--dep-rail);
 }
 
 .dropdown:hover .dropdown-content {
@@ -663,13 +841,11 @@ body[data-mobile-nav-expanded] {
    HOMEPAGE LAYOUT
    ========================================================== */
 
-.homepage-lead,
-.homepage-intro {
+.homepage-lead {
   max-width: 52rem;
   margin: 0 auto 3rem;
 }
 
-.homepage-use-cases,
 .stakeholder-grid {
   max-width: 72rem;
   margin: 0 auto 3rem;
@@ -680,14 +856,8 @@ body[data-mobile-nav-expanded] {
   text-align: left;
 }
 
-.homepage-intro {
-  text-align: center;
-}
-
 @media (min-width: 50rem) {
   .homepage-lead,
-  .homepage-intro,
-  .homepage-use-cases,
   .stakeholder-grid {
     margin-bottom: 5rem;
   }
@@ -704,90 +874,15 @@ body[data-mobile-nav-expanded] {
   margin-bottom: 1rem;
 }
 
-.homepage-use-cases h2,
 .stakeholder-grid h2 {
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.homepage-use-cases p,
 .stakeholder-grid p {
   max-width: 64rem;
   margin: 0 auto 1.5rem;
   text-align: center;
-}
-
-/* ==========================================================
-   ORGANIZATION TYPE CARDS
-   (reads only Starlight's own tokens, so no dedicated tokens
-   are needed here)
-   ========================================================== */
-
-.sbom-org-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0 2rem;
-}
-
-.sbom-org-card {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 1.1rem;
-  border-radius: var(--card-radius);
-  border: 1px solid var(--sl-color-hairline);
-  background: var(--sl-color-bg-sidebar);
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-}
-
-.sbom-org-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
-  border-color: var(--sl-color-accent);
-  text-decoration: none;
-}
-
-.sbom-org-accent {
-  height: 4px;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-.sbom-org-body {
-  padding: 0 1.1rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 0.35rem;
-}
-
-.sbom-org-title {
-  font-weight: 700;
-  font-size: 0.9rem;
-  color: var(--sl-color-white);
-  margin: 0;
-  line-height: 1.3;
-  font-family: var(--font-nav);
-}
-
-.sbom-org-desc {
-  font-size: 0.78rem;
-  color: var(--sl-color-gray-3);
-  margin: 0;
-  line-height: 1.5;
-  flex-grow: 1;
-}
-
-.sbom-org-cta {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--sl-color-accent);
-  margin-top: 0.65rem;
-  letter-spacing: 0.01em;
 }
 
 /* ==========================================================
@@ -866,19 +961,13 @@ body[data-mobile-nav-expanded] {
   font-weight: 600 !important;
 }
 
-/* Starlight renders the Tabs wrapper as the <starlight-tabs> custom
-   element on this version (no .starlight-tabs class), so the element
-   selector is what actually matches; the class selector is kept
-   alongside it in case that ever changes. */
-starlight-tabs [role='tab'],
-.starlight-tabs [role='tab'] {
+starlight-tabs [role='tab'] {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.875rem;
 }
 
-starlight-tabs [role='tab'][aria-selected='true'],
-.starlight-tabs [role='tab'][aria-selected='true'] {
+starlight-tabs [role='tab'][aria-selected='true'] {
   /* Starlight draws the tab underline as a box-shadow, not a real
      border, so the indicator thickness is set there. */
   box-shadow: 0 2px 0 var(--sl-tab-color-border);
@@ -890,7 +979,6 @@ starlight-tabs [role='tab'][aria-selected='true'],
 
 @media (prefers-reduced-motion: reduce) {
   .use-case-card,
-  .sbom-org-card,
   .custom-nav > a,
   .dropdown > .dropbtn,
   .dropdown-content a,
@@ -898,8 +986,7 @@ starlight-tabs [role='tab'][aria-selected='true'],
     transition: none !important;
   }
 
-  .use-case-card:hover,
-  .sbom-org-card:hover {
+  .use-case-card:hover {
     transform: none !important;
   }
 }
