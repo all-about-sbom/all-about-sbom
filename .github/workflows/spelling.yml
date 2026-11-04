@@ -1,0 +1,32 @@
+name: Spelling
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  spelling:
+    name: Check spelling
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - name: Check documentation spelling
+        uses: streetsidesoftware/cspell-action@v9.2.0
+        with:
+          files: |
+            src/content/docs/**/*.md
+            src/content/docs/**/*.mdx
+          config: cspell.json
+          incremental_files_only: true
+          inline: warning
+          strict: true
+          suggestions: true
