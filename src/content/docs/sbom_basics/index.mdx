@@ -3,7 +3,7 @@ title: "SBOM Basics: A Beginner's Guide"
 description: "Understand the fundamentals of Software Bills of Materials (SBOMs) in simple, easy-to-understand terms."
 ---
 
-import { Card, LinkButton, CardGrid, Aside } from '@astrojs/starlight/components';
+import { Card, LinkButton, CardGrid, Aside, Steps } from '@astrojs/starlight/components';
 
 ## What is an SBOM?
 
@@ -179,3 +179,22 @@ These types of bills of materials can either be viewed separately or combined in
   More information
 </LinkButton>
 
+## How to get started with SBOMs
+
+The term “SBOM” refers to a concept implemented primarily through the **CycloneDX** and **SPDX** standards.  
+SBOMs can be generated at different stages of the software development lifecycle, and the most useful form depends on your role and use case.
+
+If you’re just starting out, a simple approach is:
+
+<Steps>
+  1. **Assess your environment**  
+  and identify business‑critical applications.
+  2. **Pick a tool**  
+  that matches your stack (e.g., containers, packages, language ecosystems).
+  3. **Generate or request your first SBOM**  
+  by building it yourself or requiring it from your vendors.
+  4. **Validate and store**  
+  the SBOM securely and make it available to the right stakeholders.
+  5. **Keep it updated**  
+  with each release and use it in vulnerability and license reviews.
+</Steps>
