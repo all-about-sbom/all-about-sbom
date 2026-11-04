@@ -1,36 +1,50 @@
 ---
-title: "Implementing SBOMs"
-description: "The three SBOM roles (producer, distributor, and consumer) and what each one is responsible for."
+title: "SBOM Roles: Produce, Distribute, and Consume"
+description: "Understand the roles involved in creating, sharing, and using Software Bills of Materials."
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
 
+An SBOM is a machine-readable inventory of the software components and relationships contained in a specific product release. Its value depends on accurate generation, appropriate distribution, and effective use in security, compliance, and maintenance activities.
 
-Regardless of the use case, the use of SBOMs always involves three steps and associated roles.
-Click on the roles to learn about the responsibilities and get step-by-step guides.
+These activities are referred to as **Produce**, **Distribute**, and **Consume**. Responsibility may be distributed across organizations, teams, and automated tools throughout the software supply chain.
 
-<CardGrid>
-  <div class="use-case-card c2">
-    <LinkCard
-      title="1. Producer"
-      href="/roles/producer"
-      description="The SBOM must be generated initially. This role is often fulfilled by the organization that has access to the source code or compiles the software."
-    />
+The following sections describe the steps in more detail, and provide links to additional resources for each role.
+<div class="roles-process" aria-label="The three steps of the SBOM flow">
+  <div class="roles-process-step">
+    <span class="roles-process-marker" aria-hidden="true">1</span>
+    <div class="use-case-card c2">
+      <LinkCard
+        title="Produce"
+        href="/roles/producer"
+        description="Create an SBOM that describes a software product and its components."
+      />
+    </div>
   </div>
 
-  <div class="use-case-card c3">
-    <LinkCard
-      title="2. Distributor"
-      href="/roles/distributor"
-      description="The generated SBOM must be provided to the recipients."
-    />
+  <div class="roles-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="roles-process-step">
+    <span class="roles-process-marker" aria-hidden="true">2</span>
+    <div class="use-case-card c3">
+      <LinkCard
+        title="Distribute"
+        href="/roles/distributor"
+        description="Make the SBOM available to the people and systems responsible for using it."
+      />
+    </div>
   </div>
 
-  <div class="use-case-card c5">
-    <LinkCard
-      title="3. Consumer"
-      href="/roles/consumer"
-      description="The consumer must enrich the SBOM with additional information, such as vulnerability data, present the data in an understandable format, and incorporate it into a risk management process."
-    />
+  <div class="roles-process-arrow" aria-hidden="true">↓</div>
+
+  <div class="roles-process-step">
+    <span class="roles-process-marker" aria-hidden="true">3</span>
+    <div class="use-case-card c5">
+      <LinkCard
+        title="Consume"
+        href="/roles/consumer"
+        description="Use the information to assess risk, vulnerabilities, licenses, and dependencies."
+      />
+    </div>
   </div>
-</CardGrid>
+</div>
