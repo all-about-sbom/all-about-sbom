@@ -203,6 +203,19 @@
 .use-case-card.c4:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-4-rule) 55%, black); }
 .use-case-card.c5:hover { box-shadow: 0 12px 28px color-mix(in srgb, var(--card-5-rule) 55%, black); }
 
+.catalog-card-link {
+  display: inline-block;
+  margin: 0.75rem 0.85rem 0.85rem;
+  color: var(--card-fg);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.catalog-card-link:hover {
+  color: var(--sl-color-accent-high);
+}
+
 .sbom-process {
   display: grid;
   grid-template-columns: 1fr;
