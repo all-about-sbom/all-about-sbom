@@ -6,61 +6,47 @@ description: "An orientation to the SBOM tooling landscape — how tools are cat
 import { CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
 import BrandCard from '../../../components/BrandCard.astro';
 
-The market for SBOM-related tooling has expanded significantly since the first wave of SBOM adoption following the 2021 NTIA Minimum Elements publication. SBOM tooling has matured far beyond the capabilities and functionalities of tools available in 2021, and organizations implementing SBOM programs now face a dense and growing landscape of options across generation, consumption, management, and analysis functions.
+The market for SBOM tools has grown significantly in recent years, making it increasingly difficult to find the right tool for one's specific needs.
+This page helps you structure the decision-making process and provides links to existing catalogs where you can get an overview of the available solutions.
 
-Selecting the right SBOM tooling is not a single decision. Most organizations require tools that address more than one function, and a tool's stated capabilities require evaluation against an organization's specific operational requirements, formats, integration needs, and deployment constraints. This section provides an orientation to how tools are categorized, where to find current tool catalogs, and how to structure an evaluation using the attribute framework developed by the CISA SBOM Tooling and Implementation Working Group.
-
-## Find SBOM tools
-
-If you are looking for tools rather than a detailed explanation of the categories, start here. These catalogs are the quickest way to discover generators, validators, converters, analyzers, and management platforms.
-
-<CardGrid>
-  <BrandCard title="CycloneDX Tool Center" icon="tooling">
-    The official CycloneDX catalog. Browse tools that create, validate, analyze, convert, and manage CycloneDX BOMs.
-
-    <a href="https://cyclonedx.org/tool-center/" target="_blank" rel="noopener noreferrer">Open the CycloneDX Tool Center</a>
-  </BrandCard>
-  <BrandCard title="SPDX Tools" icon="standard">
-    The official SPDX catalog. Find tools that produce, consume, transform, and work with SPDX documents.
-
-    <a href="https://spdx.dev/use/spdx-tools/" target="_blank" rel="noopener noreferrer">Browse SPDX Tools</a>
-  </BrandCard>
-  <BrandCard title="OpenSSF SBOM Catalog" icon="community">
-    A format-agnostic catalog for discovering SBOM tools across the wider ecosystem, including tools that support both SPDX and CycloneDX.
-
-    <a href="https://sbom-catalog.openssf.org/" target="_blank" rel="noopener noreferrer">Explore the OpenSSF catalog</a>
-  </BrandCard>
-</CardGrid>
-
-<Aside type="tip" title="A quick way to choose">
-Start with the job you need to do — produce, consume, or transform an SBOM — and then check which formats, integrations, deployment models, and licenses fit your environment. A tool appearing in a catalog is a useful starting point, not a recommendation or a guarantee of output quality.
-</Aside>
+However, before moving on to tool selection, it is important to reach an agreement with all stakeholders on what the requirements for the tool are.
 
 ---
 
-## How SBOM Tools Are Categorized
+## What Kind of Tools Exist?
 
-SBOM tools are most usefully organized by the function they perform rather than the format they support. The functional taxonomy established by the NTIA and carried forward in [CISA guidance](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf) defines three primary categories.<sup>[<a href="/references#ref-cisa-tooling-taxonomy">27</a>]</sup> Many tools operate across more than one of them.
+SBOM tools are most usefully organized by the function they perform rather than the format they support.
+The functional taxonomy established by the NTIA and carried forward in [CISA guidance](https://www.ntia.gov/sites/default/files/publications/ntia_sbom_tooling_taxonomy-2021mar30_0.pdf) defines three primary categories.
+It describes the role a tool plays in an SBOM workflow, not necessarily a separate product or product category.
+Many tools combine several types, and a single platform may support all three categories.
+
+| Category | Tool types | Overall approach |
+| --- | --- | --- |
+| **Produce** | Build, Analyze, Edit | Tools for creating SBOMs by integrating into the build process, analyzing source code or binary artifacts, or supporting manual creation and editing of SBOM data. |
+| **Consume** | View, Diff, Import | Tools that make SBOMs interpretable for humans, e.g. by visualizing the information, comparing multiple SBOMs, or enabling the discovery, retrieval, and import of an SBOM into your system. |
+| **Transform** | Translate, Merge, Tool support | Tools that transform an SBOM, e.g. by converting it to a different format, merging multiple SBOMs into one, or providing APIs and libraries to enable other tools to use the SBOM data. |
 
 <details>
 <summary><strong>Produce — SBOM generation and authoring</strong></summary>
 
-Produce tools generate SBOMs by analyzing software artifacts. The methods they use — and the accuracy and completeness of the output — vary considerably by approach.
+Produce tools create or author SBOMs. The NTIA taxonomy identifies three approaches:
 
 **What these tools do:**
-- Scan source code, compiled binaries, containers, operating system environments, or package manager manifests to identify components and their metadata
-- Identify component name, version, license, dependency relationships, and standard identifiers (CPE, PURL, SWID)
-- Generate SBOMs in one or both of the current standard formats: SPDX and CycloneDX
-- Sign and hash generated SBOMs to support downstream integrity verification
+- **Build:** Automatically create an SBOM as part of building a software artifact, including information about the build
+- **Analyze:** Inspect source or binary files and associated sources to generate an SBOM
+- **Edit:** Assist a person with manually entering or editing SBOM data
 
 **What varies between tools in this category:**
-- Which SBOM types they support — source, build, binary-analyzed, runtime, and design SBOMs each require different instrumentation
+- Which SBOM types they support — source, build, binary-analyzed, runtime, and design SBOMs each require different approaches
 - Which ecosystems, languages, and package managers they recognize
 - Whether they integrate into CI/CD pipelines, developer IDEs, or operate as standalone utilities
 - The accuracy of component identification, particularly for transitive dependencies and components not delivered via package managers
 
 <Aside type="note">
-A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM. The [2026 CISA Minimum Elements](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.<sup>[<a href="/references#ref-cisa-minimum-elements-2026">28</a>]</sup>
+A tool that generates valid SPDX or CycloneDX does not necessarily produce a complete or accurate SBOM.
+The [2026 CISA Minimum Elements](https://www.cisa.gov/resources-tools/resources/2026-minimum-elements-software-bill-materials-sbom) notes that SBOM quality and completeness vary significantly based on the tools and methods used to generate the SBOM, and recommends including generation tool metadata in the SBOM itself so consumers can assess reliability.
+This finding is in line with academic evaluations of SBOM generation tools, which have found that many tools fail to identify all components and transitive dependencies in a software artifact.
+If you are interested in understanding how well different types of components are detected, the paper [Poking Around in the Dark: Why a Shared Understanding of Components Matters](https://arxiv.org/abs/2606.02442) can be a starting point.
 </Aside>
 
 </details>
@@ -68,16 +54,12 @@ A tool that generates valid SPDX or CycloneDX does not necessarily produce a com
 <details>
 <summary><strong>Consume — SBOM ingestion, viewing, and analysis</strong></summary>
 
-Consume tools ingest SBOMs and make their data available for review, correlation, and downstream operations. This is the category most directly relevant to organizations receiving SBOMs from vendors — see [Receiving and Using SBOMs](/roles/consumer) for the operational context.
+Consume tools use existing SBOMs and make their data available for review, comparison, retrieval, and downstream operations. The NTIA taxonomy identifies three approaches:
 
 **What these tools do:**
-- Import SBOMs in SPDX, CycloneDX, or both formats
-- Validate the format and completeness of ingested SBOMs against specification requirements
-- Display SBOM data in human-readable form, including dependency graphs and component filtering
-- Correlate SBOM components against vulnerability databases (NVD, OSV, GitHub Advisories, EPSS)
-- Ingest VEX statements to filter and prioritize vulnerability findings
-- Compare SBOMs across versions to identify component changes
-- Preserve SBOM provenance and integrity signatures through external linking
+- **View:** Present SBOM contents in a human-readable form to support decision-making and business processes
+- **Diff:** Compare multiple SBOMs and clearly show their differences, such as changes between software versions
+- **Import:** Discover, retrieve, and import an SBOM into a system for further processing and analysis
 
 **What varies between tools in this category:**
 - Which import formats and SBOM format versions are supported
@@ -85,20 +67,19 @@ Consume tools ingest SBOMs and make their data available for review, correlation
 - VEX/CSAF ingestion support and how findings are filtered and surfaced
 - Whether the tool supports linking of received SBOMs to asset records
 
+This category is especially relevant to organizations receiving SBOMs from vendors — see [Receiving and Using SBOMs](/roles/consumer) for the operational context.
+
 </details>
 
 <details>
 <summary><strong>Transform — SBOM conversion, aggregation, and export</strong></summary>
 
-Transform tools operate on existing SBOM data to convert, merge, enrich, or distribute it. This category includes a range of capabilities that support both internal workflows and external SBOM distribution.
+Transform tools operate on existing SBOM data to adapt or connect it for another purpose. The NTIA taxonomy identifies three approaches:
 
 **What these tools do:**
-- Convert SBOMs between formats — SPDX to CycloneDX and vice versa
-- Merge SBOM data from multiple sources into a single artifact, including product-line SBOMs (PLSBOMs)
-- Export SBOMs in standard formats for use in other systems or for external distribution
-- Generate VEX reports for export alongside SBOMs
-- Provide security advisory information on active exploits associated with identified components
-- Integrate with external systems for SBOM import, export, cataloging, vulnerability intelligence, asset management, and workflow
+- **Translate:** Change an SBOM from one file type to another while preserving the same information. This includes converting between SPDX and CycloneDX formats, as well as between different versions of the same format
+- **Merge:** Combine multiple SBOMs or other data sources for analysis and audit purposes
+- **Tool support:** Enable use in other tools through APIs, object models, libraries, transport, or other reference sources
 
 **What varies between tools in this category:**
 - Which format conversions are supported and whether conversion is lossless
@@ -113,37 +94,34 @@ Format interoperability between tools is not guaranteed. Interoperability betwee
 
 ---
 
-## General Tool Attributes
-
-Regardless of functional category, all SBOM tools have attributes that affect deployment and operational fit. These include how and where the tool is deployed (hosted public cloud, SaaS, on-premises, or API), the licensing and cost model, authentication and access control support, available interfaces (CLI, GUI, or both), and the type of vendor support provided. Tools that are part of a larger software security or asset management suite carry additional considerations around how the SBOM-related functionality integrates with the suite's primary features.
-
-Primary use designation — whether a tool's primary function is SBOM consumption, scanning/generation, vulnerability management, or something else — affects how the tool is maintained, what its roadmap prioritizes, and where SBOM-related gaps are most likely to appear.
-
----
-
-## Comparing tool catalogs
-
-The catalogs above are maintained by different communities and serve slightly different purposes:
-
-- **[SPDX Tools](https://spdx.dev/use/spdx-tools/)** — The SPDX project's catalog of tools that support SPDX. Organized by functional category using the Produce/Consume/Transform taxonomy.
-- **[CycloneDX Tool Center](https://cyclonedx.org/tool-center/)** — CycloneDX's catalog of tools supporting the CycloneDX format.
-- **[OpenSSF SBOM Catalog](https://sbom-catalog.openssf.org/)** — A broader catalog that is not limited to one SBOM format.
-
-Both catalogs are valuable but limited by their format specificity. Tools that support both SPDX and CycloneDX may appear in both catalogs, but tools are not represented in a catalog for a format they do not support — which can obscure otherwise capable tools from view during evaluation.
-
-The **OpenSSF catalog** helps fill that gap, while the format-specific centers usually provide more context about compatibility with their own standards. Use more than one catalog when comparing tools, and verify important capabilities directly with the tool documentation or a trial.BOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the [OpenSSF catalog](https://sbom-catalog.openssf.org/catalog/) effort to bring richer attributes to tool listings.
-
----
-
 ## Evaluating Tools for Your Organization
 
-An organization's requirements for SBOM tooling are shaped by both internal and external factors: existing tooling and integration points, developer and engineering preferences, SBOM types required, formats mandated by customers or regulators, and the maturity of the organization's current SBOM program. No single tool meets every requirement, and most organizations will need to evaluate a set of tools against their specific criteria.
+The NTIA taxonomy describes what a tool does.
+Selecting a tool requires criteria for deciding whether it fits an organization's needs, environment, and operations.
+The questions below help the **Chooser** — the person or team responsible for selecting tooling — to identify criteria for selecting the right tool.
 
-The person or team responsible for identifying and selecting SBOM tools — referred to as the **Chooser** in NTIA and CISA guidance — benefits from a structured set of tool attributes to use during evaluation or in formal RFI/RFP processes. The CISA SBOM Tooling and Implementation Working Group produced two resources specifically for this purpose:
+No single tool is right for every organization.
+Select only the categories and attributes that apply to your use case, then use the same criteria for every candidate:
+
+- **Function and coverage:** Which Produce, Consume, or Transform types are required? Which formats, SBOM types, ecosystems, and versions must the tool support?
+- **Deployment and data handling:** Where may the tool run, and where may source code, binaries, SBOMs, or vulnerability data be stored and processed?
+- **Integration and operation:** How will it connect to CI/CD, asset management, vulnerability management, ticketing, or other systems? Consider APIs, command-line interfaces, webhooks, plugins, and import/export behavior.
+- **Access and security:** Does it support the organization's requirements for authentication, authorization, audit logs, encryption, secrets management, and tenant isolation?
+- **Cost, licensing, and support:** What are the license terms and total operating costs, including infrastructure, usage limits, support, training, and additional modules? Who maintains the tool and delivers security updates?
+- **Product context:** Is SBOM functionality the tool's primary purpose or one feature of a broader platform? Which requirements need additional validation because SBOM functionality is not the product's main focus?
+
+### Practical evaluation process
+
+1. **Agree on requirements.** Mark each criterion as required, preferred, or not needed, and identify approval gates.
+2. **Shortlist candidates.** Use the catalogs below and vendor documentation to find tools that meet the required functions and formats. Exclude candidates that fail an approval gate.
+3. **Compare and validate.** Ask the same questions of each candidate. Verify unresolved requirements with representative SBOMs, workflows, or a focused proof of concept.
+4. **Approve the choice.** Document the selected tool, accepted gaps, owner, and implementation plan, then complete the organization's approval process.
+
+These resources provide the formal framework and checklist for detailed evaluations, procurement, RFIs, and RFPs:
 
 <CardGrid>
   <BrandCard title="SBOM Tool Attributes — White Paper" icon="document">
-    Explains the complete SBOM tool attribute framework organized by function (Produce, Consume, Transform) and General categories. Describes each attribute, its purpose, and how to apply the framework during tool evaluation or procurement. Suitable for use in RFI and RFP processes.
+    Describes the SBOM tool attributes and how to use them during evaluation and procurement.
 
     <a
       href="/resources/sbom-tool-attributes-whitepaper.docx"
@@ -153,7 +131,7 @@ The person or team responsible for identifying and selecting SBOM tools — refe
     </a>
   </BrandCard>
   <BrandCard title="SBOM Tool Attributes — Spreadsheet" icon="spreadsheet">
-    The companion evaluation tool. Each row is a discrete tool attribute with its category, subcategory, unique ID, description, expected response format, and references to relevant publications. Use to survey and compare tools against your organization's requirements.
+    A checklist for recording and comparing tool capabilities against your requirements.
 
       <a
         href="/resources/sbom-tool-attributes-spreadsheet.xlsx"
@@ -165,7 +143,43 @@ The person or team responsible for identifying and selecting SBOM tools — refe
 </CardGrid>
 
 <Aside type="tip" title="How to use these resources">
-The attributes in the white paper and spreadsheet are not prescriptive requirements — they are evaluation criteria that each organization weights according to its own needs and priorities. An organization focused solely on consuming vendor-supplied SBOMs will treat Produce category attributes differently than an organization with active SBOM generation requirements. The Chooser should identify required, optional, and not-needed attributes before beginning the evaluation, in consultation with relevant internal stakeholders across security, legal, finance, engineering, and asset management.
+These attributes are evaluation criteria, not mandatory requirements. Select the ones relevant to your use case, mark them as required or optional, and apply them consistently to every candidate. The framework applies to tools that support SPDX, CycloneDX, or both.
 </Aside>
 
-The attribute framework is designed to be format-agnostic: it applies equally to tools that support SPDX, CycloneDX, or both, addressing a limitation of the format-specific catalogs described above.
+---
+
+## Find the Right SBOM Tool
+
+Once you understand the functions and attributes relevant to your needs, you can use these catalogs to identify potential tools.
+They are discovery resources, not recommendations or guarantees of quality.
+
+<CardGrid>
+  <div class="catalog-card use-case-card c2">
+    <LinkCard
+      title="CycloneDX Tool Center"
+      href="https://cyclonedx.org/tool-center/"
+      description="The official CycloneDX catalog. Browse tools that create, validate, analyze, convert, and manage CycloneDX BOMs."
+    />
+    <a class="catalog-card-link" href="https://cyclonedx.org/tool-center/" target="_blank" rel="noopener noreferrer">Open the CycloneDX Tool Center</a>
+  </div>
+  <div class="catalog-card use-case-card c3">
+    <LinkCard
+      title="OpenSSF SBOM Catalog"
+      href="https://sbom-catalog.openssf.org/"
+      description="A format-agnostic catalog for discovering SBOM tools across the wider ecosystem, including tools that support both SPDX and CycloneDX."
+    />
+    <a class="catalog-card-link" href="https://sbom-catalog.openssf.org/" target="_blank" rel="noopener noreferrer">Explore the OpenSSF catalog</a>
+  </div>
+  <div class="catalog-card use-case-card c5">
+    <LinkCard
+      title="SPDX Tools"
+      href="https://spdx.dev/use/spdx-tools/"
+      description="The official SPDX catalog. Find tools that produce, consume, transform, and work with SPDX documents."
+    />
+    <a class="catalog-card-link" href="https://spdx.dev/use/spdx-tools/" target="_blank" rel="noopener noreferrer">Browse SPDX Tools</a>
+  </div>
+</CardGrid>
+
+<Aside type="note" title="Using the catalogs">
+The CycloneDX and SPDX catalogs focus on their respective formats, while the OpenSSF catalog covers a broader range of tools. Use more than one catalog when comparing options, and verify important capabilities with the tool documentation.
+</Aside>
