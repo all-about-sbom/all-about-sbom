@@ -10,6 +10,32 @@ The market for SBOM-related tooling has expanded significantly since the first w
 
 Selecting the right SBOM tooling is not a single decision. Most organizations require tools that address more than one function, and a tool's stated capabilities require evaluation against an organization's specific operational requirements, formats, integration needs, and deployment constraints. This section provides an orientation to how tools are categorized, where to find current tool catalogs, and how to structure an evaluation using the attribute framework developed by the CISA SBOM Tooling and Implementation Working Group.
 
+## Find SBOM tools
+
+If you are looking for tools rather than a detailed explanation of the categories, start here. These catalogs are the quickest way to discover generators, validators, converters, analyzers, and management platforms.
+
+<CardGrid>
+  <BrandCard title="CycloneDX Tool Center" icon="tooling">
+    The official CycloneDX catalog. Browse tools that create, validate, analyze, convert, and manage CycloneDX BOMs.
+
+    <a href="https://cyclonedx.org/tool-center/" target="_blank" rel="noopener noreferrer">Open the CycloneDX Tool Center</a>
+  </BrandCard>
+  <BrandCard title="SPDX Tools" icon="standard">
+    The official SPDX catalog. Find tools that produce, consume, transform, and work with SPDX documents.
+
+    <a href="https://spdx.dev/use/spdx-tools/" target="_blank" rel="noopener noreferrer">Browse SPDX Tools</a>
+  </BrandCard>
+  <BrandCard title="OpenSSF SBOM Catalog" icon="community">
+    A format-agnostic catalog for discovering SBOM tools across the wider ecosystem, including tools that support both SPDX and CycloneDX.
+
+    <a href="https://sbom-catalog.openssf.org/" target="_blank" rel="noopener noreferrer">Explore the OpenSSF catalog</a>
+  </BrandCard>
+</CardGrid>
+
+<Aside type="tip" title="A quick way to choose">
+Start with the job you need to do — produce, consume, or transform an SBOM — and then check which formats, integrations, deployment models, and licenses fit your environment. A tool appearing in a catalog is a useful starting point, not a recommendation or a guarantee of output quality.
+</Aside>
+
 ---
 
 ## How SBOM Tools Are Categorized
@@ -95,16 +121,17 @@ Primary use designation — whether a tool's primary function is SBOM consumptio
 
 ---
 
-## Existing Tool Catalogs
+## Comparing tool catalogs
 
-Several organizations maintain catalogs of SBOM-related tools. Two long-standing catalogs are maintained by the format standards bodies:
+The catalogs above are maintained by different communities and serve slightly different purposes:
 
 - **[SPDX Tools](https://spdx.dev/use/spdx-tools/)** — The SPDX project's catalog of tools that support SPDX. Organized by functional category using the Produce/Consume/Transform taxonomy.
 - **[CycloneDX Tool Center](https://cyclonedx.org/tool-center/)** — CycloneDX's catalog of tools supporting the CycloneDX format.
+- **[OpenSSF SBOM Catalog](https://sbom-catalog.openssf.org/)** — A broader catalog that is not limited to one SBOM format.
 
 Both catalogs are valuable but limited by their format specificity. Tools that support both SPDX and CycloneDX may appear in both catalogs, but tools are not represented in a catalog for a format they do not support — which can obscure otherwise capable tools from view during evaluation.
 
-The **[OpenSSF SBOM Everywhere project](https://sbom-catalog.openssf.org)** maintains a format-agnostic SBOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the [OpenSSF catalog](https://sbom-catalog.openssf.org/catalog/) effort to bring richer attributes to tool listings.
+The **OpenSSF catalog** helps fill that gap, while the format-specific centers usually provide more context about compatibility with their own standards. Use more than one catalog when comparing tools, and verify important capabilities directly with the tool documentation or a trial.BOM tool catalog that aims to provide broader coverage across the tooling landscape. The CISA Tooling and Implementation Working Group collaborated with the [OpenSSF catalog](https://sbom-catalog.openssf.org/catalog/) effort to bring richer attributes to tool listings.
 
 ---
 
